@@ -10,6 +10,9 @@ public class TirePieceScript : PieceScript
     [SerializeField] private bool tireInitialized;
     [SerializeField] private bool TIRELOCKUPDATE;
 
+    [SerializeField] protected HingeJoint[] joints;
+    [SerializeField] protected HingeJoint joint;
+
     private const PieceType typeToUse = PieceType.TIRE;
     private const float healthToUse = TIRE_PIECE_HEALTH;
     private const float massToUse = TIRE_PIECE_WEIGHT;
@@ -22,6 +25,10 @@ public class TirePieceScript : PieceScript
             pieceType = typeToUse;
             health = maxHealth = healthToUse;
             rb.mass = massToUse;
+
+            //TODO SET JOINTS
+            joint = GetComponent<HingeJoint>();
+            joints = GetComponents<HingeJoint>();
         }
     }
 

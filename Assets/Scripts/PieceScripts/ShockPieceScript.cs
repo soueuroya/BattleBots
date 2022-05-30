@@ -14,37 +14,10 @@ public class ShockPieceScript : CombatPieceScript
     {
         if ((!shockInitialized || forceUpdate) && !SHOCKLOCKUPDATE)
         {
+            base.InitializeCombatPiece(forceUpdate);
             pieceType = typeToUse;
             health = maxHealth = healthToUse;
-            tr = GetComponent<Transform>();
-
-            //SET RIGIDBODY
-            rb = GetComponent<Rigidbody>();
-            if (rb == null)
-            {
-                rb = gameObject.AddComponent<Rigidbody>();
-            }
             rb.mass = massToUse;
-
-            //SET MESHCOLLIDER
-            MeshCollider mc = GetComponent<MeshCollider>();
-            if (mc == null)
-            {
-                mc = gameObject.AddComponent<MeshCollider>();
-            }
-            mc.convex = true;
-
-            //TODO SET JOINTS
-            joint = GetComponent<HingeJoint>();
-            joints = GetComponents<HingeJoint>();
-
-            //TODO SET PARTICLES
-            partSyst = GetComponent<ParticleSystem>();
-            if (partSyst == null)
-            {
-                //partSyst = Resources.Load<ParticleSystem>("ParticleComponentHolders/AcidPiece");
-                //partSyst = gameObject.AddComponent(typeof (ParticleSystem), Resources.Load<ParticleSystem>("ParticleComponentHolders/AcidPiece"));
-            }
         }
     }
 
@@ -65,6 +38,6 @@ public class ShockPieceScript : CombatPieceScript
 
     private void OnDrawGizmosSelected()
     {
-        InitializeShock(true);
+        InitializeShock();
     }
 }

@@ -65,6 +65,8 @@ public class RobotScript : MonoBehaviour
                         {
                             case PieceType.TIRE: tires.Add(child.GetComponent<TirePieceScript>());
                                 break;
+                            case PieceType.MTIRE: tires.Add(child.GetComponent<MTirePieceScript>());
+                                break;
                             case PieceType.FRAME: frames.Add(child.GetComponent<FramePieceScript>());
                                 break;
                             case PieceType.ACID: acids.Add(child.GetComponent<AcidPieceScript>());

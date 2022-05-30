@@ -7,8 +7,7 @@ public class PieceScript : MonoBehaviour
     [SerializeField] protected PieceType pieceType;
     [SerializeField] protected Rigidbody rb;
     [SerializeField] protected Transform tr;
-    [SerializeField] protected HingeJoint[] joints;
-    [SerializeField] protected HingeJoint joint;
+
     public float Health { get { return health; } private set { health = value; } }
     [SerializeField] protected float health;
     [SerializeField] protected float maxHealth;
@@ -36,10 +35,6 @@ public class PieceScript : MonoBehaviour
                 mc = gameObject.AddComponent<MeshCollider>();
             }
             mc.convex = true;
-
-            //TODO SET JOINTS
-            joint = GetComponent<HingeJoint>();
-            joints = GetComponents<HingeJoint>();
         }
     }
 
