@@ -1,15 +1,13 @@
+using System.Collections.Generic;
 using UnityEngine;
 using static StaticHelper;
 
-public class CombatPieceScript : PieceScript
+public class CombatPieceScript : FramePieceScript
 {
     [SerializeField] protected OutDirection direction;
     [SerializeField] protected ParticleSystem partSyst;
     [SerializeField] protected float charge;
     [SerializeField] protected float maxCharge;
-
-    [SerializeField] protected FixedJoint[] joints;
-    [SerializeField] protected FixedJoint joint;
 
     [SerializeField] private bool combatPieceInitialized;
     [SerializeField] private bool COMBATPIECELOCKUPDATE;
@@ -26,10 +24,6 @@ public class CombatPieceScript : PieceScript
                 //partSyst = Resources.Load<ParticleSystem>("ParticleComponentHolders/AcidPiece");
                 //partSyst = gameObject.AddComponent(typeof (ParticleSystem), Resources.Load<ParticleSystem>("ParticleComponentHolders/AcidPiece"));
             }
-
-            //TODO SET JOINTS
-            joint = GetComponent<FixedJoint>();
-            joints = GetComponents<FixedJoint>();
         }
     }
 

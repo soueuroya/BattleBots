@@ -19,6 +19,9 @@ public class RobotScript : MonoBehaviour
 
     [SerializeField] protected bool initialized;
     [SerializeField] protected bool LOCKUPDATE;
+
+    private List<Rigidbody> rigidbodies = new List<Rigidbody>();
+
     protected void Initialize(bool forceUpdate = false)
     {
         if ((!initialized || forceUpdate) && !LOCKUPDATE)
@@ -58,8 +61,25 @@ public class RobotScript : MonoBehaviour
             {
                 if (child != null)
                 {
-                    if (child.GetComponent<PieceScript>() != null)
+                    PieceScript piece = child.GetComponent<PieceScript>();
+                    FramePieceScript framePiece = piece as FramePieceScript;
+                    if (piece != null)
                     {
+                        if (framePiece != null)
+                        {
+                            foreach (Transform child2 in transform)
+                            {
+                                if (child != child2)
+                                {
+                                    PieceScript piece2 = child2.GetComponent<PieceScript>();
+                                    FramePieceScript framePiece2 = piece2 as FramePieceScript;
+                                    if (framePiece2 != null)
+                                    {
+                                        framePiece.AddJoint(framePiece2.RB);
+                                    }
+                                }
+                            }
+                        }
                         maxHealth += child.GetComponent<PieceScript>().Health;
                         switch (child.GetComponent<PieceScript>().PieceType)
                         {
@@ -79,6 +99,8 @@ public class RobotScript : MonoBehaviour
                                 break;
                             case PieceType.BOMB: bombs.Add(child.GetComponent<BombPieceScript>());
                                 break;
+                            case PieceType.SPIKE: spikes.Add(child.GetComponent<SpikePieceScript>());
+                                break;
                             case PieceType.CORE:
                                 cores.Add(child.GetComponent<CorePieceScript>());
                                 break;
@@ -86,6 +108,14 @@ public class RobotScript : MonoBehaviour
                                 break;
                         }
                     }
+                }
+            }
+            foreach (Transform child in transform)
+            {
+                Rigidbody _rb = child.GetComponent<Rigidbody>();
+                if (_rb != null)
+                {
+                    _rb.isKinematic = false;
                 }
             }
             health = maxHealth;
@@ -126,6 +156,8 @@ public class RobotScript : MonoBehaviour
             case PowerType.OIL: StartOils();
                 break;
             case PowerType.SPIKE: StartSpikes();
+                break;
+            case PowerType.BOMB: StartBombs();
                 break;
             default:
                 break;
@@ -214,6 +246,22 @@ public class RobotScript : MonoBehaviour
         }
     }
 
+    public void StartBombs()
+    {
+        foreach (BombPieceScript bomb in bombs)
+        {
+            bomb.Activate();
+        }
+    }
+
+    public void StopBombs()
+    {
+        foreach (BombPieceScript bomb in bombs)
+        {
+            bomb.Deactivate();
+        }
+    }
+
     public void StopPower(PowerType power)
     {
         switch (power)
@@ -227,6 +275,8 @@ public class RobotScript : MonoBehaviour
             case PowerType.OIL: StopOils();
                 break;
             case PowerType.SPIKE: StopSpikes();
+                break;
+            case PowerType.BOMB: StopBombs();
                 break;
             default:
                 break;
@@ -267,7 +317,18 @@ public class RobotScript : MonoBehaviour
         //Rotate all tires forward.
         foreach(TirePieceScript tire in tires)
         {
-            tire.RotateForward(speed);
+            if (tire.TireHSide == TireHSide.LEFT && tire.TireOrientation == TireOrientation.LEFT) // LEFT LEFT
+            {
+                tire.RotateForward(-speed);
+            }
+            else if (tire.TireHSide == TireHSide.RIGHT && tire.TireOrientation == TireOrientation.LEFT) // RIGHT LEFT
+            {
+                tire.RotateForward(-speed);
+            }
+            else
+            {
+                tire.RotateForward(speed);
+            }
         }
     }
 
@@ -276,7 +337,18 @@ public class RobotScript : MonoBehaviour
         //Rotate all tires back.
         foreach (TirePieceScript tire in tires)
         {
-            tire.RotateForward(-speed);
+            if (tire.TireHSide == TireHSide.LEFT && tire.TireOrientation == TireOrientation.LEFT) // LEFT LEFT
+            {
+                tire.RotateForward(speed);
+            }
+            else if (tire.TireHSide == TireHSide.RIGHT && tire.TireOrientation == TireOrientation.LEFT) // RIGHT LEFT
+            {
+                tire.RotateForward(speed);
+            }
+            else
+            {
+                tire.RotateForward(-speed);
+            }
         }
     }
 
@@ -285,13 +357,27 @@ public class RobotScript : MonoBehaviour
         //Rotate all left tires back and all right tires forward.
         foreach (TirePieceScript tire in tires)
         {
-            if (tire.TireSide.Equals(TireSide.LEFT))
+            if (tire.TireHSide == TireHSide.LEFT) // LEFT of the car
             {
-                tire.RotateForward(-speed);
+                if (tire.TireOrientation == TireOrientation.LEFT) // default
+                {
+                    tire.RotateForward(speed, true);
+                }
+                else // inverted to the right
+                {
+                    tire.RotateForward(-speed, true);
+                }
             }
-            else if (tire.TireSide.Equals(TireSide.RIGHT))
+            else if (tire.TireHSide == TireHSide.RIGHT) // RIGHT of the car
             {
-                tire.RotateForward(speed);
+                if (tire.TireOrientation == TireOrientation.LEFT) // inverted to the left
+                {
+                    tire.RotateForward(-speed, true);
+                }
+                else // default
+                {
+                    tire.RotateForward(speed, true);
+                }
             }
         }
     }
@@ -301,13 +387,27 @@ public class RobotScript : MonoBehaviour
         //Rotate all left tires forward and all right tires back.
         foreach (TirePieceScript tire in tires)
         {
-            if (tire.TireSide.Equals(TireSide.LEFT))
+            if (tire.TireHSide == TireHSide.LEFT) // LEFT of the car
             {
-                tire.RotateForward(speed);
+                if (tire.TireOrientation == TireOrientation.LEFT) // default
+                {
+                    tire.RotateForward(-speed, true);
+                }
+                else // inverted to the right
+                {
+                    tire.RotateForward(speed, true);
+                }
             }
-            else if (tire.TireSide.Equals(TireSide.RIGHT))
+            else if (tire.TireHSide == TireHSide.RIGHT) // RIGHT of the car
             {
-                tire.RotateForward(-speed);
+                if (tire.TireOrientation == TireOrientation.LEFT) // inverted to the left
+                {
+                    tire.RotateForward(speed, true);
+                }
+                else // default
+                {
+                    tire.RotateForward(-speed, true);
+                }
             }
         }
     }

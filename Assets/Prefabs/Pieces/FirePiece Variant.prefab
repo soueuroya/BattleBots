@@ -9751,8 +9751,6 @@ MonoBehaviour:
   pieceType: 1
   rb: {fileID: 3298913972602771260}
   tr: {fileID: 3298913972602771256}
-  joints: []
-  joint: {fileID: 0}
   health: 40
   maxHealth: 40
   pieceInitialized: 1
@@ -9761,6 +9759,8 @@ MonoBehaviour:
   partSyst: {fileID: 628510191}
   charge: 0
   maxCharge: 0
+  joints: []
+  joint: {fileID: 0}
   combatPieceInitialized: 1
   COMBATPIECELOCKUPDATE: 1
   fireInitialized: 0

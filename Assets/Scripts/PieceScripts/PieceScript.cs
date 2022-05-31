@@ -5,8 +5,9 @@ public class PieceScript : MonoBehaviour
 {
     public PieceType PieceType { get { return pieceType; } private set { pieceType = value; } }
     [SerializeField] protected PieceType pieceType;
-    [SerializeField] protected Rigidbody rb;
     [SerializeField] protected Transform tr;
+    [SerializeField] protected Rigidbody rb;
+    public Rigidbody RB { get { return rb; } private set { rb = value; } }
 
     public float Health { get { return health; } private set { health = value; } }
     [SerializeField] protected float health;

@@ -3047,8 +3047,6 @@ MonoBehaviour:
   pieceType: 8
   rb: {fileID: 3909802947674451105}
   tr: {fileID: 3909802947674451118}
-  joints: []
-  joint: {fileID: 0}
   health: 80
   maxHealth: 80
   pieceInitialized: 1
