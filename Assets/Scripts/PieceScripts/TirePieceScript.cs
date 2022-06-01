@@ -28,6 +28,7 @@ public class TirePieceScript : PieceScript
     {
         if ((!tireInitialized || forceUpdate) && !TIRELOCKUPDATE)
         {
+            tireInitialized = true;
             base.InitializePiece(forceUpdate);
             pieceType = typeToUse;
             health = maxHealth = healthToUse;
@@ -45,13 +46,19 @@ public class TirePieceScript : PieceScript
     {
         if (speed == 0) // IF STOP, TURN OFF MOTOR
         {
+            JointMotor motor = joint.motor;
+            motor.force = 10000;
+            motor.targetVelocity = speed;
+            motor.freeSpin = false;
+
             joint.useMotor = false;
+
             joint.connectedBody.transform.localRotation = Quaternion.Euler(initialRot);
         }
         else // IF MOVING, CREATE COPY OF JOINT MOTOR, APPLY CHANGES AND OVERWRITE ORIGINAL
         {
             JointMotor motor = joint.motor;
-            motor.force = 100;
+            motor.force = 10000;
             motor.targetVelocity = speed;
             motor.freeSpin = false;
 
@@ -89,14 +96,11 @@ public class TirePieceScript : PieceScript
             joint.useMotor = true; // turning on the new original
         }
     }
-    private void Awake()
-    {
-        InitializeTire();
-    }
 
     private void Start()
     {
-        InitializeTire();
+        tireInitialized = false;
+        InitializeTire(true);
     }
 
     private void Reset()
@@ -106,6 +110,7 @@ public class TirePieceScript : PieceScript
 
     private void OnDrawGizmosSelected()
     {
-        InitializeTire();
+        tireInitialized = false;
+        InitializeTire(true);
     }
 }

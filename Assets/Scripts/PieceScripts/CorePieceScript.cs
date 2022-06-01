@@ -13,6 +13,7 @@ public class CorePieceScript : FramePieceScript
     {
         if ((!coreInitialized || forceUpdate) && !CORELOCKUPDATE)
         {
+            coreInitialized = true;
             base.InitializePiece(forceUpdate);
             pieceType = typeToUse;
             health = maxHealth = healthToUse;
@@ -20,14 +21,10 @@ public class CorePieceScript : FramePieceScript
         }
     }
 
-    private void Awake()
-    {
-        InitializeCore();
-    }
-
     private void Start()
     {
-        InitializeCore();
+        coreInitialized = false;
+        InitializeCore(true);
     }
 
     private void Reset()
@@ -37,6 +34,7 @@ public class CorePieceScript : FramePieceScript
 
     private void OnDrawGizmosSelected()
     {
-        InitializeCore();
+        coreInitialized = false;
+        InitializeCore(true);
     }
 }

@@ -15,6 +15,7 @@ public class AcidPieceScript : CombatPieceScript
     {
         if ((!acidInitialized || forceUpdate) && !ACIDLOCKUPDATE)
         {
+            acidInitialized = true;
             base.InitializeCombatPiece(forceUpdate);
             pieceType = typeToUse;
             health = maxHealth = healthToUse;
@@ -62,14 +63,10 @@ public class AcidPieceScript : CombatPieceScript
     }
     */
 
-    private void Awake()
-    {
-        InitializeAcid();
-    }
-
     private void Start()
     {
-        InitializeAcid();
+        acidInitialized = false;
+        InitializeAcid(true);
     }
 
     private void Reset()
@@ -79,6 +76,7 @@ public class AcidPieceScript : CombatPieceScript
 
     private void OnDrawGizmosSelected()
     {
-        InitializeAcid();
+        acidInitialized = false;
+        InitializeAcid(true);
     }
 }

@@ -4874,12 +4874,24 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 3969349905372855557, guid: 2f4da06719305fb4c8aa72e45d8b15b1, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: ec3c2bdfc834edd459ca328ac0974b27, type: 2}
+    - target: {fileID: 3969349905372855557, guid: 2f4da06719305fb4c8aa72e45d8b15b1, type: 3}
       propertyPath: m_Materials.Array.data[1]
       value: 
       objectReference: {fileID: 2100000, guid: 138806acde1d5ae4c8807f353a493052, type: 2}
+    - target: {fileID: 3969349905372855557, guid: 2f4da06719305fb4c8aa72e45d8b15b1, type: 3}
+      propertyPath: m_Materials.Array.data[2]
+      value: 
+      objectReference: {fileID: 2100000, guid: 634e257987faf2b43b8c349a1e0df02f, type: 2}
     - target: {fileID: 3969349905372855558, guid: 2f4da06719305fb4c8aa72e45d8b15b1, type: 3}
       propertyPath: m_Mesh
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3969349905372855610, guid: 2f4da06719305fb4c8aa72e45d8b15b1, type: 3}
+      propertyPath: m_Mass
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3969349905372855611, guid: 2f4da06719305fb4c8aa72e45d8b15b1, type: 3}
       propertyPath: m_Mesh
@@ -4937,7 +4949,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8849367683494054310, guid: 2f4da06719305fb4c8aa72e45d8b15b1, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 2f4da06719305fb4c8aa72e45d8b15b1, type: 3}
 --- !u!1 &5063867973746602878 stripped
 GameObject:
@@ -4947,6 +4960,11 @@ GameObject:
 --- !u!4 &5063867973746602877 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3969349905372855614, guid: 2f4da06719305fb4c8aa72e45d8b15b1, type: 3}
+  m_PrefabInstance: {fileID: 8166028479299456579}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &5063867973746602822 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 3969349905372855557, guid: 2f4da06719305fb4c8aa72e45d8b15b1, type: 3}
   m_PrefabInstance: {fileID: 8166028479299456579}
   m_PrefabAsset: {fileID: 0}
 --- !u!54 &5063867973746602873 stripped
@@ -9736,7 +9754,7 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
---- !u!114 &2414466607119156913
+--- !u!114 &2793539099723016214
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -9750,18 +9768,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pieceType: 2
   rb: {fileID: 5063867973746602873}
+  health: 40
   tr: {fileID: 5063867973746602877}
+  mr: {fileID: 5063867973746602822}
+  maxHealth: 40
+  pieceInitialized: 1
+  PIECELOCKUPDATE: 0
+  originalColor: {r: 0, g: 0.033422947, b: 1, a: 1}
+  frameInitialized: 0
+  FRAMELOCKUPDATE: 0
   joints: []
   joint: {fileID: 0}
-  health: 40
-  maxHealth: 40
-  pieceInitialized: 0
-  PIECELOCKUPDATE: 0
   direction: 0
   partSyst: {fileID: 6836368636491737257}
   charge: 0
   maxCharge: 0
-  combatPieceInitialized: 0
+  combatPieceInitialized: 1
   COMBATPIECELOCKUPDATE: 0
   shockInitialized: 1
   SHOCKLOCKUPDATE: 0

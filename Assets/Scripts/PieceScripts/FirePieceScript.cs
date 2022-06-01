@@ -13,6 +13,7 @@ public class FirePieceScript : CombatPieceScript
     {
         if ((!fireInitialized || forceUpdate) && !FIRELOCKUPDATE)
         {
+            fireInitialized = true;
             base.InitializeCombatPiece(forceUpdate);
             pieceType = typeToUse;
             health = maxHealth = healthToUse;
@@ -20,14 +21,10 @@ public class FirePieceScript : CombatPieceScript
         }
     }
 
-    private void Awake()
-    {
-        InitializeFire();
-    }
-
     private void Start()
     {
-        InitializeFire();
+        fireInitialized = false;
+        InitializeFire(true);
     }
 
     private void Reset()
@@ -37,6 +34,7 @@ public class FirePieceScript : CombatPieceScript
 
     private void OnDrawGizmosSelected()
     {
-        InitializeFire();
+        fireInitialized = false;
+        InitializeFire(true);
     }
 }

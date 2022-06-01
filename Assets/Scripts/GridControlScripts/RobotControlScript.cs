@@ -4,6 +4,8 @@ using UnityEngine;
 public class RobotControlScript : MonoBehaviour
 {
     public static RobotControlScript Instance;
+    public List<RobotScript> robots;
+    public int currentRobot = 0;
 
     private void Awake()
     {
@@ -17,6 +19,8 @@ public class RobotControlScript : MonoBehaviour
         }
 
         DontDestroyOnLoad(this.gameObject);
+
+        robots = new List<RobotScript>(FindObjectsOfType<RobotScript>());
     }
 
     private void Update()
@@ -30,7 +34,9 @@ public class RobotControlScript : MonoBehaviour
             }
         }
     }
-
-    public List<RobotScript> robots;
-    public int currentRobot = 0;
+    private void OnDrawGizmosSelected()
+    {
+        robots.Clear();
+        robots = new List<RobotScript>(FindObjectsOfType<RobotScript>());
+    }
 }

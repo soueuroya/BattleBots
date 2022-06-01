@@ -14,6 +14,7 @@ public class OilPieceScript : CombatPieceScript
     {
         if ((!oilInitialized || forceUpdate) && !OILLOCKUPDATE)
         {
+            oilInitialized = true;
             base.InitializeCombatPiece(forceUpdate);
             pieceType = typeToUse;
             health = maxHealth = healthToUse;
@@ -21,14 +22,10 @@ public class OilPieceScript : CombatPieceScript
         }
     }
 
-    private void Awake()
-    {
-        InitializeOil();
-    }
-
     private void Start()
     {
-        InitializeOil();
+        oilInitialized = false;
+        InitializeOil(true);
     }
 
     private void Reset()
@@ -38,6 +35,7 @@ public class OilPieceScript : CombatPieceScript
 
     private void OnDrawGizmosSelected()
     {
-        InitializeOil();
+        oilInitialized = false;
+        InitializeOil(true);
     }
 }

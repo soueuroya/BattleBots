@@ -21,7 +21,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 357b72ad0eef11443b1c64e95721d715, type: 2}
     - target: {fileID: 725195493987258314, guid: 171530159f79afc45b9efbffa24391a5, type: 3}
       propertyPath: m_Name
-      value: MTirePiece
+      value: MTirePiece Variant
       objectReference: {fileID: 0}
     - target: {fileID: 725195493987258315, guid: 171530159f79afc45b9efbffa24391a5, type: 3}
       propertyPath: m_Mesh
@@ -25989,7 +25989,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 725195493987258326, guid: 171530159f79afc45b9efbffa24391a5, type: 3}
       propertyPath: m_SelectedVertices.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 725195493987258326, guid: 171530159f79afc45b9efbffa24391a5, type: 3}
       propertyPath: m_Tangents.Array.data[1000].w
@@ -73588,6 +73588,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 725195493987258327, guid: 171530159f79afc45b9efbffa24391a5, type: 3}
   m_PrefabInstance: {fileID: 1727981307321788256}
   m_PrefabAsset: {fileID: 0}
+--- !u!23 &2155936339642362025 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 725195493987258313, guid: 171530159f79afc45b9efbffa24391a5, type: 3}
+  m_PrefabInstance: {fileID: 1727981307321788256}
+  m_PrefabAsset: {fileID: 0}
 --- !u!54 &2155936339642362036 stripped
 Rigidbody:
   m_CorrespondingSourceObject: {fileID: 725195493987258324, guid: 171530159f79afc45b9efbffa24391a5, type: 3}
@@ -73607,15 +73612,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pieceType: 7
   rb: {fileID: 2155936339642362036}
-  tr: {fileID: 2155936339642362039}
-  joints: []
-  joint: {fileID: 0}
   health: 80
+  tr: {fileID: 2155936339642362039}
+  mr: {fileID: 2155936339642362025}
   maxHealth: 80
   pieceInitialized: 1
   PIECELOCKUPDATE: 1
-  tireSide: 2
+  originalColor: {r: 0, g: 0, b: 0, a: 0}
+  tireHSide: 0
+  tireVSide: 0
+  tireOrientation: 0
   tireInitialized: 1
   TIRELOCKUPDATE: 1
+  joints: []
+  joint: {fileID: 0}
   mtireInitialized: 0
   MTIRELOCKUPDATE: 0

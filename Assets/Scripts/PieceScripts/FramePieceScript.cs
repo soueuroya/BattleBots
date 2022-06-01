@@ -17,6 +17,7 @@ public class FramePieceScript : PieceScript
     {
         if ((!frameInitialized || forceUpdate) && !FRAMELOCKUPDATE)
         {
+            frameInitialized = true;
             base.InitializePiece(forceUpdate);
             pieceType = typeToUse;
             health = maxHealth = healthToUse;
@@ -42,14 +43,10 @@ public class FramePieceScript : PieceScript
         }
     }
 
-    private void Awake()
-    {
-        InitializeFrame();
-    }
-
     private void Start()
     {
-        InitializeFrame();
+        frameInitialized = false;
+        InitializeFrame(true);
     }
 
     private void Reset()
@@ -59,6 +56,7 @@ public class FramePieceScript : PieceScript
 
     private void OnDrawGizmosSelected()
     {
-        InitializeFrame();
+        frameInitialized = false;
+        InitializeFrame(true);
     }
 }

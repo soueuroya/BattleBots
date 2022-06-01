@@ -21,14 +21,10 @@ public class BombPieceScript : CombatPieceScript
         }
     }
 
-    private void Awake()
-    {
-        InitializeBomb();
-    }
-
     private void Start()
     {
-        InitializeBomb();
+        bombInitialized = false;
+        InitializeBomb(true);
     }
 
     private void Reset()
@@ -38,6 +34,7 @@ public class BombPieceScript : CombatPieceScript
 
     private void OnDrawGizmosSelected()
     {
-        InitializeBomb();
+        bombInitialized = false;
+        InitializeBomb(true);
     }
 }

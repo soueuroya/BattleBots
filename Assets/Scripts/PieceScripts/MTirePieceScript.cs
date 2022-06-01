@@ -16,6 +16,7 @@ public class MTirePieceScript : TirePieceScript
     {
         if ((!mtireInitialized || forceUpdate) && !MTIRELOCKUPDATE)
         {
+            mtireInitialized = true;
             pieceType = typeToUse;
             health = maxHealth = healthToUse;
             tr = GetComponent<Transform>();
@@ -42,14 +43,10 @@ public class MTirePieceScript : TirePieceScript
         }
     }
 
-    private void Awake()
-    {
-        InitializeMTire();
-    }
-
     private void Start()
     {
-        InitializeMTire();
+        mtireInitialized = false;
+        InitializeMTire(true);
     }
 
     private void Reset()
@@ -59,6 +56,7 @@ public class MTirePieceScript : TirePieceScript
 
     private void OnDrawGizmosSelected()
     {
-        InitializeMTire();
+        mtireInitialized = false;
+        InitializeMTire(true);
     }
 }

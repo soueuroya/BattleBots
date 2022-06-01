@@ -4874,12 +4874,24 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 3969349905372855557, guid: 2f4da06719305fb4c8aa72e45d8b15b1, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: ec3c2bdfc834edd459ca328ac0974b27, type: 2}
+    - target: {fileID: 3969349905372855557, guid: 2f4da06719305fb4c8aa72e45d8b15b1, type: 3}
       propertyPath: m_Materials.Array.data[1]
       value: 
       objectReference: {fileID: 2100000, guid: 1c104d1924c70c14c81423e455f3eaee, type: 2}
+    - target: {fileID: 3969349905372855557, guid: 2f4da06719305fb4c8aa72e45d8b15b1, type: 3}
+      propertyPath: m_Materials.Array.data[2]
+      value: 
+      objectReference: {fileID: 2100000, guid: 634e257987faf2b43b8c349a1e0df02f, type: 2}
     - target: {fileID: 3969349905372855558, guid: 2f4da06719305fb4c8aa72e45d8b15b1, type: 3}
       propertyPath: m_Mesh
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3969349905372855610, guid: 2f4da06719305fb4c8aa72e45d8b15b1, type: 3}
+      propertyPath: m_Mass
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3969349905372855611, guid: 2f4da06719305fb4c8aa72e45d8b15b1, type: 3}
       propertyPath: m_Mesh
@@ -4939,6 +4951,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 4308490941966007833, guid: 2f4da06719305fb4c8aa72e45d8b15b1, type: 3}
+    - {fileID: 8849367683494054310, guid: 2f4da06719305fb4c8aa72e45d8b15b1, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 2f4da06719305fb4c8aa72e45d8b15b1, type: 3}
 --- !u!1 &8968101975021125284 stripped
 GameObject:
@@ -4948,6 +4961,11 @@ GameObject:
 --- !u!4 &8968101975021125287 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3969349905372855614, guid: 2f4da06719305fb4c8aa72e45d8b15b1, type: 3}
+  m_PrefabInstance: {fileID: 5431604545524745113}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &8968101975021125276 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 3969349905372855557, guid: 2f4da06719305fb4c8aa72e45d8b15b1, type: 3}
   m_PrefabInstance: {fileID: 5431604545524745113}
   m_PrefabAsset: {fileID: 0}
 --- !u!54 &8968101975021125283 stripped
@@ -5588,7 +5606,7 @@ ParticleSystem:
     boxThickness: {x: 0, y: 0, z: 0}
     radiusThickness: 1
     donutRadius: 0.2
-    m_Position: {x: 0, y: 0, z: 0.4}
+    m_Position: {x: 0, y: 0, z: 0.7}
     m_Rotation: {x: 0, y: 0, z: 0}
     m_Scale: {x: 1, y: 1, z: 1}
     placementMode: 0
@@ -9737,7 +9755,7 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
---- !u!114 &1188622293
+--- !u!114 &7443029055184457104
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -9751,18 +9769,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pieceType: 0
   rb: {fileID: 8968101975021125283}
-  tr: {fileID: 8968101975021125287}
   health: 40
+  tr: {fileID: 8968101975021125287}
+  mr: {fileID: 8968101975021125276}
   maxHealth: 40
   pieceInitialized: 1
-  PIECELOCKUPDATE: 1
-  direction: 4
+  PIECELOCKUPDATE: 0
+  originalColor: {r: 0, g: 1, b: 0.06795335, a: 1}
+  frameInitialized: 0
+  FRAMELOCKUPDATE: 0
+  joints: []
+  joint: {fileID: 0}
+  direction: 0
   partSyst: {fileID: 1188622291}
   charge: 0
   maxCharge: 0
-  joints: []
-  joint: {fileID: 0}
   combatPieceInitialized: 1
-  COMBATPIECELOCKUPDATE: 1
-  acidInitialized: 0
+  COMBATPIECELOCKUPDATE: 0
+  acidInitialized: 1
   ACIDLOCKUPDATE: 0

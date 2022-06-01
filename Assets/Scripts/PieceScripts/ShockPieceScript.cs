@@ -14,6 +14,7 @@ public class ShockPieceScript : CombatPieceScript
     {
         if ((!shockInitialized || forceUpdate) && !SHOCKLOCKUPDATE)
         {
+            shockInitialized = true;
             base.InitializeCombatPiece(forceUpdate);
             pieceType = typeToUse;
             health = maxHealth = healthToUse;
@@ -21,14 +22,10 @@ public class ShockPieceScript : CombatPieceScript
         }
     }
 
-    private void Awake()
-    {
-        InitializeShock();
-    }
-
     private void Start()
     {
-        InitializeShock();
+        shockInitialized = false;
+        InitializeShock(true);
     }
 
     private void Reset()
@@ -38,6 +35,7 @@ public class ShockPieceScript : CombatPieceScript
 
     private void OnDrawGizmosSelected()
     {
-        InitializeShock();
+        shockInitialized = false;
+        InitializeShock(true);
     }
 }

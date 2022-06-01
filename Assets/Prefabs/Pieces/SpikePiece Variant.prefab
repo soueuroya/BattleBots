@@ -4873,9 +4873,25 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 3969349905372855557, guid: 2f4da06719305fb4c8aa72e45d8b15b1, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: ec3c2bdfc834edd459ca328ac0974b27, type: 2}
+    - target: {fileID: 3969349905372855557, guid: 2f4da06719305fb4c8aa72e45d8b15b1, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 863074c292caa174e904779edadb8f59, type: 2}
+    - target: {fileID: 3969349905372855557, guid: 2f4da06719305fb4c8aa72e45d8b15b1, type: 3}
+      propertyPath: m_Materials.Array.data[2]
+      value: 
+      objectReference: {fileID: 2100000, guid: 634e257987faf2b43b8c349a1e0df02f, type: 2}
     - target: {fileID: 3969349905372855558, guid: 2f4da06719305fb4c8aa72e45d8b15b1, type: 3}
       propertyPath: m_Mesh
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3969349905372855610, guid: 2f4da06719305fb4c8aa72e45d8b15b1, type: 3}
+      propertyPath: m_Mass
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3969349905372855611, guid: 2f4da06719305fb4c8aa72e45d8b15b1, type: 3}
       propertyPath: m_Mesh
@@ -4933,7 +4949,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8849367683494054310, guid: 2f4da06719305fb4c8aa72e45d8b15b1, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 2f4da06719305fb4c8aa72e45d8b15b1, type: 3}
 --- !u!1 &7197306081117928066 stripped
 GameObject:
@@ -4943,6 +4960,11 @@ GameObject:
 --- !u!4 &7197306081117928065 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3969349905372855614, guid: 2f4da06719305fb4c8aa72e45d8b15b1, type: 3}
+  m_PrefabInstance: {fileID: 6121518936672454591}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &7197306081117928122 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 3969349905372855557, guid: 2f4da06719305fb4c8aa72e45d8b15b1, type: 3}
   m_PrefabInstance: {fileID: 6121518936672454591}
   m_PrefabAsset: {fileID: 0}
 --- !u!54 &7197306081117928069 stripped
@@ -9732,7 +9754,7 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
---- !u!114 &1806165699
+--- !u!114 &9023078274453399823
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -9746,18 +9768,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pieceType: 5
   rb: {fileID: 7197306081117928069}
+  health: 40
   tr: {fileID: 7197306081117928065}
+  mr: {fileID: 7197306081117928122}
+  maxHealth: 40
+  pieceInitialized: 1
+  PIECELOCKUPDATE: 0
+  originalColor: {r: 0.4245283, g: 0.4245283, b: 0.4245283, a: 1}
+  frameInitialized: 0
+  FRAMELOCKUPDATE: 0
   joints: []
   joint: {fileID: 0}
-  health: 40
-  maxHealth: 40
-  pieceInitialized: 0
-  PIECELOCKUPDATE: 0
   direction: 0
   partSyst: {fileID: 1806165697}
   charge: 0
   maxCharge: 0
-  combatPieceInitialized: 0
+  combatPieceInitialized: 1
   COMBATPIECELOCKUPDATE: 0
-  spikeInitialized: 1
+  spikeInitialized: 0
   SPIKELOCKUPDATE: 0

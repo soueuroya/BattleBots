@@ -1108,6 +1108,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3909802947674451118, guid: c2264998332c09f4bb21d86642c22157, type: 3}
   m_PrefabInstance: {fileID: 5382113467050122541}
   m_PrefabAsset: {fileID: 0}
+--- !u!23 &9003666240911667598 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 3909802947674451107, guid: c2264998332c09f4bb21d86642c22157, type: 3}
+  m_PrefabInstance: {fileID: 5382113467050122541}
+  m_PrefabAsset: {fileID: 0}
 --- !u!54 &9003666240911667596 stripped
 Rigidbody:
   m_CorrespondingSourceObject: {fileID: 3909802947674451105, guid: c2264998332c09f4bb21d86642c22157, type: 3}
@@ -1189,12 +1194,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pieceType: 9
   rb: {fileID: 9003666240911667596}
-  tr: {fileID: 9003666240911667587}
   health: 80
+  tr: {fileID: 9003666240911667587}
+  mr: {fileID: 9003666240911667598}
   maxHealth: 80
   pieceInitialized: 0
   PIECELOCKUPDATE: 0
+  originalColor: {r: 0, g: 0, b: 0, a: 0}
   frameInitialized: 0
   FRAMELOCKUPDATE: 0
+  joints: []
+  joint: {fileID: 0}
   coreInitialized: 0
   CORELOCKUPDATE: 0

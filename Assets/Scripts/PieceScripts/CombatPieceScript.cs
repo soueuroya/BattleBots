@@ -16,6 +16,7 @@ public class CombatPieceScript : FramePieceScript
     {
         if ((!combatPieceInitialized || forceUpdate) && !COMBATPIECELOCKUPDATE)
         {
+            combatPieceInitialized = true;
             base.InitializePiece(forceUpdate);
             //TODO SET PARTICLES
             partSyst = GetComponent<ParticleSystem>();
@@ -43,14 +44,10 @@ public class CombatPieceScript : FramePieceScript
         }
     }
 
-    private void Awake()
-    {
-        InitializeCombatPiece();
-    }
-
     private void Start()
     {
-        InitializeCombatPiece();
+        combatPieceInitialized = false;
+        InitializeCombatPiece(true);
     }
 
     private void Reset()
@@ -60,6 +57,7 @@ public class CombatPieceScript : FramePieceScript
 
     private void OnDrawGizmosSelected()
     {
+        combatPieceInitialized = false;
         InitializeCombatPiece(true);
     }
 }

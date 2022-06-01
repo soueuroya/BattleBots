@@ -2934,13 +2934,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pieceType: 6
   rb: {fileID: 725195493987258324}
-  tr: {fileID: 725195493987258327}
-  joints: []
-  joint: {fileID: 0}
   health: 60
+  tr: {fileID: 725195493987258327}
+  mr: {fileID: 725195493987258313}
   maxHealth: 60
   pieceInitialized: 1
   PIECELOCKUPDATE: 1
-  tireSide: 2
+  originalColor: {r: 0, g: 0, b: 0, a: 0}
+  tireHSide: 0
+  tireVSide: 0
+  tireOrientation: 0
   tireInitialized: 0
   TIRELOCKUPDATE: 0
+  joints: []
+  joint: {fileID: 0}
