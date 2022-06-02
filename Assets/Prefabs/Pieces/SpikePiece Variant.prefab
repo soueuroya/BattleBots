@@ -5629,7 +5629,7 @@ ParticleSystem:
     boxThickness: {x: 0, y: 0, z: 0}
     radiusThickness: 1
     donutRadius: 0.2
-    m_Position: {x: 0, y: 0, z: 0.69}
+    m_Position: {x: 0, y: 0, z: 0.7}
     m_Rotation: {x: 0, y: 0, z: 0}
     m_Scale: {x: 1, y: 1, z: 1}
     placementMode: 0
@@ -9793,22 +9793,21 @@ MonoBehaviour:
   pieceType: 5
   rb: {fileID: 7197306081117928069}
   health: 40
+  maxHealth: 40
+  alive: 0
   healthbarCanvas: {fileID: 3547590571006166670}
   healthbar: {fileID: 6266692648874774304}
   tr: {fileID: 7197306081117928065}
   mr: {fileID: 7197306081117928122}
-  maxHealth: 40
-  pieceInitialized: 0
-  PIECELOCKUPDATE: 0
   originalColor: {r: 0.4245283, g: 0.4245283, b: 0.4245283, a: 1}
-  frameInitialized: 0
-  FRAMELOCKUPDATE: 0
+  leftTire: {fileID: 0}
+  rightTire: {fileID: 0}
+  leftAxis: {fileID: 0}
+  rightAxis: {fileID: 0}
   joints: []
   direction: 0
   partSyst: {fileID: 1806165697}
   charge: 0
   maxCharge: 0
-  combatPieceInitialized: 0
-  COMBATPIECELOCKUPDATE: 0
   spikeInitialized: 0
   SPIKELOCKUPDATE: 0
