@@ -5,18 +5,18 @@ using static StaticHelper;
 
 public class MTirePieceScript : TirePieceScript
 {
-    [SerializeField] private bool mtireInitialized;
-    [SerializeField] private bool MTIRELOCKUPDATE;
+    ///[SerializeField] private bool mtireInitialized;
+    ///[SerializeField] private bool MTIRELOCKUPDATE;
 
-    private const PieceType typeToUse = PieceType.MTIRE;
-    private const float healthToUse = MTIRE_PIECE_HEALTH;
-    private const float massToUse = MTIRE_PIECE_WEIGHT;
+    [SerializeField] private const PieceType typeToUse = PieceType.MTIRE;
+    [SerializeField] private const float healthToUse = MTIRE_PIECE_HEALTH;
+    [SerializeField] private const float massToUse = MTIRE_PIECE_WEIGHT;
 
     protected void InitializeMTire(bool forceUpdate = false)
     {
-        if ((!mtireInitialized || forceUpdate) && !MTIRELOCKUPDATE)
+        ///if ((!mtireInitialized || forceUpdate) && !MTIRELOCKUPDATE)
         {
-            mtireInitialized = true;
+            ///mtireInitialized = true;
             pieceType = typeToUse;
             health = maxHealth = healthToUse;
             tr = GetComponent<Transform>();
@@ -38,14 +38,14 @@ public class MTirePieceScript : TirePieceScript
             mc.convex = true;
 
             //TODO SET JOINTS
-            joint = GetComponent<HingeJoint>();
-            joints = GetComponents<HingeJoint>();
+            hJoint = GetComponent<HingeJoint>();
+            //joints = new List<HingeJoint>(GetComponents<HingeJoint>());
         }
     }
 
     private void Start()
     {
-        mtireInitialized = false;
+        ///mtireInitialized = false;
         InitializeMTire(true);
     }
 
@@ -56,7 +56,7 @@ public class MTirePieceScript : TirePieceScript
 
     private void OnDrawGizmosSelected()
     {
-        mtireInitialized = false;
+        ///mtireInitialized = false;
         InitializeMTire(true);
     }
 }

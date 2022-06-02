@@ -20,8 +20,6 @@ public class RobotScript : MonoBehaviour
     [SerializeField] protected bool initialized;
     [SerializeField] protected bool LOCKUPDATE;
 
-    private List<Rigidbody> rigidbodies = new List<Rigidbody>();
-
     protected void Initialize(bool forceUpdate = false)
     {
         if ((!initialized || forceUpdate) && !LOCKUPDATE)
@@ -56,20 +54,21 @@ public class RobotScript : MonoBehaviour
             {
                 cores.Clear();
             }
-
-            foreach (Transform child in transform)
+            //Arrange child objects
+            foreach (Transform child in transform) // FOR EACH GAMEOBJECT IN THE ROBOT
             {
                 if (child != null)
                 {
-                    PieceScript piece = child.GetComponent<PieceScript>();
-                    FramePieceScript framePiece = piece as FramePieceScript;
+                    PieceScript piece = child.GetComponent<PieceScript>(); // GET THE PIECE SCRIPT
                     if (piece != null)
                     {
+                        FramePieceScript framePiece = piece as FramePieceScript; // GET THE FRAMESCRIPT (CORES AND BATTLE PIECES, NO TIRES)
                         if (framePiece != null)
                         {
+                            framePiece.ClearJoints();
                             foreach (Transform child2 in transform)
                             {
-                                if (child != child2)
+                                if (child != child2) // IF NOT THE SAME PIECE
                                 {
                                     PieceScript piece2 = child2.GetComponent<PieceScript>();
                                     FramePieceScript framePiece2 = piece2 as FramePieceScript;
@@ -116,20 +115,17 @@ public class RobotScript : MonoBehaviour
                 if (_rb != null)
                 {
                     _rb.isKinematic = false;
+                    _rb.centerOfMass += new Vector3(0, -0.2f, 0);
                 }
             }
             health = maxHealth;
         }
     }
 
-    private void Awake()
-    {
-        Initialize();
-    }
-
     private void Start()
     {
-        Initialize();
+        initialized = false;
+        Initialize(true);
     }
 
     private void Reset()
@@ -139,6 +135,7 @@ public class RobotScript : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
+        initialized = false;
         Initialize(true);
     }
     #region POWER
@@ -164,16 +161,82 @@ public class RobotScript : MonoBehaviour
         }
     }
 
+    public void LosePiece(PieceScript _piece)
+    {
+        switch (_piece.PieceType)
+        {
+            case PieceType.TIRE:
+                if (tires.Contains(_piece as TirePieceScript))
+                {
+                    tires.Remove(_piece as TirePieceScript);
+                }
+                break;
+            case PieceType.MTIRE:
+                if (tires.Contains(_piece as TirePieceScript))
+                {
+                    tires.Remove(_piece as TirePieceScript);
+                }
+                break;
+            case PieceType.FRAME:
+                if (frames.Contains(_piece as FramePieceScript))
+                {
+                    frames.Remove(_piece as FramePieceScript);
+                }
+                break;
+            case PieceType.ACID:
+                if (acids.Contains(_piece as AcidPieceScript))
+                {
+                    acids.Remove(_piece as AcidPieceScript);
+                }
+                break;
+            case PieceType.FIRE:
+                if (fires.Contains(_piece as FirePieceScript))
+                {
+                    fires.Remove(_piece as FirePieceScript);
+                }
+                break;
+            case PieceType.SHOCK:
+                if (shocks.Contains(_piece as ShockPieceScript))
+                {
+                    shocks.Remove(_piece as ShockPieceScript);
+                }
+                break;
+            case PieceType.OIL:
+                if (oils.Contains(_piece as OilPieceScript))
+                {
+                    oils.Remove(_piece as OilPieceScript);
+                }
+                break;
+            case PieceType.BOMB:
+                if (bombs.Contains(_piece as BombPieceScript))
+                {
+                    bombs.Remove(_piece as BombPieceScript);
+                }
+                break;
+            case PieceType.SPIKE:
+                if (spikes.Contains(_piece as SpikePieceScript))
+                {
+                    spikes.Remove(_piece as SpikePieceScript);
+                }
+                break;
+            case PieceType.CORE:
+                if (cores.Contains(_piece as CorePieceScript))
+                {
+                    cores.Remove(_piece as CorePieceScript);
+                }
+                break;
+            default:
+                break;
+        }
+    }
+
     public void StartAcids()
     {
-        Debug.Log("STARTING ACIDS");
         foreach (AcidPieceScript acid in acids)
         {
-            Debug.Log("STARTING acid");
             acid.Activate();
         }   
     }
-
     public void StopAcids()
     {
         foreach (AcidPieceScript acid in acids)
@@ -181,7 +244,6 @@ public class RobotScript : MonoBehaviour
             acid.Deactivate();
         }
     }
-
     public void StartFires()
     {
         foreach (FirePieceScript fire in fires)
@@ -189,7 +251,6 @@ public class RobotScript : MonoBehaviour
             fire.Activate();
         }
     }
-
     public void StopFires()
     {
         foreach (FirePieceScript fire in fires)
@@ -197,7 +258,6 @@ public class RobotScript : MonoBehaviour
             fire.Deactivate();
         }
     }
-
     public void StartShocks()
     {
         foreach (ShockPieceScript schock in shocks)
@@ -205,7 +265,6 @@ public class RobotScript : MonoBehaviour
             schock.Activate();
         }
     }
-
     public void StopShocks()
     {
         foreach (ShockPieceScript schock in shocks)
@@ -213,7 +272,6 @@ public class RobotScript : MonoBehaviour
             schock.Deactivate();
         }
     }
-
     public void StartOils()
     {
         foreach (OilPieceScript oil in oils)
@@ -221,7 +279,6 @@ public class RobotScript : MonoBehaviour
             oil.Activate();
         }
     }
-
     public void StopOils()
     {
         foreach (OilPieceScript oil in oils)
@@ -229,7 +286,6 @@ public class RobotScript : MonoBehaviour
             oil.Deactivate();
         }
     }
-
     public void StartSpikes()
     {
         foreach (SpikePieceScript spike in spikes)
@@ -237,7 +293,6 @@ public class RobotScript : MonoBehaviour
             spike.Activate();
         }
     }
-
     public void StopSpikes()
     {
         foreach (SpikePieceScript spike in spikes)
@@ -245,7 +300,6 @@ public class RobotScript : MonoBehaviour
             spike.Deactivate();
         }
     }
-
     public void StartBombs()
     {
         foreach (BombPieceScript bomb in bombs)
@@ -253,7 +307,6 @@ public class RobotScript : MonoBehaviour
             bomb.Activate();
         }
     }
-
     public void StopBombs()
     {
         foreach (BombPieceScript bomb in bombs)
@@ -288,7 +341,7 @@ public class RobotScript : MonoBehaviour
     #region MOVEMENT
     public void Move(MovementDirection dir)
     {
-        switch (dir)
+        switch(dir)
         {
             case MovementDirection.LEFT: MoveLeft();
                 break;
@@ -298,6 +351,14 @@ public class RobotScript : MonoBehaviour
                 break;
             case MovementDirection.DOWN: MoveBack();
                 break;
+            case MovementDirection.TLEFT: MoveForwardLeft();
+                break;
+            case MovementDirection.TRIGHT: MoveForwardRight();
+                break;
+            case MovementDirection.BLEFT: MoveBackLeft();
+                break;
+            case MovementDirection.BRIGHT: MoveBackRight();
+                break;
             default:
                 break;
         }
@@ -306,111 +367,338 @@ public class RobotScript : MonoBehaviour
     public void Stop()
     {
         //Stop all tires
-        foreach (TirePieceScript tire in tires)
+        int? tireIndex = null;
+        for (int i = 0; i < tires.Count; i++)
         {
-            tire.RotateForward(0);
+            if (tires[i].HJoint != null)
+            {
+                tires[i].RotateForward(0);
+            }
+            else
+            {
+                tireIndex = i;
+            }
+        }
+        if (tireIndex.HasValue)
+        {
+            tires.RemoveAt(tireIndex.Value);
         }
     }
 
     public void MoveForward()
     {
         //Rotate all tires forward.
-        foreach(TirePieceScript tire in tires)
+        int? tireIndex = null;
+        for (int i = 0; i < tires.Count; i++)
         {
-            if (tire.TireHSide == TireHSide.LEFT && tire.TireOrientation == TireOrientation.LEFT) // LEFT LEFT
+            if (tires[i].HJoint != null)
             {
-                tire.RotateForward(-speed);
-            }
-            else if (tire.TireHSide == TireHSide.RIGHT && tire.TireOrientation == TireOrientation.LEFT) // RIGHT LEFT
-            {
-                tire.RotateForward(-speed);
+                if (tires[i].TireHSide == TireHSide.LEFT && tires[i].TireOrientation == TireOrientation.LEFT) // LEFT LEFT
+                {
+                    tires[i].RotateForward(-speed);
+                }
+                else if (tires[i].TireHSide == TireHSide.RIGHT && tires[i].TireOrientation == TireOrientation.LEFT) // RIGHT LEFT
+                {
+                    tires[i].RotateForward(-speed);
+                }
+                else
+                {
+                    tires[i].RotateForward(speed);
+                }
             }
             else
             {
-                tire.RotateForward(speed);
+                tireIndex = i;
             }
+        }
+        if (tireIndex.HasValue)
+        {
+            tires.RemoveAt(tireIndex.Value);
         }
     }
 
     public void MoveBack()
     {
         //Rotate all tires back.
-        foreach (TirePieceScript tire in tires)
+        int? tireIndex = null;
+        for (int i = 0; i < tires.Count; i++)
         {
-            if (tire.TireHSide == TireHSide.LEFT && tire.TireOrientation == TireOrientation.LEFT) // LEFT LEFT
+            if (tires[i].HJoint != null)
             {
-                tire.RotateForward(speed);
-            }
-            else if (tire.TireHSide == TireHSide.RIGHT && tire.TireOrientation == TireOrientation.LEFT) // RIGHT LEFT
-            {
-                tire.RotateForward(speed);
+                if (tires[i].TireHSide == TireHSide.LEFT && tires[i].TireOrientation == TireOrientation.LEFT) // LEFT LEFT
+                {
+                    tires[i].RotateForward(speed);
+                }
+                else if (tires[i].TireHSide == TireHSide.RIGHT && tires[i].TireOrientation == TireOrientation.LEFT) // RIGHT LEFT
+                {
+                    tires[i].RotateForward(speed);
+                }
+                else
+                {
+                    tires[i].RotateForward(-speed);
+                }
             }
             else
             {
-                tire.RotateForward(-speed);
+                tireIndex = i;
             }
+        }
+        if (tireIndex.HasValue)
+        {
+            tires.RemoveAt(tireIndex.Value);
         }
     }
 
     public void MoveLeft()
     {
         //Rotate all left tires back and all right tires forward.
-        foreach (TirePieceScript tire in tires)
+        int? tireIndex = null;
+        for (int i = 0; i < tires.Count; i++)
         {
-            if (tire.TireHSide == TireHSide.LEFT) // LEFT of the car
+            if (tires[i].HJoint != null)
             {
-                if (tire.TireOrientation == TireOrientation.LEFT) // default
+                if (tires[i].TireHSide == TireHSide.LEFT) // LEFT of the car
                 {
-                    tire.RotateForward(speed, true);
+                    if (tires[i].TireOrientation == TireOrientation.LEFT) // default
+                    {
+                        tires[i].RotateForward(speed, true);
+                    }
+                    else // inverted to the right
+                    {
+                        tires[i].RotateForward(-speed, true);
+                    }
                 }
-                else // inverted to the right
+                else if (tires[i].TireHSide == TireHSide.RIGHT) // RIGHT of the car
                 {
-                    tire.RotateForward(-speed, true);
+                    if (tires[i].TireOrientation == TireOrientation.LEFT) // inverted to the left
+                    {
+                        tires[i].RotateForward(-speed, true);
+                    }
+                    else // default
+                    {
+                        tires[i].RotateForward(speed, true);
+                    }
                 }
             }
-            else if (tire.TireHSide == TireHSide.RIGHT) // RIGHT of the car
+            else
             {
-                if (tire.TireOrientation == TireOrientation.LEFT) // inverted to the left
+                tireIndex = i;
+            }
+        }
+        if (tireIndex.HasValue)
+        {
+            tires.RemoveAt(tireIndex.Value);
+        }
+    }
+
+    public void MoveForwardLeft()
+    {
+        //Just rotate right tires forward.
+        int? tireIndex = null;
+        for (int i = 0; i < tires.Count; i++)
+        {
+            if (tires[i].HJoint != null)
+            {
+                if (tires[i].TireHSide == TireHSide.LEFT) // LEFT of the car
                 {
-                    tire.RotateForward(-speed, true);
+                    /*if (tires[i].TireOrientation == TireOrientation.LEFT) // default
+                    {
+                        tires[i].RotateForward(speed, true);
+                    }
+                    else // inverted to the right
+                    {
+                        tires[i].RotateForward(-speed, true);
+                    }*/
                 }
-                else // default
+                else if (tires[i].TireHSide == TireHSide.RIGHT) // RIGHT of the car
                 {
-                    tire.RotateForward(speed, true);
+                    if (tires[i].TireOrientation == TireOrientation.LEFT) // inverted to the left
+                    {
+                        tires[i].RotateForward(-speed, true);
+                    }
+                    else // default
+                    {
+                        tires[i].RotateForward(speed, true);
+                    }
                 }
             }
+            else
+            {
+                tireIndex = i;
+            }
+        }
+        if (tireIndex.HasValue)
+        {
+            tires.RemoveAt(tireIndex.Value);
+        }
+    }
+
+    public void MoveBackLeft()
+    {
+        //Just rotate right tires back.
+        int? tireIndex = null;
+        for (int i = 0; i < tires.Count; i++)
+        {
+            if (tires[i].HJoint != null)
+            {
+                if (tires[i].TireHSide == TireHSide.LEFT) // LEFT of the car
+                {
+                    /*if (tires[i].TireOrientation == TireOrientation.LEFT) // default
+                    {
+                        tires[i].RotateForward(speed, true);
+                    }
+                    else // inverted to the right
+                    {
+                        tires[i].RotateForward(-speed, true);
+                    }*/
+                }
+                else if (tires[i].TireHSide == TireHSide.RIGHT) // RIGHT of the car
+                {
+                    if (tires[i].TireOrientation == TireOrientation.LEFT) // inverted to the left
+                    {
+                        tires[i].RotateForward(speed, true);
+                    }
+                    else // default
+                    {
+                        tires[i].RotateForward(-speed, true);
+                    }
+                }
+            }
+            else
+            {
+                tireIndex = i;
+            }
+        }
+        if (tireIndex.HasValue)
+        {
+            tires.RemoveAt(tireIndex.Value);
         }
     }
 
     public void MoveRight()
     {
         //Rotate all left tires forward and all right tires back.
-        foreach (TirePieceScript tire in tires)
+        int? tireIndex = null;
+        for (int i = 0; i < tires.Count; i++)
         {
-            if (tire.TireHSide == TireHSide.LEFT) // LEFT of the car
+            if (tires[i].HJoint != null)
             {
-                if (tire.TireOrientation == TireOrientation.LEFT) // default
+                if (tires[i].TireHSide == TireHSide.LEFT) // LEFT of the car
                 {
-                    tire.RotateForward(-speed, true);
+                    if (tires[i].TireOrientation == TireOrientation.LEFT) // default
+                    {
+                        tires[i].RotateForward(-speed, true);
+                    }
+                    else // inverted to the right
+                    {
+                        tires[i].RotateForward(speed, true);
+                    }
                 }
-                else // inverted to the right
+                else if (tires[i].TireHSide == TireHSide.RIGHT) // RIGHT of the car
                 {
-                    tire.RotateForward(speed, true);
+                    if (tires[i].TireOrientation == TireOrientation.LEFT) // inverted to the left
+                    {
+                        tires[i].RotateForward(speed, true);
+                    }
+                    else // default
+                    {
+                        tires[i].RotateForward(-speed, true);
+                    }
                 }
             }
-            else if (tire.TireHSide == TireHSide.RIGHT) // RIGHT of the car
+            else
             {
-                if (tire.TireOrientation == TireOrientation.LEFT) // inverted to the left
-                {
-                    tire.RotateForward(speed, true);
-                }
-                else // default
-                {
-                    tire.RotateForward(-speed, true);
-                }
+                tireIndex = i;
             }
+        }
+        if (tireIndex.HasValue)
+        {
+            tires.RemoveAt(tireIndex.Value);
         }
     }
 
+    public void MoveForwardRight()
+    {
+        //Rotate all left tires forward
+        int? tireIndex = null;
+        for (int i = 0; i < tires.Count; i++)
+        {
+            if (tires[i].HJoint != null)
+            {
+                if (tires[i].TireHSide == TireHSide.LEFT) // LEFT of the car
+                {
+                    if (tires[i].TireOrientation == TireOrientation.LEFT) // default
+                    {
+                        tires[i].RotateForward(-speed, true);
+                    }
+                    else // inverted to the right
+                    {
+                        tires[i].RotateForward(speed, true);
+                    }
+                }
+                else if (tires[i].TireHSide == TireHSide.RIGHT) // RIGHT of the car
+                {
+                    /*if (tires[i].TireOrientation == TireOrientation.LEFT) // inverted to the left
+                    {
+                        tires[i].RotateForward(speed, true);
+                    }
+                    else // default
+                    {
+                        tires[i].RotateForward(-speed, true);
+                    }*/
+                }
+            }
+            else
+            {
+                tireIndex = i;
+            }
+        }
+        if (tireIndex.HasValue)
+        {
+            tires.RemoveAt(tireIndex.Value);
+        }
+    }
+
+    public void MoveBackRight()
+    {
+        //Rotate all left tires back
+        int? tireIndex = null;
+        for (int i = 0; i < tires.Count; i++)
+        {
+            if (tires[i].HJoint != null)
+            {
+                if (tires[i].TireHSide == TireHSide.LEFT) // LEFT of the car
+                {
+                    if (tires[i].TireOrientation == TireOrientation.LEFT) // default
+                    {
+                        tires[i].RotateForward(speed, true);
+                    }
+                    else // inverted to the right
+                    {
+                        tires[i].RotateForward(-speed, true);
+                    }
+                }
+                else if (tires[i].TireHSide == TireHSide.RIGHT) // RIGHT of the car
+                {
+                    /*if (tires[i].TireOrientation == TireOrientation.LEFT) // inverted to the left
+                    {
+                        tires[i].RotateForward(speed, true);
+                    }
+                    else // default
+                    {
+                        tires[i].RotateForward(-speed, true);
+                    }*/
+                }
+            }
+            else
+            {
+                tireIndex = i;
+            }
+        }
+        if (tireIndex.HasValue)
+        {
+            tires.RemoveAt(tireIndex.Value);
+        }
+    }
     #endregion
 }

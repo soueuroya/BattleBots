@@ -5,20 +5,38 @@ public class MoveButtonScript : MonoBehaviour
 {
     public MovementDirection dir;
     public bool isHeld;
+    public KeyCode key;
+    private void Update()
+    {
+        if (Input.GetKeyDown(key))
+        {
+            StartMove();
+        }
+        else if (Input.GetKeyUp(key))
+        {
+            StopMove();
+        }
+
+        if (isHeld)
+        {
+            RobotControlScript.Instance.Move(dir);
+        }
+    }
     private void OnMouseDown()
     {
-        isHeld = true;
+        StartMove();
     }
     private void OnMouseUp()
     {
-        isHeld = false;
-        RobotControlScript.Instance.robots[RobotControlScript.Instance.currentRobot].Stop();
+        StopMove();
     }
-    private void Update()
+    private void StartMove()
     {
-        if (isHeld)
-        {
-            RobotControlScript.Instance.robots[RobotControlScript.Instance.currentRobot].Move(dir);
-        }
+        isHeld = true;
+    }
+    private void StopMove()
+    {
+        isHeld = false;
+        RobotControlScript.Instance.Stop();
     }
 }

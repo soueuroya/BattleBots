@@ -4911,15 +4911,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3969349905372855614, guid: 2f4da06719305fb4c8aa72e45d8b15b1, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3969349905372855614, guid: 2f4da06719305fb4c8aa72e45d8b15b1, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3969349905372855614, guid: 2f4da06719305fb4c8aa72e45d8b15b1, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3969349905372855614, guid: 2f4da06719305fb4c8aa72e45d8b15b1, type: 3}
       propertyPath: m_LocalRotation.w
@@ -4949,6 +4949,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5024431263390762310, guid: 2f4da06719305fb4c8aa72e45d8b15b1, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6200136284069364196, guid: 2f4da06719305fb4c8aa72e45d8b15b1, type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8849367683494054310, guid: 2f4da06719305fb4c8aa72e45d8b15b1, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 2f4da06719305fb4c8aa72e45d8b15b1, type: 3}
@@ -4972,6 +4980,22 @@ Rigidbody:
   m_CorrespondingSourceObject: {fileID: 3969349905372855610, guid: 2f4da06719305fb4c8aa72e45d8b15b1, type: 3}
   m_PrefabInstance: {fileID: 6121518936672454591}
   m_PrefabAsset: {fileID: 0}
+--- !u!223 &3547590571006166670 stripped
+Canvas:
+  m_CorrespondingSourceObject: {fileID: 7336244900698603825, guid: 2f4da06719305fb4c8aa72e45d8b15b1, type: 3}
+  m_PrefabInstance: {fileID: 6121518936672454591}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6266692648874774304 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 145173782331115679, guid: 2f4da06719305fb4c8aa72e45d8b15b1, type: 3}
+  m_PrefabInstance: {fileID: 6121518936672454591}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1289e15cdc6f07458dbb8b893cd5d31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!198 &1806165697
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -8733,7 +8757,7 @@ ParticleSystem:
     radiusScale: 0.0001
     collidesWith:
       serializedVersion: 2
-      m_Bits: 4294967295
+      m_Bits: 1
     maxCollisionShapes: 256
     quality: 0
     voxelSize: 0.5
@@ -9769,21 +9793,22 @@ MonoBehaviour:
   pieceType: 5
   rb: {fileID: 7197306081117928069}
   health: 40
+  healthbarCanvas: {fileID: 3547590571006166670}
+  healthbar: {fileID: 6266692648874774304}
   tr: {fileID: 7197306081117928065}
   mr: {fileID: 7197306081117928122}
   maxHealth: 40
-  pieceInitialized: 1
+  pieceInitialized: 0
   PIECELOCKUPDATE: 0
   originalColor: {r: 0.4245283, g: 0.4245283, b: 0.4245283, a: 1}
   frameInitialized: 0
   FRAMELOCKUPDATE: 0
   joints: []
-  joint: {fileID: 0}
   direction: 0
   partSyst: {fileID: 1806165697}
   charge: 0
   maxCharge: 0
-  combatPieceInitialized: 1
+  combatPieceInitialized: 0
   COMBATPIECELOCKUPDATE: 0
   spikeInitialized: 0
   SPIKELOCKUPDATE: 0

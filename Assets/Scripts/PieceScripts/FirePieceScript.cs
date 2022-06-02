@@ -3,17 +3,17 @@ using static StaticHelper;
 
 public class FirePieceScript : CombatPieceScript
 {
-    [SerializeField] private bool fireInitialized;
-    [SerializeField] private bool FIRELOCKUPDATE;
+    ///[SerializeField] private bool fireInitialized;
+    ///[SerializeField] private bool FIRELOCKUPDATE;
 
-    private const PieceType typeToUse = PieceType.FIRE;
-    private const float healthToUse = FIRE_PIECE_HEALTH;
-    private const float massToUse = FIRE_PIECE_WEIGHT;
+    [SerializeField] private const PieceType typeToUse = PieceType.FIRE;
+    [SerializeField] private const float healthToUse = FIRE_PIECE_HEALTH;
+    [SerializeField] private const float massToUse = FIRE_PIECE_WEIGHT;
     protected void InitializeFire(bool forceUpdate = false)
     {
-        if ((!fireInitialized || forceUpdate) && !FIRELOCKUPDATE)
+        ///if ((!fireInitialized || forceUpdate) && !FIRELOCKUPDATE)
         {
-            fireInitialized = true;
+            ///fireInitialized = true;
             base.InitializeCombatPiece(forceUpdate);
             pieceType = typeToUse;
             health = maxHealth = healthToUse;
@@ -23,7 +23,7 @@ public class FirePieceScript : CombatPieceScript
 
     private void Start()
     {
-        fireInitialized = false;
+        ///fireInitialized = false;
         InitializeFire(true);
     }
 
@@ -34,7 +34,7 @@ public class FirePieceScript : CombatPieceScript
 
     private void OnDrawGizmosSelected()
     {
-        fireInitialized = false;
+        ///fireInitialized = false;
         InitializeFire(true);
     }
 }

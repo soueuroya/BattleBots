@@ -9,21 +9,23 @@ public class PieceScript : MonoBehaviour
     [SerializeField] protected Rigidbody rb;
     public float Health { get { return health; } private set { health = value; } }
     [SerializeField] protected float health;
-
+    [SerializeField] protected float maxHealth;
+    [SerializeField] protected bool alive;
+    [SerializeField] protected Canvas healthbarCanvas;
+    [SerializeField] protected HealthbarScript healthbar;
     [SerializeField] protected Transform tr;
     [SerializeField] protected MeshRenderer mr;
-    [SerializeField] protected float maxHealth;
-    [SerializeField] private bool pieceInitialized;
-    [SerializeField] private bool PIECELOCKUPDATE;
+    ///[SerializeField] private bool pieceInitialized;
+    ///[SerializeField] private bool PIECELOCKUPDATE;
 
     [SerializeField] private Color originalColor;
 
     protected void InitializePiece(bool forceUpdate = false)
     {
-        if ((!pieceInitialized || forceUpdate) && !PIECELOCKUPDATE)
+        ///if ((!pieceInitialized || forceUpdate) && !PIECELOCKUPDATE)
         {
-            pieceInitialized = true;
-            Debug.Log("INITIALIZING PIECE: " + gameObject.name);
+            ///pieceInitialized = true;
+            alive = true;
             tr = GetComponent<Transform>();
 
             //SET RIGIDBODY
@@ -45,63 +47,82 @@ public class PieceScript : MonoBehaviour
             mr = GetComponent<MeshRenderer>();
             if (mr != null)
             {
-                if (pieceType.Equals(PieceType.FRAME))
+                if (pieceType.Equals(PieceType.FRAME) || pieceType.Equals(PieceType.TIRE) || pieceType.Equals(PieceType.MTIRE))
                 {
                     originalColor = mr.materials[0].color;
                 }
-                else if (!pieceType.Equals(PieceType.CORE))
+                else
                 {
                     originalColor = mr.materials[1].color;
                 }
             }
+
+            //SET HEALTHBAR
+            healthbarCanvas = GetComponentInChildren<Canvas>(true);
+            healthbar = healthbarCanvas.GetComponentInChildren<HealthbarScript>(true);
         }
     }
 
     private void OnMouseDown()
     {
-        Debug.Log("CLICKED");
-        TakeDamage();
+        TakeDamage(10);
     }
 
-    private void TakeDamage()
+    private void TakeDamage(float damage)
     {
         if (mr != null)
         {
-            if (pieceType.Equals(PieceType.FRAME))
+            if (pieceType.Equals(PieceType.FRAME) || pieceType.Equals(PieceType.TIRE) || pieceType.Equals(PieceType.MTIRE))
             {
                 mr.materials[0].color = Color.white;
             }
-            else if (!pieceType.Equals(PieceType.CORE))
+            else
             {
                 mr.materials[1].color = Color.white;
             }
-
+            health -= damage;
+            if (health <= 0)
+            {
+                health = 0;
+                DestroyPiece();
+                //TODO Destroy piece, if core, game over for this car.
+            }
+            ShowHealthbarCanvas();
+            healthbar.UpdateHealth(health/maxHealth);
             Invoke("RestoreColor", 0.2f);
         }
     }
+
+    protected virtual void DestroyPiece(){}
 
     private void RestoreColor()
     {
         if (mr != null)
         {
-            if (pieceType.Equals(PieceType.FRAME))
+            if (pieceType.Equals(PieceType.FRAME) || pieceType.Equals(PieceType.TIRE) || pieceType.Equals(PieceType.MTIRE))
             {
                 mr.materials[0].color = originalColor;
             }
-            else if (!pieceType.Equals(PieceType.CORE))
+            else
             {
                 mr.materials[1].color = originalColor;
             }
-            else
-            {
-
-            }
         }
     }
+    private void ShowHealthbarCanvas()
+    {
+        healthbarCanvas.gameObject.SetActive(true);
+        CancelInvoke("HideHealthbarCanvas");
+        Invoke("HideHealthbarCanvas", 0.5f);
+    }
 
+    private void HideHealthbarCanvas()
+    {
+        healthbarCanvas.gameObject.SetActive(false);
+    }
     private void Start()
     {
-        pieceInitialized = false;
+        ///pieceInitialized = false;
         InitializePiece(true);
     }
 
@@ -112,7 +133,7 @@ public class PieceScript : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
-        pieceInitialized = false;
+        ///pieceInitialized = false;
         InitializePiece(true);
     }
 }

@@ -9,14 +9,14 @@ public class CombatPieceScript : FramePieceScript
     [SerializeField] protected float charge;
     [SerializeField] protected float maxCharge;
 
-    [SerializeField] private bool combatPieceInitialized;
-    [SerializeField] private bool COMBATPIECELOCKUPDATE;
+    ///[SerializeField] private bool combatPieceInitialized;
+    ///[SerializeField] private bool COMBATPIECELOCKUPDATE;
 
     protected void InitializeCombatPiece(bool forceUpdate = false)
     {
-        if ((!combatPieceInitialized || forceUpdate) && !COMBATPIECELOCKUPDATE)
+        ///if ((!combatPieceInitialized || forceUpdate) && !COMBATPIECELOCKUPDATE)
         {
-            combatPieceInitialized = true;
+            ///combatPieceInitialized = true;
             base.InitializePiece(forceUpdate);
             //TODO SET PARTICLES
             partSyst = GetComponent<ParticleSystem>();
@@ -46,7 +46,7 @@ public class CombatPieceScript : FramePieceScript
 
     private void Start()
     {
-        combatPieceInitialized = false;
+        ///combatPieceInitialized = false;
         InitializeCombatPiece(true);
     }
 
@@ -57,7 +57,7 @@ public class CombatPieceScript : FramePieceScript
 
     private void OnDrawGizmosSelected()
     {
-        combatPieceInitialized = false;
+        ///combatPieceInitialized = false
         InitializeCombatPiece(true);
     }
 }

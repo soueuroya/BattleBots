@@ -12,94 +12,125 @@ public class TirePieceScript : PieceScript
     public TireOrientation TireOrientation { get { return tireOrientation; } private set { tireOrientation = value; } }
     [SerializeField] protected TireOrientation tireOrientation;
 
-    [SerializeField] private bool tireInitialized;
-    [SerializeField] private bool TIRELOCKUPDATE;
+    ///[SerializeField] private bool tireInitialized;
+    ///[SerializeField] private bool TIRELOCKUPDATE;
 
-    [SerializeField] protected HingeJoint[] joints;
-    [SerializeField] protected HingeJoint joint;
+    //[SerializeField] protected List<HingeJoint> joints;
+    public HingeJoint HJoint { get { return hJoint; } private set { hJoint = value; } }
+    [SerializeField] protected HingeJoint hJoint;
 
-    private const PieceType typeToUse = PieceType.TIRE;
-    private const float healthToUse = TIRE_PIECE_HEALTH;
-    private const float massToUse = TIRE_PIECE_WEIGHT;
+    public HingeJoint AxisJoint { get { return axisJoint; } private set { axisJoint = value; } }
+    [SerializeField] protected HingeJoint axisJoint;
+
+    [SerializeField] private const PieceType typeToUse = PieceType.TIRE;
+    [SerializeField] private const float healthToUse = TIRE_PIECE_HEALTH;
+    [SerializeField] private const float massToUse = TIRE_PIECE_WEIGHT;
 
     private Vector3 initialRot;
 
     protected void InitializeTire(bool forceUpdate = false)
     {
-        if ((!tireInitialized || forceUpdate) && !TIRELOCKUPDATE)
+        ///if ((!tireInitialized || forceUpdate) && !TIRELOCKUPDATE)
         {
-            tireInitialized = true;
+            ///tireInitialized = true;
             base.InitializePiece(forceUpdate);
             pieceType = typeToUse;
             health = maxHealth = healthToUse;
             rb.mass = massToUse;
 
             //TODO SET JOINTS
-            joint = GetComponent<HingeJoint>();
-            joints = GetComponents<HingeJoint>();
+            hJoint = GetComponent<HingeJoint>();
+            axisJoint = hJoint.connectedBody.GetComponent<HingeJoint>();
+            JointLimits otherJointLimits = new JointLimits();
+            otherJointLimits.min = -TIRE_PIVOT_ANGLE;
+            otherJointLimits.max = TIRE_PIVOT_ANGLE;
+            axisJoint.limits = otherJointLimits;
+            axisJoint.useLimits = true;
+            //joints = new List<HingeJoint>(GetComponents<HingeJoint>());
 
-            initialRot = joint.connectedBody.transform.localRotation.eulerAngles;
+            initialRot = hJoint.connectedBody.transform.localRotation.eulerAngles;
         }
     }
 
-    public void RotateForward(float speed, bool pivot = false)
+    public void RotateForward(float speed, bool pivot = false) // TODO - CREATE CO ROUTINE TO LERP ROTATION INSTEAD OF SNAPPING
     {
+        //TIRE MOTOR
+        JointMotor motor = hJoint.motor;
+        motor.force = StaticHelper.TIRE_FORCE;
+        motor.targetVelocity = speed;
+        motor.freeSpin = false;
+
         if (speed == 0) // IF STOP, TURN OFF MOTOR
         {
-            JointMotor motor = joint.motor;
-            motor.force = 10000;
-            motor.targetVelocity = speed;
-            motor.freeSpin = false;
-
-            joint.useMotor = false;
-
-            joint.connectedBody.transform.localRotation = Quaternion.Euler(initialRot);
+            hJoint.useMotor = false;
+            axisJoint.useMotor = false;
+            axisJoint.transform.localRotation = Quaternion.Euler(initialRot); // RESET ROTATION
         }
         else // IF MOVING, CREATE COPY OF JOINT MOTOR, APPLY CHANGES AND OVERWRITE ORIGINAL
         {
-            JointMotor motor = joint.motor;
-            motor.force = 10000;
-            motor.targetVelocity = speed;
-            motor.freeSpin = false;
-
             if (pivot)
             {
+                JointMotor otherMotor = axisJoint.motor;
+                otherMotor.force = StaticHelper.AXIS_FORCE;
+                otherMotor.freeSpin = false;
                 if (tireHSide == TireHSide.RIGHT)
                 {
                     if (tireVSide == TireVSide.UP)
                     {
-                        joint.connectedBody.transform.localRotation = Quaternion.Euler(initialRot + (Vector3.up * -6));
+                        otherMotor.targetVelocity = Mathf.Abs(speed);
                     }
                     else
                     {
-                        joint.connectedBody.transform.localRotation = Quaternion.Euler(initialRot + (Vector3.up * 6));
+                        otherMotor.targetVelocity = -Mathf.Abs(speed);
                     }
                 }
                 else
                 {
                     if (tireVSide == TireVSide.UP)
                     {
-                        joint.connectedBody.transform.localRotation = Quaternion.Euler(initialRot + (Vector3.up * 6));
+                        otherMotor.targetVelocity = -Mathf.Abs(speed);
                     }
                     else
                     {
-                        joint.connectedBody.transform.localRotation = Quaternion.Euler(initialRot + (Vector3.up * -6));
+                        otherMotor.targetVelocity = Mathf.Abs(speed);
                     }
                 }
+                axisJoint.motor = otherMotor;
+                axisJoint.useMotor = true;
             }
             else
             {
-                joint.connectedBody.transform.localRotation = Quaternion.Euler(initialRot);
+                hJoint.useMotor = false;
+                axisJoint.useMotor = false;
+                axisJoint.transform.localRotation = Quaternion.Euler(initialRot); // RESET ROTATION
             }
-
-            joint.motor = motor; // overwritting here
-            joint.useMotor = true; // turning on the new original
+            hJoint.motor = motor; // overwritting here
+            hJoint.useMotor = true; // turning on the new original
         }
+    }
+
+    protected override void DestroyPiece()
+    {
+        if (hJoint != null)
+        {
+            hJoint.breakForce = 0;
+            Destroy(hJoint);
+        }
+        /*if (joints != null)
+        {
+            foreach (HingeJoint hj in joints)
+            {
+                Debug.Log("Joint not null");
+                hj.breakForce = 0;
+                //Destroy(fj);
+            }
+            joints.Clear();
+        }*/
     }
 
     private void Start()
     {
-        tireInitialized = false;
+        ///tireInitialized = false;
         InitializeTire(true);
     }
 
@@ -110,7 +141,7 @@ public class TirePieceScript : PieceScript
 
     private void OnDrawGizmosSelected()
     {
-        tireInitialized = false;
+        ///tireInitialized = false;
         InitializeTire(true);
     }
 }

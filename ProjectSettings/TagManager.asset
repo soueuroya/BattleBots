@@ -8,12 +8,12 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - RobotLocal
+  - Robot1
   - Water
   - UI
-  - 
-  - 
-  - 
+  - Robot2
+  - Robot3
+  - Robot4
   - 
   - 
   - 

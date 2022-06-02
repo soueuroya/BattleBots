@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using static StaticHelper;
 
 public class RobotControlScript : MonoBehaviour
 {
@@ -17,10 +18,9 @@ public class RobotControlScript : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
-
         DontDestroyOnLoad(this.gameObject);
 
-        robots = new List<RobotScript>(FindObjectsOfType<RobotScript>());
+        robots = new List<RobotScript>(FindObjectsOfType<RobotScript>()); // Look for all robots
     }
 
     private void Update()
@@ -38,5 +38,15 @@ public class RobotControlScript : MonoBehaviour
     {
         robots.Clear();
         robots = new List<RobotScript>(FindObjectsOfType<RobotScript>());
+    }
+
+    public void Move(MovementDirection dir)
+    {
+        robots[currentRobot].Move(dir);
+    }
+
+    public void Stop()
+    {
+        robots[currentRobot].Stop();
     }
 }
