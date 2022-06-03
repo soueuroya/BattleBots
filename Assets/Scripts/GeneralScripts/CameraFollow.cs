@@ -7,14 +7,11 @@ public class CameraFollow : MonoBehaviour
     public Transform target;
     public Transform tr;
     public Vector3 offset;
-    // Start is called before the first frame update
     void Start()
     {
         tr = transform;
         offset = tr.position - target.position;
     }
-
-    // Update is called once per frame
     void Update()
     {
         tr.position = offset + RobotControlScript.Instance.robots[RobotControlScript.Instance.currentRobot].transform.GetChild(0).transform.position;

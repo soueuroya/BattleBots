@@ -12,7 +12,6 @@ public class FramePieceScript : PieceScript
     [SerializeField] private const PieceType typeToUse = PieceType.FRAME;
     [SerializeField] private const float healthToUse = FRAME_PIECE_HEALTH;
     [SerializeField] private const float massToUse = FRAME_PIECE_WEIGHT;
-
     protected void InitializeFrame()
     {
         base.InitializePiece();

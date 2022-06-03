@@ -3,27 +3,16 @@ using static StaticHelper;
 
 public class SpikePieceScript : CombatPieceScript
 {
-    [SerializeField] private bool spikeInitialized;
-    [SerializeField] private bool SPIKELOCKUPDATE;
-
     private const PieceType typeToUse = PieceType.SPIKE;
     private const float healthToUse = SPIKE_PIECE_HEALTH;
     private const float massToUse = SPIKE_PIECE_WEIGHT;
 
-    protected void InitializeSpike(bool forceUpdate = false)
+    protected void InitializeSpike()
     {
-        if ((!spikeInitialized || forceUpdate) && !SPIKELOCKUPDATE)
-        {
-            base.InitializeCombatPiece(forceUpdate);
-            pieceType = typeToUse;
-            health = maxHealth = healthToUse;
-            rb.mass = massToUse;
-        }
-    }
-
-    private void Awake()
-    {
-        InitializeSpike();
+        base.InitializeCombatPiece();
+        pieceType = typeToUse;
+        health = maxHealth = healthToUse;
+        rb.mass = massToUse;
     }
 
     private void Start()

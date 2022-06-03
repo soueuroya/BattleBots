@@ -15,52 +15,45 @@ public class PieceScript : MonoBehaviour
     [SerializeField] protected HealthbarScript healthbar;
     [SerializeField] protected Transform tr;
     [SerializeField] protected MeshRenderer mr;
-    ///[SerializeField] private bool pieceInitialized;
-    ///[SerializeField] private bool PIECELOCKUPDATE;
-
     [SerializeField] private Color originalColor;
 
-    protected void InitializePiece(bool forceUpdate = false)
+    protected void InitializePiece()
     {
-        ///if ((!pieceInitialized || forceUpdate) && !PIECELOCKUPDATE)
+        alive = true;
+        tr = GetComponent<Transform>();
+
+        //SET RIGIDBODY
+        rb = GetComponent<Rigidbody>();
+        if (rb == null)
         {
-            ///pieceInitialized = true;
-            alive = true;
-            tr = GetComponent<Transform>();
-
-            //SET RIGIDBODY
-            rb = GetComponent<Rigidbody>();
-            if (rb == null)
-            {
-                rb = gameObject.AddComponent<Rigidbody>();
-            }
-
-            //SET MESHCOLLIDER
-            MeshCollider mc = GetComponent<MeshCollider>();
-            if (mc == null)
-            {
-                mc = gameObject.AddComponent<MeshCollider>();
-            }
-            mc.convex = true;
-
-            //SET MESHRENDERER
-            mr = GetComponent<MeshRenderer>();
-            if (mr != null)
-            {
-                if (pieceType.Equals(PieceType.FRAME) || pieceType.Equals(PieceType.TIRE) || pieceType.Equals(PieceType.MTIRE))
-                {
-                    originalColor = mr.materials[0].color;
-                }
-                else
-                {
-                    originalColor = mr.materials[1].color;
-                }
-            }
-
-            //SET HEALTHBAR
-            healthbarCanvas = GetComponentInChildren<Canvas>(true);
-            healthbar = healthbarCanvas.GetComponentInChildren<HealthbarScript>(true);
+            rb = gameObject.AddComponent<Rigidbody>();
         }
+
+        //SET MESHCOLLIDER
+        MeshCollider mc = GetComponent<MeshCollider>();
+        if (mc == null)
+        {
+            mc = gameObject.AddComponent<MeshCollider>();
+        }
+        mc.convex = true;
+
+        //SET MESHRENDERER
+        mr = GetComponent<MeshRenderer>();
+        if (mr != null)
+        {
+            if (IsFirstMaterial())
+            {
+                originalColor = mr.materials[0].color;
+            }
+            else
+            {
+                originalColor = mr.materials[1].color;
+            }
+        }
+
+        //SET HEALTHBAR
+        healthbarCanvas = GetComponentInChildren<Canvas>(true);
+        healthbar = healthbarCanvas.GetComponentInChildren<HealthbarScript>(true);
     }
 
     private void OnMouseDown()
@@ -72,7 +65,7 @@ public class PieceScript : MonoBehaviour
     {
         if (mr != null)
         {
-            if (pieceType.Equals(PieceType.FRAME) || pieceType.Equals(PieceType.TIRE) || pieceType.Equals(PieceType.MTIRE))
+            if (IsFirstMaterial())
             {
                 mr.materials[0].color = Color.white;
             }
@@ -99,7 +92,7 @@ public class PieceScript : MonoBehaviour
     {
         if (mr != null)
         {
-            if (pieceType.Equals(PieceType.FRAME) || pieceType.Equals(PieceType.TIRE) || pieceType.Equals(PieceType.MTIRE))
+            if (IsFirstMaterial())
             {
                 mr.materials[0].color = originalColor;
             }
@@ -109,6 +102,12 @@ public class PieceScript : MonoBehaviour
             }
         }
     }
+
+    private bool IsFirstMaterial()
+    {
+        return pieceType.Equals(PieceType.FRAME) || pieceType.Equals(PieceType.TIRE) || pieceType.Equals(PieceType.MTIRE);
+    }
+
     private void ShowHealthbarCanvas()
     {
         healthbarCanvas.gameObject.SetActive(true);
@@ -122,8 +121,7 @@ public class PieceScript : MonoBehaviour
     }
     private void Start()
     {
-        ///pieceInitialized = false;
-        InitializePiece(true);
+        InitializePiece();
     }
 
     private void Reset()
@@ -133,7 +131,6 @@ public class PieceScript : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
-        ///pieceInitialized = false;
-        InitializePiece(true);
+        InitializePiece();
     }
 }

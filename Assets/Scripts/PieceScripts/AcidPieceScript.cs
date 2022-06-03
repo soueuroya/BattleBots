@@ -3,24 +3,17 @@ using static StaticHelper;
 
 public class AcidPieceScript : CombatPieceScript
 {
-    ///[SerializeField] private bool acidInitialized;
-    ///[SerializeField] private bool ACIDLOCKUPDATE;
-
     [SerializeField] private const PieceType typeToUse = PieceType.ACID;
     [SerializeField] private const float healthToUse = ACID_PIECE_HEALTH;
     [SerializeField] private const float massToUse = ACID_PIECE_WEIGHT;
 
 
-    protected void InitializeAcid(bool forceUpdate = false)
+    protected void InitializeAcid()
     {
-        ///if ((!acidInitialized || forceUpdate) && !ACIDLOCKUPDATE)
-        {
-            ///acidInitialized = true;
-            base.InitializeCombatPiece(forceUpdate);
-            pieceType = typeToUse;
-            health = maxHealth = healthToUse;
-            rb.mass = massToUse;
-        }
+        base.InitializeCombatPiece();
+        pieceType = typeToUse;
+        health = maxHealth = healthToUse;
+        rb.mass = massToUse;
     }
 
     /*
@@ -65,8 +58,7 @@ public class AcidPieceScript : CombatPieceScript
 
     private void Start()
     {
-        ///acidInitialized = false;
-        InitializeAcid(true);
+        InitializeAcid();
     }
 
     private void Reset()
@@ -76,7 +68,6 @@ public class AcidPieceScript : CombatPieceScript
 
     private void OnDrawGizmosSelected()
     {
-        ///acidInitialized = false;
-        InitializeAcid(true);
+        InitializeAcid();
     }
 }

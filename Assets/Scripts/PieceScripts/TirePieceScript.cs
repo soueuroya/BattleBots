@@ -12,10 +12,6 @@ public class TirePieceScript : PieceScript
     public TireOrientation TireOrientation { get { return tireOrientation; } private set { tireOrientation = value; } }
     [SerializeField] protected TireOrientation tireOrientation;
 
-    ///[SerializeField] private bool tireInitialized;
-    ///[SerializeField] private bool TIRELOCKUPDATE;
-
-    //[SerializeField] protected List<HingeJoint> joints;
     public HingeJoint HJoint { get { return hJoint; } private set { hJoint = value; } }
     [SerializeField] protected HingeJoint hJoint;
 
@@ -28,28 +24,24 @@ public class TirePieceScript : PieceScript
 
     private Vector3 initialRot;
 
-    protected void InitializeTire(bool forceUpdate = false)
+    protected void InitializeTire()
     {
-        ///if ((!tireInitialized || forceUpdate) && !TIRELOCKUPDATE)
-        {
-            ///tireInitialized = true;
-            base.InitializePiece(forceUpdate);
-            pieceType = typeToUse;
-            health = maxHealth = healthToUse;
-            rb.mass = massToUse;
+        base.InitializePiece();
+        pieceType = typeToUse;
+        health = maxHealth = healthToUse;
+        rb.mass = massToUse;
 
-            //TODO SET JOINTS
-            hJoint = GetComponent<HingeJoint>();
-            axisJoint = hJoint.connectedBody.GetComponent<HingeJoint>();
-            JointLimits otherJointLimits = new JointLimits();
-            otherJointLimits.min = -TIRE_PIVOT_ANGLE;
-            otherJointLimits.max = TIRE_PIVOT_ANGLE;
-            axisJoint.limits = otherJointLimits;
-            axisJoint.useLimits = true;
-            //joints = new List<HingeJoint>(GetComponents<HingeJoint>());
+        //TODO SET JOINTS
+        hJoint = GetComponent<HingeJoint>();
+        axisJoint = hJoint.connectedBody.GetComponent<HingeJoint>();
+        JointLimits otherJointLimits = new JointLimits();
+        otherJointLimits.min = -TIRE_PIVOT_ANGLE;
+        otherJointLimits.max = TIRE_PIVOT_ANGLE;
+        axisJoint.limits = otherJointLimits;
+        axisJoint.useLimits = true;
+        //joints = new List<HingeJoint>(GetComponents<HingeJoint>());
 
-            initialRot = hJoint.connectedBody.transform.localRotation.eulerAngles;
-        }
+        initialRot = hJoint.connectedBody.transform.localRotation.eulerAngles;
     }
 
     public void RotateForward(float speed, bool pivot = false) // TODO - CREATE CO ROUTINE TO LERP ROTATION INSTEAD OF SNAPPING
@@ -130,8 +122,7 @@ public class TirePieceScript : PieceScript
 
     private void Start()
     {
-        ///tireInitialized = false;
-        InitializeTire(true);
+        InitializeTire();
     }
 
     private void Reset()
@@ -141,7 +132,6 @@ public class TirePieceScript : PieceScript
 
     private void OnDrawGizmosSelected()
     {
-        ///tireInitialized = false;
-        InitializeTire(true);
+        InitializeTire();
     }
 }
