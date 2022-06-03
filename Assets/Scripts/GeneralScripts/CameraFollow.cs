@@ -17,6 +17,6 @@ public class CameraFollow : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        tr.position = offset + target.position;
+        tr.position = offset + RobotControlScript.Instance.robots[RobotControlScript.Instance.currentRobot].transform.GetChild(0).transform.position;
     }
 }
