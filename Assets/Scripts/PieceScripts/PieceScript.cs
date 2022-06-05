@@ -16,6 +16,7 @@ public class PieceScript : MonoBehaviour
     [SerializeField] protected Transform tr;
     [SerializeField] protected MeshRenderer mr;
     [SerializeField] private Color originalColor;
+    [SerializeField] protected RobotScript robot;
 
     protected void InitializePiece()
     {
@@ -61,6 +62,29 @@ public class PieceScript : MonoBehaviour
         TakeDamage(10);
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        switch (collision.gameObject.tag)
+        {
+            case "Acid":
+                break;
+            case "Fire":
+                break;
+            case "Shock":
+                break;
+            case "Spike":
+                break;
+            case "Oil":
+                break;
+            default: 
+                break;
+        }
+    }
+
+    public void SetRobot(RobotScript _robot)
+    {
+        robot = _robot;
+    }
     private void TakeDamage(float damage)
     {
         if (mr != null)

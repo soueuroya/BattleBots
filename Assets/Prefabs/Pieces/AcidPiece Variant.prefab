@@ -4905,6 +4905,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: AcidPiece Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 3969349905372855613, guid: 2f4da06719305fb4c8aa72e45d8b15b1, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 3969349905372855614, guid: 2f4da06719305fb4c8aa72e45d8b15b1, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -5041,6 +5045,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1289e15cdc6f07458dbb8b893cd5d31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!59 &8407279537840938596 stripped
+HingeJoint:
+  m_CorrespondingSourceObject: {fileID: 4597128193559567869, guid: 2f4da06719305fb4c8aa72e45d8b15b1, type: 3}
+  m_PrefabInstance: {fileID: 5431604545524745113}
+  m_PrefabAsset: {fileID: 0}
+--- !u!59 &4554363886668234044 stripped
+HingeJoint:
+  m_CorrespondingSourceObject: {fileID: 8382525318113296037, guid: 2f4da06719305fb4c8aa72e45d8b15b1, type: 3}
+  m_PrefabInstance: {fileID: 5431604545524745113}
+  m_PrefabAsset: {fileID: 0}
 --- !u!198 &1188622291
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -8802,11 +8816,11 @@ ParticleSystem:
     radiusScale: 0.0001
     collidesWith:
       serializedVersion: 2
-      m_Bits: 1
+      m_Bits: 457
     maxCollisionShapes: 256
     quality: 0
     voxelSize: 0.5
-    collisionMessages: 0
+    collisionMessages: 1
     collidesWithDynamic: 1
     interiorCollisions: 0
   TriggerModule:
@@ -8818,7 +8832,8 @@ ParticleSystem:
     exit: 0
     colliderQueryMode: 0
     radiusScale: 1
-    primitives: []
+    primitives:
+    - {fileID: 0}
   SubModule:
     serializedVersion: 2
     enabled: 1
@@ -9838,22 +9853,20 @@ MonoBehaviour:
   pieceType: 0
   rb: {fileID: 8968101975021125283}
   health: 40
+  maxHealth: 40
+  alive: 0
   healthbarCanvas: {fileID: 3364044131101770408}
   healthbar: {fileID: 5288120171618994950}
   tr: {fileID: 8968101975021125287}
   mr: {fileID: 8968101975021125276}
-  maxHealth: 40
-  pieceInitialized: 1
-  PIECELOCKUPDATE: 0
   originalColor: {r: 0, g: 1, b: 0.06795335, a: 1}
-  frameInitialized: 0
-  FRAMELOCKUPDATE: 0
+  robot: {fileID: 0}
+  leftTire: {fileID: 0}
+  rightTire: {fileID: 0}
+  leftAxis: {fileID: 4554363886668234044}
+  rightAxis: {fileID: 8407279537840938596}
   joints: []
   direction: 0
   partSyst: {fileID: 1188622291}
   charge: 0
   maxCharge: 0
-  combatPieceInitialized: 1
-  COMBATPIECELOCKUPDATE: 0
-  acidInitialized: 1
-  ACIDLOCKUPDATE: 0

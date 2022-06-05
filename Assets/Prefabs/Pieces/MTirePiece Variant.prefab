@@ -73642,13 +73642,16 @@ MonoBehaviour:
   pieceType: 7
   rb: {fileID: 2155936339642362036}
   health: 80
+  maxHealth: 80
+  alive: 0
   healthbarCanvas: {fileID: 1382816651976623031}
   healthbar: {fileID: 303281338640538818}
   tr: {fileID: 2155936339642362039}
   mr: {fileID: 0}
-  maxHealth: 80
   originalColor: {r: 0, g: 0, b: 0, a: 0}
+  robot: {fileID: 0}
   tireHSide: 0
   tireVSide: 0
   tireOrientation: 0
   hJoint: {fileID: 6937795427394453709}
+  axisJoint: {fileID: 0}

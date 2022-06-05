@@ -3171,7 +3171,7 @@ MeshCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3909802947674451119}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: a18b4dab9c637bb459e20a9610ec0077, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
@@ -3209,12 +3209,14 @@ MonoBehaviour:
   pieceType: 8
   rb: {fileID: 3909802947674451105}
   health: 80
+  maxHealth: 80
+  alive: 0
   healthbarCanvas: {fileID: 5902289129984698817}
   healthbar: {fileID: 2062429553540949918}
   tr: {fileID: 3909802947674451118}
   mr: {fileID: 3909802947674451107}
-  maxHealth: 80
   originalColor: {r: 0.1792453, g: 0.1792453, b: 0.1792453, a: 1}
+  robot: {fileID: 0}
   leftTire: {fileID: 0}
   rightTire: {fileID: 0}
   leftAxis: {fileID: 514918674269677941}

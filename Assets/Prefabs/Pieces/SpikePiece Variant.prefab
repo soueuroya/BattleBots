@@ -8757,7 +8757,7 @@ ParticleSystem:
     radiusScale: 0.0001
     collidesWith:
       serializedVersion: 2
-      m_Bits: 1
+      m_Bits: 457
     maxCollisionShapes: 256
     quality: 0
     voxelSize: 0.5
@@ -9800,6 +9800,7 @@ MonoBehaviour:
   tr: {fileID: 7197306081117928065}
   mr: {fileID: 7197306081117928122}
   originalColor: {r: 0.4245283, g: 0.4245283, b: 0.4245283, a: 1}
+  robot: {fileID: 0}
   leftTire: {fileID: 0}
   rightTire: {fileID: 0}
   leftAxis: {fileID: 0}
@@ -9809,5 +9810,3 @@ MonoBehaviour:
   partSyst: {fileID: 1806165697}
   charge: 0
   maxCharge: 0
-  spikeInitialized: 0
-  SPIKELOCKUPDATE: 0

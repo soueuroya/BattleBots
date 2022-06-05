@@ -4985,6 +4985,11 @@ Rigidbody:
   m_CorrespondingSourceObject: {fileID: 3969349905372855610, guid: 2f4da06719305fb4c8aa72e45d8b15b1, type: 3}
   m_PrefabInstance: {fileID: 2027334883824114718}
   m_PrefabAsset: {fileID: 0}
+--- !u!59 &2589233239131750883 stripped
+HingeJoint:
+  m_CorrespondingSourceObject: {fileID: 4597128193559567869, guid: 2f4da06719305fb4c8aa72e45d8b15b1, type: 3}
+  m_PrefabInstance: {fileID: 2027334883824114718}
+  m_PrefabAsset: {fileID: 0}
 --- !u!223 &8785706536559271215 stripped
 Canvas:
   m_CorrespondingSourceObject: {fileID: 7336244900698603825, guid: 2f4da06719305fb4c8aa72e45d8b15b1, type: 3}
@@ -5001,6 +5006,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1289e15cdc6f07458dbb8b893cd5d31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!59 &7527269835034878651 stripped
+HingeJoint:
+  m_CorrespondingSourceObject: {fileID: 8382525318113296037, guid: 2f4da06719305fb4c8aa72e45d8b15b1, type: 3}
+  m_PrefabInstance: {fileID: 2027334883824114718}
+  m_PrefabAsset: {fileID: 0}
 --- !u!198 &830958035
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -8762,7 +8772,7 @@ ParticleSystem:
     radiusScale: 0.0001
     collidesWith:
       serializedVersion: 2
-      m_Bits: 1
+      m_Bits: 457
     maxCollisionShapes: 256
     quality: 0
     voxelSize: 0.5
@@ -9798,22 +9808,20 @@ MonoBehaviour:
   pieceType: 4
   rb: {fileID: 3114094972050252068}
   health: 40
+  maxHealth: 40
+  alive: 0
   healthbarCanvas: {fileID: 8785706536559271215}
   healthbar: {fileID: 2171096333603296385}
   tr: {fileID: 3114094972050252064}
   mr: {fileID: 3114094972050252059}
-  maxHealth: 40
-  pieceInitialized: 1
-  PIECELOCKUPDATE: 0
   originalColor: {r: 0.9772253, g: 1, b: 0, a: 1}
-  frameInitialized: 0
-  FRAMELOCKUPDATE: 0
+  robot: {fileID: 0}
+  leftTire: {fileID: 0}
+  rightTire: {fileID: 0}
+  leftAxis: {fileID: 7527269835034878651}
+  rightAxis: {fileID: 2589233239131750883}
   joints: []
   direction: 0
   partSyst: {fileID: 830958035}
   charge: 0
   maxCharge: 0
-  combatPieceInitialized: 1
-  COMBATPIECELOCKUPDATE: 0
-  bombInitialized: 0
-  BOMBLOCKUPDATE: 0

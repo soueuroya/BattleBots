@@ -8757,7 +8757,7 @@ ParticleSystem:
     radiusScale: 0.0001
     collidesWith:
       serializedVersion: 2
-      m_Bits: 1
+      m_Bits: 457
     maxCollisionShapes: 256
     quality: 0
     voxelSize: 0.5
@@ -9793,22 +9793,20 @@ MonoBehaviour:
   pieceType: 3
   rb: {fileID: 6061120339130593287}
   health: 40
+  maxHealth: 40
+  alive: 0
   healthbarCanvas: {fileID: 488369799250168844}
   healthbar: {fileID: 6992780332092573090}
   tr: {fileID: 6061120339130593283}
   mr: {fileID: 6061120339130593336}
-  maxHealth: 40
-  pieceInitialized: 1
-  PIECELOCKUPDATE: 0
   originalColor: {r: 0.4811321, g: 0.21132077, b: 0, a: 1}
-  frameInitialized: 0
-  FRAMELOCKUPDATE: 0
+  robot: {fileID: 0}
+  leftTire: {fileID: 0}
+  rightTire: {fileID: 0}
+  leftAxis: {fileID: 0}
+  rightAxis: {fileID: 0}
   joints: []
   direction: 0
   partSyst: {fileID: 1812782363}
   charge: 0
   maxCharge: 0
-  combatPieceInitialized: 1
-  COMBATPIECELOCKUPDATE: 0
-  oilInitialized: 1
-  OILLOCKUPDATE: 0

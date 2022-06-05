@@ -5,7 +5,7 @@ using static StaticHelper;
 public class CombatPieceScript : FramePieceScript
 {
     [SerializeField] protected OutDirection direction;
-    [SerializeField] protected ParticleSystem partSyst;
+    [SerializeField] public ParticleSystem partSyst;
     [SerializeField] protected float charge;
     [SerializeField] protected float maxCharge;
     protected void InitializeCombatPiece()
@@ -20,7 +20,7 @@ public class CombatPieceScript : FramePieceScript
         }
     }
 
-    public void Activate()
+    public virtual void  Activate()
     {
         if (partSyst != null)
         {
@@ -28,7 +28,7 @@ public class CombatPieceScript : FramePieceScript
         }
     }
 
-    public void Deactivate()
+    public virtual void Deactivate()
     {
         if (partSyst != null)
         {

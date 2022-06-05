@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using static StaticHelper;
+using static UnityEngine.ParticleSystem;
 
 public class RobotScript : MonoBehaviour
 {
@@ -14,129 +15,143 @@ public class RobotScript : MonoBehaviour
     [SerializeField] protected List<SpikePieceScript> spikes = new List<SpikePieceScript>();
     [SerializeField] protected List<OilPieceScript> oils = new List<OilPieceScript>();
     [SerializeField] protected List<BombPieceScript> bombs = new List<BombPieceScript>();
+    [SerializeField] protected List<SawPieceScript> saws = new List<SawPieceScript>();
     [SerializeField] protected List<FramePieceScript> frames = new List<FramePieceScript>();
     [SerializeField] protected List<CorePieceScript> cores = new List<CorePieceScript>();
 
-    [SerializeField] protected bool initialized;
-    [SerializeField] protected bool LOCKUPDATE;
-
-    protected void Initialize(bool forceUpdate = false)
+    protected void Initialize()
     {
-        if ((!initialized || forceUpdate) && !LOCKUPDATE)
+        maxHealth = 0;
+        if (tires != null)
         {
-            initialized = true;
-            maxHealth = 0;
-            if (tires != null)
+            tires.Clear();
+        }
+        if (acids != null)
+        {
+            acids.Clear();
+        }
+        if (fires != null)
+        {
+            fires.Clear();
+        }
+        if (oils != null)
+        {
+            oils.Clear();
+        }
+        if (shocks != null)
+        {
+            shocks.Clear();
+        }
+        if (frames != null)
+        {
+            frames.Clear();
+        }
+        if (cores != null)
+        {
+            cores.Clear();
+        }
+        //Arrange child objects
+        foreach (Transform child in transform) // FOR EACH GAMEOBJECT IN THE ROBOT
+        {
+            if (child != null)
             {
-                tires.Clear();
-            }
-            if (acids != null)
-            {
-                acids.Clear();
-            }
-            if (fires != null)
-            {
-                fires.Clear();
-            }
-            if (oils != null)
-            {
-                oils.Clear();
-            }
-            if (shocks != null)
-            {
-                shocks.Clear();
-            }
-            if (frames != null)
-            {
-                frames.Clear();
-            }
-            if (cores != null)
-            {
-                cores.Clear();
-            }
-            //Arrange child objects
-            foreach (Transform child in transform) // FOR EACH GAMEOBJECT IN THE ROBOT
-            {
-                if (child != null)
+                PieceScript piece = child.GetComponent<PieceScript>(); // GET THE PIECE SCRIPT
+                if (piece != null)
                 {
-                    PieceScript piece = child.GetComponent<PieceScript>(); // GET THE PIECE SCRIPT
-                    if (piece != null)
+                    piece.SetRobot(this);
+                    FramePieceScript framePiece = piece as FramePieceScript; // GET THE FRAMESCRIPT (CORES AND BATTLE PIECES, NO TIRES)
+                    if (framePiece != null)
                     {
-                        FramePieceScript framePiece = piece as FramePieceScript; // GET THE FRAMESCRIPT (CORES AND BATTLE PIECES, NO TIRES)
-                        if (framePiece != null)
+                        framePiece.ClearJoints();
+                        foreach (Transform child2 in transform)
                         {
-                            framePiece.ClearJoints();
-                            foreach (Transform child2 in transform)
+                            if (child != child2) // IF NOT THE SAME PIECE
                             {
-                                if (child != child2) // IF NOT THE SAME PIECE
+                                PieceScript piece2 = child2.GetComponent<PieceScript>();
+                                FramePieceScript framePiece2 = piece2 as FramePieceScript;
+                                if (framePiece2 != null)
                                 {
-                                    PieceScript piece2 = child2.GetComponent<PieceScript>();
-                                    FramePieceScript framePiece2 = piece2 as FramePieceScript;
-                                    if (framePiece2 != null)
-                                    {
-                                        framePiece.AddJoint(framePiece2.RB);
-                                    }
+                                    framePiece.AddJoint(framePiece2.RB);
                                 }
                             }
                         }
-                        maxHealth += child.GetComponent<PieceScript>().Health;
-                        switch (child.GetComponent<PieceScript>().PieceType)
+                    }
+                    CombatPieceScript combatPiece = piece as CombatPieceScript; // GET THE COMBAT SCRIPT, SO WE CAN MAKE THE WEAPONS IGNORE OWN ROBOT
+                    if (combatPiece != null)
+                    {
+                        if (combatPiece.partSyst != null)
                         {
-                            case PieceType.TIRE: tires.Add(child.GetComponent<TirePieceScript>());
-                                break;
-                            case PieceType.MTIRE: tires.Add(child.GetComponent<MTirePieceScript>());
-                                break;
-                            case PieceType.FRAME: frames.Add(child.GetComponent<FramePieceScript>());
-                                break;
-                            case PieceType.ACID: acids.Add(child.GetComponent<AcidPieceScript>());
-                                break;
-                            case PieceType.FIRE: fires.Add(child.GetComponent<FirePieceScript>());
-                                break;
-                            case PieceType.SHOCK: shocks.Add(child.GetComponent<ShockPieceScript>());
-                                break;
-                            case PieceType.OIL: oils.Add(child.GetComponent<OilPieceScript>());
-                                break;
-                            case PieceType.BOMB: bombs.Add(child.GetComponent<BombPieceScript>());
-                                break;
-                            case PieceType.SPIKE: spikes.Add(child.GetComponent<SpikePieceScript>());
-                                break;
-                            case PieceType.CORE:
-                                cores.Add(child.GetComponent<CorePieceScript>());
-                                break;
-                            default:
-                                break;
+                            CollisionModule col = combatPiece.partSyst.collision;
+                            col.collidesWith = col.collidesWith & ~(1 << this.gameObject.layer);
                         }
+                    }
+                    maxHealth += piece.Health;
+                    switch (piece.PieceType)
+                    {
+                        case PieceType.TIRE:
+                            tires.Add(piece as TirePieceScript);
+                            break;
+                        case PieceType.MTIRE:
+                            tires.Add(piece as MTirePieceScript);
+                            break;
+                        case PieceType.FRAME:
+                            frames.Add(piece as FramePieceScript);
+                            break;
+                        case PieceType.ACID:
+                            acids.Add(piece as AcidPieceScript);
+                            break;
+                        case PieceType.FIRE:
+                            fires.Add(piece as FirePieceScript);
+                            break;
+                        case PieceType.SHOCK:
+                            shocks.Add(piece as ShockPieceScript);
+                            break;
+                        case PieceType.OIL:
+                            oils.Add(piece as OilPieceScript);
+                            break;
+                        case PieceType.BOMB:
+                            bombs.Add(piece as BombPieceScript);
+                            break;
+                        case PieceType.SPIKE:
+                            spikes.Add(piece as SpikePieceScript);
+                            break;
+                        case PieceType.SAW:
+                            saws.Add(piece as SawPieceScript);
+                            break;
+                        case PieceType.CORE:
+                            cores.Add(piece as CorePieceScript);
+                            break;
+                        default:
+                            break;
                     }
                 }
             }
-            foreach (Transform child in transform)
-            {
-                Rigidbody _rb = child.GetComponent<Rigidbody>();
-                if (_rb != null)
-                {
-                    _rb.isKinematic = false;
-                    _rb.centerOfMass += new Vector3(0, -0.2f, 0);
-                }
-            }
-            health = maxHealth;
         }
+        foreach (Transform child in transform)
+        {
+            Rigidbody _rb = child.GetComponent<Rigidbody>();
+            if (_rb != null)
+            {
+                _rb.isKinematic = false;
+                _rb.centerOfMass += new Vector3(0, -0.2f, 0);
+            }
+        }
+        health = maxHealth;
     }
 
     private void Start()
     {
-        initialized = false;
-        Initialize(true);
+        Initialize();
     }
 
     private void Reset()
     {
-        Initialize();   
+        Initialize();
     }
 
     private void OnDrawGizmosSelected()
     {
-        initialized = false;
-        Initialize(true);
+        Initialize();
     }
     #region POWER
 
@@ -144,17 +159,26 @@ public class RobotScript : MonoBehaviour
     {
         switch (power)
         {
-            case PowerType.ACID: StartAcids();
+            case PowerType.ACID:
+                StartAcids();
                 break;
-            case PowerType.FIRE: StartFires();
+            case PowerType.FIRE:
+                StartFires();
                 break;
-            case PowerType.SHOCK: StartShocks();
+            case PowerType.SHOCK:
+                StartShocks();
                 break;
-            case PowerType.OIL: StartOils();
+            case PowerType.OIL:
+                StartOils();
                 break;
-            case PowerType.SPIKE: StartSpikes();
+            case PowerType.SPIKE:
+                StartSpikes();
                 break;
-            case PowerType.BOMB: StartBombs();
+            case PowerType.BOMB:
+                StartBombs();
+                break;
+            case PowerType.SAW:
+                StartSaws();
                 break;
             default:
                 break;
@@ -163,6 +187,7 @@ public class RobotScript : MonoBehaviour
 
     public void LosePiece(PieceScript _piece)
     {
+        _piece.gameObject.layer = LayerMask.NameToLayer("Default");
         switch (_piece.PieceType)
         {
             case PieceType.TIRE:
@@ -235,7 +260,7 @@ public class RobotScript : MonoBehaviour
         foreach (AcidPieceScript acid in acids)
         {
             acid.Activate();
-        }   
+        }
     }
     public void StopAcids()
     {
@@ -315,21 +340,45 @@ public class RobotScript : MonoBehaviour
         }
     }
 
+    public void StartSaws()
+    {
+        foreach (SawPieceScript saw in saws)
+        {
+            saw.Activate();
+        }
+    }
+    public void StopSaws()
+    {
+        foreach (SawPieceScript saw in saws)
+        {
+            saw.Deactivate();
+        }
+    }
+
     public void StopPower(PowerType power)
     {
         switch (power)
         {
-            case PowerType.ACID: StopAcids();
+            case PowerType.ACID:
+                StopAcids();
                 break;
-            case PowerType.FIRE: StopFires();
+            case PowerType.FIRE:
+                StopFires();
                 break;
-            case PowerType.SHOCK: StopShocks();
+            case PowerType.SHOCK:
+                StopShocks();
                 break;
-            case PowerType.OIL: StopOils();
+            case PowerType.OIL:
+                StopOils();
                 break;
-            case PowerType.SPIKE: StopSpikes();
+            case PowerType.SPIKE:
+                StopSpikes();
                 break;
-            case PowerType.BOMB: StopBombs();
+            case PowerType.BOMB:
+                StopBombs();
+                break;
+            case PowerType.SAW:
+                StopSaws();
                 break;
             default:
                 break;
@@ -341,23 +390,31 @@ public class RobotScript : MonoBehaviour
     #region MOVEMENT
     public void Move(MovementDirection dir)
     {
-        switch(dir)
+        switch (dir)
         {
-            case MovementDirection.LEFT: MoveLeft();
+            case MovementDirection.LEFT:
+                MoveLeft();
                 break;
-            case MovementDirection.RIGHT: MoveRight();
+            case MovementDirection.RIGHT:
+                MoveRight();
                 break;
-            case MovementDirection.FORWARD: MoveForward();
+            case MovementDirection.FORWARD:
+                MoveForward();
                 break;
-            case MovementDirection.DOWN: MoveBack();
+            case MovementDirection.DOWN:
+                MoveBack();
                 break;
-            case MovementDirection.TLEFT: MoveForwardLeft();
+            case MovementDirection.TLEFT:
+                MoveForwardLeft();
                 break;
-            case MovementDirection.TRIGHT: MoveForwardRight();
+            case MovementDirection.TRIGHT:
+                MoveForwardRight();
                 break;
-            case MovementDirection.BLEFT: MoveBackLeft();
+            case MovementDirection.BLEFT:
+                MoveBackLeft();
                 break;
-            case MovementDirection.BRIGHT: MoveBackRight();
+            case MovementDirection.BRIGHT:
+                MoveBackRight();
                 break;
             default:
                 break;
@@ -499,18 +556,7 @@ public class RobotScript : MonoBehaviour
         {
             if (tires[i].HJoint != null)
             {
-                if (tires[i].TireHSide == TireHSide.LEFT) // LEFT of the car
-                {
-                    /*if (tires[i].TireOrientation == TireOrientation.LEFT) // default
-                    {
-                        tires[i].RotateForward(speed, true);
-                    }
-                    else // inverted to the right
-                    {
-                        tires[i].RotateForward(-speed, true);
-                    }*/
-                }
-                else if (tires[i].TireHSide == TireHSide.RIGHT) // RIGHT of the car
+                if (tires[i].TireHSide == TireHSide.RIGHT) // RIGHT of the car
                 {
                     if (tires[i].TireOrientation == TireOrientation.LEFT) // inverted to the left
                     {
@@ -541,18 +587,7 @@ public class RobotScript : MonoBehaviour
         {
             if (tires[i].HJoint != null)
             {
-                if (tires[i].TireHSide == TireHSide.LEFT) // LEFT of the car
-                {
-                    /*if (tires[i].TireOrientation == TireOrientation.LEFT) // default
-                    {
-                        tires[i].RotateForward(speed, true);
-                    }
-                    else // inverted to the right
-                    {
-                        tires[i].RotateForward(-speed, true);
-                    }*/
-                }
-                else if (tires[i].TireHSide == TireHSide.RIGHT) // RIGHT of the car
+                if (tires[i].TireHSide == TireHSide.RIGHT) // RIGHT of the car
                 {
                     if (tires[i].TireOrientation == TireOrientation.LEFT) // inverted to the left
                     {

@@ -39,6 +39,27 @@ public class TirePieceScript : PieceScript
         otherJointLimits.max = TIRE_PIVOT_ANGLE;
         axisJoint.limits = otherJointLimits;
         axisJoint.useLimits = true;
+        //axisJoint.transform.parent.GetComponent<FramePieceScript>()
+        FramePieceScript frameConnectedTo = axisJoint.transform.parent.GetComponent<FramePieceScript>();
+        if (frameConnectedTo != null)
+        {
+            if (frameConnectedTo.rightAxis == axisJoint)
+            {
+                frameConnectedTo.rightTire = this;
+            }
+            else if (frameConnectedTo.leftAxis == axisJoint)
+            {
+                frameConnectedTo.leftTire = this; // change to list and then just add?
+            }
+            else
+            {
+                Debug.LogError("FOUND NO AXIS");
+            }
+        }
+        else
+        {
+            Debug.LogError("FOUND NO FRAME");
+        }
         //joints = new List<HingeJoint>(GetComponents<HingeJoint>());
 
         initialRot = hJoint.connectedBody.transform.localRotation.eulerAngles;
@@ -63,7 +84,7 @@ public class TirePieceScript : PieceScript
             if (pivot)
             {
                 JointMotor otherMotor = axisJoint.motor;
-                otherMotor.force = StaticHelper.AXIS_FORCE;
+                otherMotor.force = StaticHelper.TIRE_AXIS_FORCE;
                 otherMotor.freeSpin = false;
                 if (tireHSide == TireHSide.RIGHT)
                 {
@@ -107,6 +128,7 @@ public class TirePieceScript : PieceScript
         {
             hJoint.breakForce = 0;
             Destroy(hJoint);
+            robot.LosePiece(this);
         }
         /*if (joints != null)
         {
