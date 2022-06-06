@@ -60,8 +60,6 @@ public class TirePieceScript : PieceScript
         {
             Debug.LogError("FOUND NO FRAME");
         }
-        //joints = new List<HingeJoint>(GetComponents<HingeJoint>());
-
         initialRot = hJoint.connectedBody.transform.localRotation.eulerAngles;
     }
 

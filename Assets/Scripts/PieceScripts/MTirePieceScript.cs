@@ -11,29 +11,10 @@ public class MTirePieceScript : TirePieceScript
 
     protected void InitializeMTire()
     {
+        base.InitializeTire();
         pieceType = typeToUse;
         health = maxHealth = healthToUse;
-        tr = GetComponent<Transform>();
-
-        //SET RIGIDBODY
-        rb = GetComponent<Rigidbody>();
-        if (rb == null)
-        {
-            rb = gameObject.AddComponent<Rigidbody>();
-        }
         rb.mass = massToUse;
-
-        //SET MESHCOLLIDER
-        MeshCollider mc = GetComponent<MeshCollider>();
-        if (mc == null)
-        {
-            mc = gameObject.AddComponent<MeshCollider>();
-        }
-        mc.convex = true;
-
-        //TODO SET JOINTS
-        hJoint = GetComponent<HingeJoint>();
-        //joints = new List<HingeJoint>(GetComponents<HingeJoint>());
     }
 
     private void Start()

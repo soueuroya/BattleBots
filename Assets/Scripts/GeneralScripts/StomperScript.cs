@@ -26,7 +26,6 @@ public class StomperScript : MonoBehaviour
                 Release();
             }
         }
-        
         if (!rb.useGravity && rb.velocity.y < speed)
         {
             rb.velocity = Vector3.up * speed;
@@ -50,7 +49,6 @@ public class StomperScript : MonoBehaviour
 
     public void GoUp()
     {
-        Debug.Log("Going UP");
         active = false;
         rb.useGravity = false;
         rb.velocity = Vector3.up * speed;
