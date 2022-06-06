@@ -7,7 +7,7 @@ public class FloatingCanvasScript : MonoBehaviour
     [SerializeField] private Vector3 offset;
     private Transform tr;
     private Transform target;
-    void Start()
+    void Awake()
     {
         tr = transform;
         if (offset == null)

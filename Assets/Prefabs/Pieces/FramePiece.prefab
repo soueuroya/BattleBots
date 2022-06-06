@@ -3217,6 +3217,7 @@ MonoBehaviour:
   mr: {fileID: 3909802947674451107}
   originalColor: {r: 0.1792453, g: 0.1792453, b: 0.1792453, a: 1}
   robot: {fileID: 0}
+  collidedWith: []
   leftTire: {fileID: 0}
   rightTire: {fileID: 0}
   leftAxis: {fileID: 514918674269677941}
@@ -3235,6 +3236,7 @@ GameObject:
   - component: {fileID: 3584880867126004162}
   - component: {fileID: 3420412702611846709}
   - component: {fileID: 1012914536822172723}
+  - component: {fileID: 6096975986756204296}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -3336,6 +3338,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4ea2d0383b88394eb7a7b6121bb46ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &6096975986756204296
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6684218767578250795}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e41766d6f2d684f4fb88f14054fb3e6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  offset: {x: 0, y: 0.5, z: 0}
 --- !u!1 &7385855517766984120
 GameObject:
   m_ObjectHideFlags: 0

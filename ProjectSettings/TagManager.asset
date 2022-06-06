@@ -5,6 +5,14 @@ TagManager:
   serializedVersion: 2
   tags:
   - Acid
+  - Fire
+  - Bomb
+  - Spike
+  - Oil
+  - Saw
+  - Shock
+  - AcidPool
+  - LavaPool
   layers:
   - Default
   - TransparentFX

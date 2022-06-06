@@ -1,5 +1,7 @@
+using System.Collections.Generic;
 using UnityEngine;
 using static StaticHelper;
+using static UnityEngine.ParticleSystem;
 
 public class PieceScript : MonoBehaviour
 {
@@ -17,6 +19,8 @@ public class PieceScript : MonoBehaviour
     [SerializeField] protected MeshRenderer mr;
     [SerializeField] private Color originalColor;
     [SerializeField] protected RobotScript robot;
+    [SerializeField] private List<GameObject> collidedWith;
+    private bool cleanCollisions;
 
     protected void InitializePiece()
     {
@@ -62,21 +66,85 @@ public class PieceScript : MonoBehaviour
         TakeDamage(10);
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void Update()
     {
-        switch (collision.gameObject.tag)
+        foreach (GameObject go in collidedWith)
+        {
+            switch (go.gameObject.tag)
+            {
+                case "LavaPool":
+                    TakeDamage(0.1f);
+                    break;
+                case "AcidPool":
+                    TakeDamage(0.1f);
+                    break;
+                default:
+                    break;
+            }
+        }
+        if (cleanCollisions)
+        {
+            collidedWith.Clear();
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        switch(other.gameObject.tag)
+        {
+            case "LavaPool":
+                if (!collidedWith.Contains(other.gameObject))
+                {
+                    collidedWith.Add(other.gameObject);
+                }
+                TakeDamage(1);
+                break;
+            case "AcidPool":
+                if (!collidedWith.Contains(other.gameObject))
+                {
+                    collidedWith.Add(other.gameObject);
+                }
+                TakeDamage(1);
+                break;
+        }
+    }
+
+    void OnParticleCollision(GameObject other)
+    {
+        Debug.Log(other.gameObject.tag + " - " + other.gameObject.name + " TOUCHING: " + gameObject.name + " - " + robot.name);
+        //if (other.gameObject.tag == "Sub")
+        {
+            //ParticleSystem ps = other.GetComponent<ParticleSystem>();
+            //MainModule main = ps.main;
+            //main.simulationSpace = ParticleSystemSimulationSpace.Custom;
+            //main.customSimulationSpace = tr;
+            //ps.simulationSpace = ParticleSystemSimulationSpace.Custom;
+        }
+
+        switch (other.gameObject.tag)
         {
             case "Acid":
+                TakeDamage(1);
                 break;
             case "Fire":
+                TakeDamage(1);
                 break;
             case "Shock":
+                TakeDamage(1);
                 break;
             case "Spike":
+                TakeDamage(1);
                 break;
             case "Oil":
+                TakeDamage(1);
                 break;
-            default: 
+            case "Saw":
+                TakeDamage(1);
+                break;
+            case "Bomb":
+                TakeDamage(1);
+                break;
+            default:
                 break;
         }
     }
@@ -87,26 +155,30 @@ public class PieceScript : MonoBehaviour
     }
     private void TakeDamage(float damage)
     {
-        if (mr != null)
+        if (health > 0)
         {
-            if (IsFirstMaterial())
+            if (mr != null)
             {
-                mr.materials[0].color = Color.white;
+                if (IsFirstMaterial())
+                {
+                    mr.materials[0].color = Color.white;
+                }
+                else
+                {
+                    mr.materials[1].color = Color.white;
+                }
+                health -= damage;
+                if (health <= 0)
+                {
+                    health = 0;
+                    
+                    DestroyPiece();
+                    //TODO Destroy piece, if core, game over for this car.
+                }
+                ShowHealthbarCanvas();
+                healthbar.UpdateHealth(health / maxHealth);
+                Invoke("RestoreColor", 0.2f);
             }
-            else
-            {
-                mr.materials[1].color = Color.white;
-            }
-            health -= damage;
-            if (health <= 0)
-            {
-                health = 0;
-                DestroyPiece();
-                //TODO Destroy piece, if core, game over for this car.
-            }
-            ShowHealthbarCanvas();
-            healthbar.UpdateHealth(health/maxHealth);
-            Invoke("RestoreColor", 0.2f);
         }
     }
 

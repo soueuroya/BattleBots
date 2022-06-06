@@ -11,8 +11,8 @@ public class StaticHelper
     public const int TIRE_AXIS_FORCE = 100;
     public const int TIRE_FORCE = 55;
     public const int TIRE_PIVOT_ANGLE = 10;
-    public const int SAW_FORCE = 100;
-    public const int SAW_SPEED = 1000;
+    public const int SAW_FORCE = 200;
+    public const int SAW_SPEED = 2000;
 
     public const float ACID_PIECE_WEIGHT = 5; public const float ACID_PIECE_HEALTH = 40; // ACID
     public const float FIRE_PIECE_WEIGHT = 5; public const float FIRE_PIECE_HEALTH = 40; // FIRE

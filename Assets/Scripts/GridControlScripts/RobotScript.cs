@@ -153,8 +153,8 @@ public class RobotScript : MonoBehaviour
     {
         Initialize();
     }
-    #region POWER
 
+    #region POWERS ACTIVATION AND PIECE DESTRUCTION
     public void StartPower(PowerType power)
     {
         switch (power)
@@ -185,20 +185,22 @@ public class RobotScript : MonoBehaviour
         }
     }
 
-    public void LosePiece(PieceScript _piece)
+    public void LosePiece(PieceScript _piece) // When robot looses the piece, remove it from list and stop the piece
     {
-        _piece.gameObject.layer = LayerMask.NameToLayer("Default");
+        _piece.gameObject.layer = LayerMask.NameToLayer("Default"); // Make this piece collide with the original robot now
         switch (_piece.PieceType)
         {
             case PieceType.TIRE:
                 if (tires.Contains(_piece as TirePieceScript))
                 {
+                    (_piece as TirePieceScript).RotateForward(0);
                     tires.Remove(_piece as TirePieceScript);
                 }
                 break;
             case PieceType.MTIRE:
                 if (tires.Contains(_piece as TirePieceScript))
                 {
+                    (_piece as TirePieceScript).RotateForward(0);
                     tires.Remove(_piece as TirePieceScript);
                 }
                 break;
@@ -211,37 +213,50 @@ public class RobotScript : MonoBehaviour
             case PieceType.ACID:
                 if (acids.Contains(_piece as AcidPieceScript))
                 {
+                    (_piece as AcidPieceScript).Deactivate();
                     acids.Remove(_piece as AcidPieceScript);
                 }
                 break;
             case PieceType.FIRE:
                 if (fires.Contains(_piece as FirePieceScript))
                 {
+                    (_piece as FirePieceScript).Deactivate();
                     fires.Remove(_piece as FirePieceScript);
                 }
                 break;
             case PieceType.SHOCK:
                 if (shocks.Contains(_piece as ShockPieceScript))
                 {
+                    (_piece as ShockPieceScript).Deactivate();
                     shocks.Remove(_piece as ShockPieceScript);
                 }
                 break;
             case PieceType.OIL:
                 if (oils.Contains(_piece as OilPieceScript))
                 {
+                    (_piece as OilPieceScript).Deactivate();
                     oils.Remove(_piece as OilPieceScript);
                 }
                 break;
             case PieceType.BOMB:
                 if (bombs.Contains(_piece as BombPieceScript))
                 {
+                    (_piece as BombPieceScript).Deactivate();
                     bombs.Remove(_piece as BombPieceScript);
                 }
                 break;
             case PieceType.SPIKE:
                 if (spikes.Contains(_piece as SpikePieceScript))
                 {
+                    (_piece as SpikePieceScript).Deactivate();
                     spikes.Remove(_piece as SpikePieceScript);
+                }
+                break;
+            case PieceType.SAW:
+                if (saws.Contains(_piece as SawPieceScript))
+                {
+                    (_piece as SawPieceScript).Deactivate();
+                    saws.Remove(_piece as SawPieceScript);
                 }
                 break;
             case PieceType.CORE:
@@ -339,7 +354,6 @@ public class RobotScript : MonoBehaviour
             bomb.Deactivate();
         }
     }
-
     public void StartSaws()
     {
         foreach (SawPieceScript saw in saws)
@@ -384,7 +398,6 @@ public class RobotScript : MonoBehaviour
                 break;
         }
     }
-
     #endregion
 
     #region MOVEMENT

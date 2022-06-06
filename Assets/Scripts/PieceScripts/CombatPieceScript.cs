@@ -12,7 +12,7 @@ public class CombatPieceScript : FramePieceScript
     {
         base.InitializePiece();
         //TODO SET PARTICLES
-        partSyst = GetComponent<ParticleSystem>();
+        partSyst = GetComponentInChildren<ParticleSystem>();
         if (partSyst == null)
         {
             //partSyst = Resources.Load<ParticleSystem>("ParticleComponentHolders/AcidPiece");

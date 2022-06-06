@@ -3,9 +3,6 @@ using static StaticHelper;
 
 public class FirePieceScript : CombatPieceScript
 {
-    ///[SerializeField] private bool fireInitialized;
-    ///[SerializeField] private bool FIRELOCKUPDATE;
-
     [SerializeField] private const PieceType typeToUse = PieceType.FIRE;
     [SerializeField] private const float healthToUse = FIRE_PIECE_HEALTH;
     [SerializeField] private const float massToUse = FIRE_PIECE_WEIGHT;

@@ -72,6 +72,7 @@ MonoBehaviour:
   spikes: []
   oils: []
   bombs: []
+  saws: []
   frames: []
   cores:
   - {fileID: 0}
@@ -1513,6 +1514,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2066460598627889255}
     m_Modifications:
+    - target: {fileID: 4117727954997997340, guid: 3b092c29d209be245a012342ab58bb34, type: 3}
+      propertyPath: m_ConnectedAnchor.x
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 4117727954997997340, guid: 3b092c29d209be245a012342ab58bb34, type: 3}
+      propertyPath: m_ConnectedAnchor.y
+      value: 0.00000047683716
+      objectReference: {fileID: 0}
     - target: {fileID: 4163405986210104075, guid: 3b092c29d209be245a012342ab58bb34, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -1523,27 +1532,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5495314874080696083, guid: 3b092c29d209be245a012342ab58bb34, type: 3}
       propertyPath: m_Tangents.Array.data[21].x
-      value: NaN
+      value: -0.000067766654
       objectReference: {fileID: 0}
     - target: {fileID: 5495314874080696083, guid: 3b092c29d209be245a012342ab58bb34, type: 3}
       propertyPath: m_Tangents.Array.data[21].y
-      value: NaN
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 5495314874080696083, guid: 3b092c29d209be245a012342ab58bb34, type: 3}
       propertyPath: m_Tangents.Array.data[21].z
-      value: NaN
+      value: 0.0000023137125
       objectReference: {fileID: 0}
     - target: {fileID: 5495314874080696083, guid: 3b092c29d209be245a012342ab58bb34, type: 3}
       propertyPath: m_Tangents.Array.data[23].x
-      value: NaN
+      value: -0.00012602775
       objectReference: {fileID: 0}
     - target: {fileID: 5495314874080696083, guid: 3b092c29d209be245a012342ab58bb34, type: 3}
       propertyPath: m_Tangents.Array.data[23].y
-      value: NaN
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 5495314874080696083, guid: 3b092c29d209be245a012342ab58bb34, type: 3}
       propertyPath: m_Tangents.Array.data[23].z
-      value: NaN
+      value: 0.0000034263421
       objectReference: {fileID: 0}
     - target: {fileID: 5495314874080696083, guid: 3b092c29d209be245a012342ab58bb34, type: 3}
       propertyPath: m_Tangents.Array.data[39].x
@@ -1571,27 +1580,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5495314874080696083, guid: 3b092c29d209be245a012342ab58bb34, type: 3}
       propertyPath: m_Tangents.Array.data[41].x
-      value: NaN
+      value: 0.00007906911
       objectReference: {fileID: 0}
     - target: {fileID: 5495314874080696083, guid: 3b092c29d209be245a012342ab58bb34, type: 3}
       propertyPath: m_Tangents.Array.data[41].y
-      value: NaN
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5495314874080696083, guid: 3b092c29d209be245a012342ab58bb34, type: 3}
       propertyPath: m_Tangents.Array.data[41].z
-      value: NaN
+      value: 0.000034906487
       objectReference: {fileID: 0}
     - target: {fileID: 5495314874080696083, guid: 3b092c29d209be245a012342ab58bb34, type: 3}
       propertyPath: m_Tangents.Array.data[42].x
-      value: NaN
+      value: -0.00011184354
       objectReference: {fileID: 0}
     - target: {fileID: 5495314874080696083, guid: 3b092c29d209be245a012342ab58bb34, type: 3}
       propertyPath: m_Tangents.Array.data[42].y
-      value: NaN
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 5495314874080696083, guid: 3b092c29d209be245a012342ab58bb34, type: 3}
       propertyPath: m_Tangents.Array.data[42].z
-      value: NaN
+      value: -0.000009791689
       objectReference: {fileID: 0}
     - target: {fileID: 5495314874080696083, guid: 3b092c29d209be245a012342ab58bb34, type: 3}
       propertyPath: m_Tangents.Array.data[54].x
@@ -2108,6 +2117,10 @@ PrefabInstance:
     - target: {fileID: 7197306081117928121, guid: 3b092c29d209be245a012342ab58bb34, type: 3}
       propertyPath: m_Tangents.Array.data[709].z
       value: NaN
+      objectReference: {fileID: 0}
+    - target: {fileID: 7197306081117928122, guid: 3b092c29d209be245a012342ab58bb34, type: 3}
+      propertyPath: m_SelectedEditorRenderState
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7197306081117928123, guid: 3b092c29d209be245a012342ab58bb34, type: 3}
       propertyPath: m_Mesh

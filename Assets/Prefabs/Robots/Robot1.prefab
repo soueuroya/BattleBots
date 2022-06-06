@@ -66,6 +66,7 @@ MonoBehaviour:
   spikes: []
   oils: []
   bombs: []
+  saws: []
   frames: []
   cores:
   - {fileID: 0}
@@ -82,7 +83,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 300309432371318788, guid: 7656dbe7804c72b4988bcd3524020dd3, type: 3}
       propertyPath: m_Layer
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4554363886668234044, guid: 7656dbe7804c72b4988bcd3524020dd3, type: 3}
       propertyPath: m_ConnectedAnchor.x
@@ -94,6 +95,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7443029055184457104, guid: 7656dbe7804c72b4988bcd3524020dd3, type: 3}
       propertyPath: alive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8352564280465083324, guid: 7656dbe7804c72b4988bcd3524020dd3, type: 3}
+      propertyPath: CollisionModule.type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8352564280465083324, guid: 7656dbe7804c72b4988bcd3524020dd3, type: 3}
+      propertyPath: CollisionModule.enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8352564280465083324, guid: 7656dbe7804c72b4988bcd3524020dd3, type: 3}
+      propertyPath: CollisionModule.collisionMessages
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8407279537840938596, guid: 7656dbe7804c72b4988bcd3524020dd3, type: 3}
@@ -925,7 +938,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5449173759188992211, guid: 171530159f79afc45b9efbffa24391a5, type: 3}
       propertyPath: offset.y
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8625244269344663469, guid: 171530159f79afc45b9efbffa24391a5, type: 3}
       propertyPath: m_ConnectedBody
