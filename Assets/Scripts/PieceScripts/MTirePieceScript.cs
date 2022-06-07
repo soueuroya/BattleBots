@@ -17,7 +17,7 @@ public class MTirePieceScript : TirePieceScript
         rb.mass = massToUse;
     }
 
-    private void Start()
+    private void OnValidate()
     {
         InitializeMTire();
     }

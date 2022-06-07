@@ -22,7 +22,12 @@ public class LiquidWaveScript : MonoBehaviour
     public float forceUp = 8;
     public bool UPDATE;
 
-    void Start()
+    private void Start()
+    {
+        UpdateMesh();
+    }
+
+    void UpdateMesh()
     {
         filter = GetComponent<MeshFilter>();
         filter.mesh = GenerateMesh();
@@ -35,13 +40,8 @@ public class LiquidWaveScript : MonoBehaviour
         if (UPDATE)
         {
             UPDATE = false;
-            Start();
+            UpdateMesh();
         }
-    }
-
-    private void Reset()
-    {
-        Start();
     }
 
     void Update()

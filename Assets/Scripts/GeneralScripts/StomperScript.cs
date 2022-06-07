@@ -10,7 +10,7 @@ public class StomperScript : MonoBehaviour
     public float speed;
     public bool active;
 
-    void Start()
+    private void OnValidate()
     {
         tr = transform;
         origin = tr.position;
