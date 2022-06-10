@@ -14,6 +14,8 @@ public class StaticHelper
     public const int SAW_FORCE = 200;
     public const int SAW_SPEED = 2000;
 
+    public const int GRIDSIZE = 9;
+
     public const float ACID_PIECE_WEIGHT = 5; public const float ACID_PIECE_HEALTH = 40; // ACID
     public const float FIRE_PIECE_WEIGHT = 5; public const float FIRE_PIECE_HEALTH = 40; // FIRE
     public const float SHOCK_PIECE_WEIGHT = 5; public const float SHOCK_PIECE_HEALTH = 40; // SHOCK

@@ -48,11 +48,27 @@ public class PieceScript : MonoBehaviour
         {
             if (IsFirstMaterial())
             {
-                originalColor = mr.materials[0].color;
+                try
+                {
+                    originalColor = mr.materials[0].color;
+                }
+                catch (System.Exception)
+                {
+
+                    throw;
+                }
             }
             else
             {
-                originalColor = mr.materials[1].color;
+                try
+                {
+                    originalColor = mr.materials[1].color;
+                }
+                catch (System.Exception)
+                {
+
+                    throw;
+                }
             }
         }
 

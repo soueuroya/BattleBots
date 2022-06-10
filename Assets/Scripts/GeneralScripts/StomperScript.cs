@@ -7,8 +7,6 @@ public class StomperScript : MonoBehaviour
     public Vector3 origin;
     public Transform tr;
     public Rigidbody rb;
-    public float speed;
-    public bool active;
 
     private void OnValidate()
     {
@@ -17,24 +15,20 @@ public class StomperScript : MonoBehaviour
         rb = GetComponent<Rigidbody>();
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
-        if (!active)
+        if (rb.isKinematic)
         {
             if (tr.position.y >= origin.y)
             {
                 Release();
             }
-        }
-        if (!rb.useGravity && rb.velocity.y < speed)
-        {
-            rb.velocity = Vector3.up * speed;
+            rb.MovePosition(tr.position + origin * Time.deltaTime/3);
         }
     }
 
     void Reset()
     {
-        speed = 3;
         tr = transform;
         origin = tr.position;
         rb = GetComponent<Rigidbody>();
@@ -42,15 +36,13 @@ public class StomperScript : MonoBehaviour
 
     public void Release()
     {
-        active = true;
-        rb.useGravity = true;
-        Invoke("GoUp", 2f);
+        rb.isKinematic = false;
+        CancelInvoke("GoUp");
+        Invoke("GoUp", 3f);
     }
 
     public void GoUp()
     {
-        active = false;
-        rb.useGravity = false;
-        rb.velocity = Vector3.up * speed;
+        rb.isKinematic = true;
     }
 }

@@ -30,7 +30,14 @@ public class LiquidWaveScript : MonoBehaviour
     void UpdateMesh()
     {
         filter = GetComponent<MeshFilter>();
-        filter.mesh = GenerateMesh();
+        try
+        {
+            filter.mesh = GenerateMesh();
+        }
+        catch (System.Exception)
+        {
+            throw;
+        }
         floatingBodies = new List<Rigidbody>();
         unfloatingBodies = new List<Rigidbody>();
     }
