@@ -127,6 +127,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e41766d6f2d684f4fb88f14054fb3e6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  offset: {x: 0, y: 0.5, z: 0}
 --- !u!1 &725195493987258314
 GameObject:
   m_ObjectHideFlags: 0
@@ -3100,16 +3101,20 @@ MonoBehaviour:
   pieceType: 6
   rb: {fileID: 725195493987258324}
   health: 60
+  maxHealth: 60
+  alive: 0
   healthbarCanvas: {fileID: 345587169615799511}
   healthbar: {fileID: 1427215696668048290}
   tr: {fileID: 725195493987258327}
   mr: {fileID: 725195493987258313}
-  maxHealth: 60
   originalColor: {r: 0.1792453, g: 0.1792453, b: 0.1792453, a: 1}
+  robot: {fileID: 0}
+  collidedWith: []
   tireHSide: 0
   tireVSide: 0
   tireOrientation: 0
   hJoint: {fileID: 8625244269344663469}
+  axisJoint: {fileID: 0}
 --- !u!1 &8890030144811177357
 GameObject:
   m_ObjectHideFlags: 0

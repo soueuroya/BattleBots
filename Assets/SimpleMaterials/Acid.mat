@@ -70,12 +70,12 @@ Material:
     - _Parallax: 0.02
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
-    - _Speed: 0.01
+    - _Speed: 0.041
     - _SrcBlend: 1
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
     - _Color: {r: 0, g: 1, b: 0.06795335, a: 1}
     - _EmissionColor: {r: 0.010526162, g: 0.26415092, b: 0, a: 1}
-    - _FlowDirection: {r: 1, g: 1, b: 0, a: 0}
+    - _FlowDirection: {r: 0, g: 1, b: 0, a: 0}
   m_BuildTextureStacks: []

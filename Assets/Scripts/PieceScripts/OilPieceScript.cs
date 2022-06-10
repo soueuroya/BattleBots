@@ -3,29 +3,21 @@ using static StaticHelper;
 
 public class OilPieceScript : CombatPieceScript
 {
-    [SerializeField] private bool oilInitialized;
-    [SerializeField] private bool OILLOCKUPDATE;
-
     private const PieceType typeToUse = PieceType.OIL;
     private const float healthToUse = OIL_PIECE_HEALTH;
     private const float massToUse = OIL_PIECE_WEIGHT;
 
-    protected void InitializeOil(bool forceUpdate = false)
+    protected void InitializeOil()
     {
-        if ((!oilInitialized || forceUpdate) && !OILLOCKUPDATE)
-        {
-            oilInitialized = true;
-            base.InitializeCombatPiece(forceUpdate);
-            pieceType = typeToUse;
-            health = maxHealth = healthToUse;
-            rb.mass = massToUse;
-        }
+        base.InitializeCombatPiece();
+        pieceType = typeToUse;
+        health = maxHealth = healthToUse;
+        rb.mass = massToUse;
     }
 
     private void Start()
     {
-        oilInitialized = false;
-        InitializeOil(true);
+        InitializeOil();
     }
 
     private void Reset()
@@ -35,7 +27,6 @@ public class OilPieceScript : CombatPieceScript
 
     private void OnDrawGizmosSelected()
     {
-        oilInitialized = false;
-        InitializeOil(true);
+        InitializeOil();
     }
 }

@@ -73627,7 +73627,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1289e15cdc6f07458dbb8b893cd5d31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &433447969469112491
+--- !u!114 &5304616496832169316
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -73642,13 +73642,17 @@ MonoBehaviour:
   pieceType: 7
   rb: {fileID: 2155936339642362036}
   health: 80
+  maxHealth: 80
+  alive: 0
   healthbarCanvas: {fileID: 1382816651976623031}
   healthbar: {fileID: 303281338640538818}
   tr: {fileID: 2155936339642362039}
   mr: {fileID: 0}
-  maxHealth: 80
   originalColor: {r: 0, g: 0, b: 0, a: 0}
+  robot: {fileID: 0}
+  collidedWith: []
   tireHSide: 0
   tireVSide: 0
   tireOrientation: 0
   hJoint: {fileID: 6937795427394453709}
+  axisJoint: {fileID: 0}

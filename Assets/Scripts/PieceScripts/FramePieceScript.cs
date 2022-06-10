@@ -4,15 +4,14 @@ using static StaticHelper;
 
 public class FramePieceScript : PieceScript
 {
-    [SerializeField] protected HingeJoint leftTire;
-    [SerializeField] protected HingeJoint rightTire;
-    [SerializeField] protected HingeJoint leftAxis;
-    [SerializeField] protected HingeJoint rightAxis;
+    [SerializeField] public PieceScript leftTire; // change both to lists?
+    [SerializeField] public PieceScript rightTire;
+    [SerializeField] public HingeJoint leftAxis;
+    [SerializeField] public HingeJoint rightAxis;
     [SerializeField] protected List<FixedJoint> joints;
     [SerializeField] private const PieceType typeToUse = PieceType.FRAME;
     [SerializeField] private const float healthToUse = FRAME_PIECE_HEALTH;
     [SerializeField] private const float massToUse = FRAME_PIECE_WEIGHT;
-
     protected void InitializeFrame()
     {
         base.InitializePiece();
@@ -72,37 +71,39 @@ public class FramePieceScript : PieceScript
             {
                 if (rightAxis.connectedBody != null)
                 {
-                    rightTire = rightAxis.connectedBody.GetComponent<HingeJoint>();
+                    //rightTire = rightAxis.connectedBody.GetComponent<PieceScript>(); // TIRES HAVE TO BE SET BY THEMSELVES
                     if (rightTire != null)
                     {
-                        rightTire.breakForce = 0;
+                        //rightTire.breakForce = 0;
                         Debug.Log("Destroy right tire");
-                        Destroy(rightTire);
+                        robot.LosePiece(rightTire);
+                        //Destroy(rightTire);
                     }
-                    rightAxis.connectedBody = null;
+                    //rightAxis.connectedBody = null;
                 }
-                rightAxis.breakForce = 0;
+                //rightAxis.breakForce = 0;
                 Debug.Log("Destroy right axis");
-                Destroy(rightAxis);
+                //Destroy(rightAxis);
             }
             if (leftAxis != null)
             {
                 if (leftAxis.connectedBody != null)
                 {
-                    leftTire = leftAxis.connectedBody.GetComponent<HingeJoint>();
+                    //leftTire = leftAxis.connectedBody.GetComponent<PieceScript>(); // TIRES HAVE TO BE SET BY THEMSELVES
                     if (leftTire != null)
                     {
-                        leftTire.breakForce = 0;
+                        //leftTire.breakForce = 0;
                         Debug.Log("Destroy left tire");
-                        Destroy(leftTire);
+                        robot.LosePiece(leftTire);
+                        //Destroy(leftTire);
                     }
-                    leftAxis.connectedBody = null;
+                    //leftAxis.connectedBody = null;
                 }
-                leftAxis.breakForce = 0;
+                //leftAxis.breakForce = 0;
                 Debug.Log("Destroy left axis");
-                Destroy(leftAxis);
+                //Destroy(leftAxis);
             }
-
+            robot.LosePiece(this);
             /*
             if (joints != null)
             {

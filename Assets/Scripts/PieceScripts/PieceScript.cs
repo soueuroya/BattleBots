@@ -1,5 +1,7 @@
+using System.Collections.Generic;
 using UnityEngine;
 using static StaticHelper;
+using static UnityEngine.ParticleSystem;
 
 public class PieceScript : MonoBehaviour
 {
@@ -15,52 +17,48 @@ public class PieceScript : MonoBehaviour
     [SerializeField] protected HealthbarScript healthbar;
     [SerializeField] protected Transform tr;
     [SerializeField] protected MeshRenderer mr;
-    ///[SerializeField] private bool pieceInitialized;
-    ///[SerializeField] private bool PIECELOCKUPDATE;
-
     [SerializeField] private Color originalColor;
+    [SerializeField] protected RobotScript robot;
+    [SerializeField] private List<GameObject> collidedWith;
+    private bool cleanCollisions;
 
-    protected void InitializePiece(bool forceUpdate = false)
+    protected void InitializePiece()
     {
-        ///if ((!pieceInitialized || forceUpdate) && !PIECELOCKUPDATE)
+        alive = true;
+        tr = GetComponent<Transform>();
+
+        //SET RIGIDBODY
+        rb = GetComponent<Rigidbody>();
+        if (rb == null)
         {
-            ///pieceInitialized = true;
-            alive = true;
-            tr = GetComponent<Transform>();
-
-            //SET RIGIDBODY
-            rb = GetComponent<Rigidbody>();
-            if (rb == null)
-            {
-                rb = gameObject.AddComponent<Rigidbody>();
-            }
-
-            //SET MESHCOLLIDER
-            MeshCollider mc = GetComponent<MeshCollider>();
-            if (mc == null)
-            {
-                mc = gameObject.AddComponent<MeshCollider>();
-            }
-            mc.convex = true;
-
-            //SET MESHRENDERER
-            mr = GetComponent<MeshRenderer>();
-            if (mr != null)
-            {
-                if (pieceType.Equals(PieceType.FRAME) || pieceType.Equals(PieceType.TIRE) || pieceType.Equals(PieceType.MTIRE))
-                {
-                    originalColor = mr.materials[0].color;
-                }
-                else
-                {
-                    originalColor = mr.materials[1].color;
-                }
-            }
-
-            //SET HEALTHBAR
-            healthbarCanvas = GetComponentInChildren<Canvas>(true);
-            healthbar = healthbarCanvas.GetComponentInChildren<HealthbarScript>(true);
+            rb = gameObject.AddComponent<Rigidbody>();
         }
+
+        //SET MESHCOLLIDER
+        MeshCollider mc = GetComponent<MeshCollider>();
+        if (mc == null)
+        {
+            mc = gameObject.AddComponent<MeshCollider>();
+        }
+        mc.convex = true;
+
+        //SET MESHRENDERER
+        mr = GetComponent<MeshRenderer>();
+        if (mr != null)
+        {
+            if (IsFirstMaterial())
+            {
+                originalColor = mr.materials[0].color;
+            }
+            else
+            {
+                originalColor = mr.materials[1].color;
+            }
+        }
+
+        //SET HEALTHBAR
+        healthbarCanvas = GetComponentInChildren<Canvas>(true);
+        healthbar = healthbarCanvas.GetComponentInChildren<HealthbarScript>(true);
     }
 
     private void OnMouseDown()
@@ -68,28 +66,119 @@ public class PieceScript : MonoBehaviour
         TakeDamage(10);
     }
 
+    private void Update()
+    {
+        foreach (GameObject go in collidedWith)
+        {
+            switch (go.gameObject.tag)
+            {
+                case "LavaPool":
+                    TakeDamage(0.1f);
+                    break;
+                case "AcidPool":
+                    TakeDamage(0.1f);
+                    break;
+                default:
+                    break;
+            }
+        }
+        if (cleanCollisions)
+        {
+            collidedWith.Clear();
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        switch(other.gameObject.tag)
+        {
+            case "LavaPool":
+                if (!collidedWith.Contains(other.gameObject))
+                {
+                    collidedWith.Add(other.gameObject);
+                }
+                TakeDamage(1);
+                break;
+            case "AcidPool":
+                if (!collidedWith.Contains(other.gameObject))
+                {
+                    collidedWith.Add(other.gameObject);
+                }
+                TakeDamage(1);
+                break;
+        }
+    }
+
+    void OnParticleCollision(GameObject other)
+    {
+        Debug.Log(other.gameObject.tag + " - " + other.gameObject.name + " TOUCHING: " + gameObject.name + " - " + robot.name);
+        //if (other.gameObject.tag == "Sub")
+        {
+            //ParticleSystem ps = other.GetComponent<ParticleSystem>();
+            //MainModule main = ps.main;
+            //main.simulationSpace = ParticleSystemSimulationSpace.Custom;
+            //main.customSimulationSpace = tr;
+            //ps.simulationSpace = ParticleSystemSimulationSpace.Custom;
+        }
+
+        switch (other.gameObject.tag)
+        {
+            case "Acid":
+                TakeDamage(1);
+                break;
+            case "Fire":
+                TakeDamage(1);
+                break;
+            case "Shock":
+                TakeDamage(1);
+                break;
+            case "Spike":
+                TakeDamage(1);
+                break;
+            case "Oil":
+                TakeDamage(1);
+                break;
+            case "Saw":
+                TakeDamage(1);
+                break;
+            case "Bomb":
+                TakeDamage(1);
+                break;
+            default:
+                break;
+        }
+    }
+
+    public void SetRobot(RobotScript _robot)
+    {
+        robot = _robot;
+    }
     private void TakeDamage(float damage)
     {
-        if (mr != null)
+        if (health > 0)
         {
-            if (pieceType.Equals(PieceType.FRAME) || pieceType.Equals(PieceType.TIRE) || pieceType.Equals(PieceType.MTIRE))
+            if (mr != null)
             {
-                mr.materials[0].color = Color.white;
+                if (IsFirstMaterial())
+                {
+                    mr.materials[0].color = Color.white;
+                }
+                else
+                {
+                    mr.materials[1].color = Color.white;
+                }
+                health -= damage;
+                if (health <= 0)
+                {
+                    health = 0;
+                    
+                    DestroyPiece();
+                    //TODO Destroy piece, if core, game over for this car.
+                }
+                ShowHealthbarCanvas();
+                healthbar.UpdateHealth(health / maxHealth);
+                Invoke("RestoreColor", 0.2f);
             }
-            else
-            {
-                mr.materials[1].color = Color.white;
-            }
-            health -= damage;
-            if (health <= 0)
-            {
-                health = 0;
-                DestroyPiece();
-                //TODO Destroy piece, if core, game over for this car.
-            }
-            ShowHealthbarCanvas();
-            healthbar.UpdateHealth(health/maxHealth);
-            Invoke("RestoreColor", 0.2f);
         }
     }
 
@@ -99,7 +188,7 @@ public class PieceScript : MonoBehaviour
     {
         if (mr != null)
         {
-            if (pieceType.Equals(PieceType.FRAME) || pieceType.Equals(PieceType.TIRE) || pieceType.Equals(PieceType.MTIRE))
+            if (IsFirstMaterial())
             {
                 mr.materials[0].color = originalColor;
             }
@@ -109,6 +198,12 @@ public class PieceScript : MonoBehaviour
             }
         }
     }
+
+    private bool IsFirstMaterial()
+    {
+        return pieceType.Equals(PieceType.FRAME) || pieceType.Equals(PieceType.TIRE) || pieceType.Equals(PieceType.MTIRE);
+    }
+
     private void ShowHealthbarCanvas()
     {
         healthbarCanvas.gameObject.SetActive(true);
@@ -122,8 +217,7 @@ public class PieceScript : MonoBehaviour
     }
     private void Start()
     {
-        ///pieceInitialized = false;
-        InitializePiece(true);
+        InitializePiece();
     }
 
     private void Reset()
@@ -133,7 +227,6 @@ public class PieceScript : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
-        ///pieceInitialized = false;
-        InitializePiece(true);
+        InitializePiece();
     }
 }

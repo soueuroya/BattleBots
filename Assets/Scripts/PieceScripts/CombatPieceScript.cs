@@ -5,38 +5,30 @@ using static StaticHelper;
 public class CombatPieceScript : FramePieceScript
 {
     [SerializeField] protected OutDirection direction;
-    [SerializeField] protected ParticleSystem partSyst;
+    [SerializeField] public ParticleSystem partSyst;
     [SerializeField] protected float charge;
     [SerializeField] protected float maxCharge;
-
-    ///[SerializeField] private bool combatPieceInitialized;
-    ///[SerializeField] private bool COMBATPIECELOCKUPDATE;
-
-    protected void InitializeCombatPiece(bool forceUpdate = false)
+    protected void InitializeCombatPiece()
     {
-        ///if ((!combatPieceInitialized || forceUpdate) && !COMBATPIECELOCKUPDATE)
+        base.InitializePiece();
+        //TODO SET PARTICLES
+        partSyst = GetComponentInChildren<ParticleSystem>();
+        if (partSyst == null)
         {
-            ///combatPieceInitialized = true;
-            base.InitializePiece(forceUpdate);
-            //TODO SET PARTICLES
-            partSyst = GetComponent<ParticleSystem>();
-            if (partSyst == null)
-            {
-                //partSyst = Resources.Load<ParticleSystem>("ParticleComponentHolders/AcidPiece");
-                //partSyst = gameObject.AddComponent(typeof (ParticleSystem), Resources.Load<ParticleSystem>("ParticleComponentHolders/AcidPiece"));
-            }
+            //partSyst = Resources.Load<ParticleSystem>("ParticleComponentHolders/AcidPiece");
+            //partSyst = gameObject.AddComponent(typeof (ParticleSystem), Resources.Load<ParticleSystem>("ParticleComponentHolders/AcidPiece"));
         }
     }
 
-    public void Activate()
+    public virtual void  Activate()
     {
         if (partSyst != null)
         {
-            partSyst.Play();
+            partSyst.Play(); // TODO, receive % of force, so when attacking we can increase to the maximum, and as the fuel goes down, the attack goes down. Also when the piece is destroyed
         }
     }
 
-    public void Deactivate()
+    public virtual void Deactivate()
     {
         if (partSyst != null)
         {
@@ -46,8 +38,7 @@ public class CombatPieceScript : FramePieceScript
 
     private void Start()
     {
-        ///combatPieceInitialized = false;
-        InitializeCombatPiece(true);
+        InitializeCombatPiece();
     }
 
     private void Reset()
@@ -57,7 +48,6 @@ public class CombatPieceScript : FramePieceScript
 
     private void OnDrawGizmosSelected()
     {
-        ///combatPieceInitialized = false
-        InitializeCombatPiece(true);
+        InitializeCombatPiece();
     }
 }

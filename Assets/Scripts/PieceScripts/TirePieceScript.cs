@@ -12,10 +12,6 @@ public class TirePieceScript : PieceScript
     public TireOrientation TireOrientation { get { return tireOrientation; } private set { tireOrientation = value; } }
     [SerializeField] protected TireOrientation tireOrientation;
 
-    ///[SerializeField] private bool tireInitialized;
-    ///[SerializeField] private bool TIRELOCKUPDATE;
-
-    //[SerializeField] protected List<HingeJoint> joints;
     public HingeJoint HJoint { get { return hJoint; } private set { hJoint = value; } }
     [SerializeField] protected HingeJoint hJoint;
 
@@ -28,28 +24,43 @@ public class TirePieceScript : PieceScript
 
     private Vector3 initialRot;
 
-    protected void InitializeTire(bool forceUpdate = false)
+    protected void InitializeTire()
     {
-        ///if ((!tireInitialized || forceUpdate) && !TIRELOCKUPDATE)
+        base.InitializePiece();
+        pieceType = typeToUse;
+        health = maxHealth = healthToUse;
+        rb.mass = massToUse;
+
+        //TODO SET JOINTS
+        hJoint = GetComponent<HingeJoint>();
+        axisJoint = hJoint.connectedBody.GetComponent<HingeJoint>();
+        JointLimits otherJointLimits = new JointLimits();
+        otherJointLimits.min = -TIRE_PIVOT_ANGLE;
+        otherJointLimits.max = TIRE_PIVOT_ANGLE;
+        axisJoint.limits = otherJointLimits;
+        axisJoint.useLimits = true;
+        //axisJoint.transform.parent.GetComponent<FramePieceScript>()
+        FramePieceScript frameConnectedTo = axisJoint.transform.parent.GetComponent<FramePieceScript>();
+        if (frameConnectedTo != null)
         {
-            ///tireInitialized = true;
-            base.InitializePiece(forceUpdate);
-            pieceType = typeToUse;
-            health = maxHealth = healthToUse;
-            rb.mass = massToUse;
-
-            //TODO SET JOINTS
-            hJoint = GetComponent<HingeJoint>();
-            axisJoint = hJoint.connectedBody.GetComponent<HingeJoint>();
-            JointLimits otherJointLimits = new JointLimits();
-            otherJointLimits.min = -TIRE_PIVOT_ANGLE;
-            otherJointLimits.max = TIRE_PIVOT_ANGLE;
-            axisJoint.limits = otherJointLimits;
-            axisJoint.useLimits = true;
-            //joints = new List<HingeJoint>(GetComponents<HingeJoint>());
-
-            initialRot = hJoint.connectedBody.transform.localRotation.eulerAngles;
+            if (frameConnectedTo.rightAxis == axisJoint)
+            {
+                frameConnectedTo.rightTire = this;
+            }
+            else if (frameConnectedTo.leftAxis == axisJoint)
+            {
+                frameConnectedTo.leftTire = this; // change to list and then just add?
+            }
+            else
+            {
+                Debug.LogError("FOUND NO AXIS");
+            }
         }
+        else
+        {
+            Debug.LogError("FOUND NO FRAME");
+        }
+        initialRot = hJoint.connectedBody.transform.localRotation.eulerAngles;
     }
 
     public void RotateForward(float speed, bool pivot = false) // TODO - CREATE CO ROUTINE TO LERP ROTATION INSTEAD OF SNAPPING
@@ -71,7 +82,7 @@ public class TirePieceScript : PieceScript
             if (pivot)
             {
                 JointMotor otherMotor = axisJoint.motor;
-                otherMotor.force = StaticHelper.AXIS_FORCE;
+                otherMotor.force = StaticHelper.TIRE_AXIS_FORCE;
                 otherMotor.freeSpin = false;
                 if (tireHSide == TireHSide.RIGHT)
                 {
@@ -115,6 +126,7 @@ public class TirePieceScript : PieceScript
         {
             hJoint.breakForce = 0;
             Destroy(hJoint);
+            robot.LosePiece(this);
         }
         /*if (joints != null)
         {
@@ -130,8 +142,7 @@ public class TirePieceScript : PieceScript
 
     private void Start()
     {
-        ///tireInitialized = false;
-        InitializeTire(true);
+        InitializeTire();
     }
 
     private void Reset()
@@ -141,7 +152,6 @@ public class TirePieceScript : PieceScript
 
     private void OnDrawGizmosSelected()
     {
-        ///tireInitialized = false;
-        InitializeTire(true);
+        InitializeTire();
     }
 }

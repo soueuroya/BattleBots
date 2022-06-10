@@ -3,7 +3,16 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Acid
+  - Fire
+  - Bomb
+  - Spike
+  - Oil
+  - Saw
+  - Shock
+  - AcidPool
+  - LavaPool
   layers:
   - Default
   - TransparentFX
@@ -14,7 +23,7 @@ TagManager:
   - Robot2
   - Robot3
   - Robot4
-  - 
+  - Treadmill
   - 
   - 
   - 

@@ -1038,7 +1038,7 @@ PrefabInstance:
     - target: {fileID: 3909802947674451107, guid: c2264998332c09f4bb21d86642c22157, type: 3}
       propertyPath: m_Materials.Array.data[1]
       value: 
-      objectReference: {fileID: 2100000, guid: 1c104d1924c70c14c81423e455f3eaee, type: 2}
+      objectReference: {fileID: 2100000, guid: c26a920e47c030843a8abc4492f3e950, type: 2}
     - target: {fileID: 3909802947674451116, guid: c2264998332c09f4bb21d86642c22157, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -1135,6 +1135,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1289e15cdc6f07458dbb8b893cd5d31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!59 &8093089396697359695 stripped
+HingeJoint:
+  m_CorrespondingSourceObject: {fileID: 4242802356812396642, guid: c2264998332c09f4bb21d86642c22157, type: 3}
+  m_PrefabInstance: {fileID: 5382113467050122541}
+  m_PrefabAsset: {fileID: 0}
+--- !u!59 &5590163821157250136 stripped
+HingeJoint:
+  m_CorrespondingSourceObject: {fileID: 514918674269677941, guid: c2264998332c09f4bb21d86642c22157, type: 3}
+  m_PrefabInstance: {fileID: 5382113467050122541}
+  m_PrefabAsset: {fileID: 0}
 --- !u!108 &5650267548933145821
 Light:
   m_ObjectHideFlags: 0
@@ -1197,7 +1207,7 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
---- !u!114 &4499540079692357467
+--- !u!114 &5802132107470919360
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1212,16 +1222,16 @@ MonoBehaviour:
   pieceType: 9
   rb: {fileID: 9003666240911667596}
   health: 80
+  maxHealth: 80
+  alive: 1
   healthbarCanvas: {fileID: 1970394243281024236}
   healthbar: {fileID: 6209939894518495923}
   tr: {fileID: 9003666240911667587}
   mr: {fileID: 9003666240911667598}
-  maxHealth: 80
-  pieceInitialized: 1
-  PIECELOCKUPDATE: 0
   originalColor: {r: 0, g: 1, b: 0.06795335, a: 1}
-  frameInitialized: 0
-  FRAMELOCKUPDATE: 0
+  robot: {fileID: 0}
+  leftTire: {fileID: 0}
+  rightTire: {fileID: 0}
+  leftAxis: {fileID: 5590163821157250136}
+  rightAxis: {fileID: 8093089396697359695}
   joints: []
-  coreInitialized: 1
-  CORELOCKUPDATE: 0
