@@ -152,7 +152,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3899440572048735243, guid: e12f17de2d793fd4bb580d0901edad36, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -71.3
       objectReference: {fileID: 0}
     - target: {fileID: 3899440572048735243, guid: e12f17de2d793fd4bb580d0901edad36, type: 3}
       propertyPath: m_LocalPosition.y
@@ -294,3 +294,55 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1 &1844861226
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1844861227}
+  - component: {fileID: 1844861228}
+  m_Layer: 0
+  m_Name: WolrdGenerator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1844861227
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1844861226}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 14.375478, y: 0.5125756, z: -20.71266}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1844861228
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1844861226}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c40b21e4ea8d7e3499f06d5b5ed53fb0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  water: {fileID: 1451550175725446324, guid: 9c8b655d045d88648819b9e5e2af7372, type: 3}
+  sand: {fileID: 5525680164971724365, guid: 4087b07d7d8f7b84d9cd43593b0db187, type: 3}
+  grass: {fileID: 1654772014881386673, guid: 1be494681794c8447bd44abe1d4f6089, type: 3}
+  rock: {fileID: 2140003821940839808, guid: 8716d6f05a0cfda4693abd2256ef1a6c, type: 3}
+  waterLimit: 0.25
+  sandLimit: 0.4
+  grassLimit: 0.7
+  gridSize: 50
+  scale: 6
