@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5210428771683112955}
   - component: {fileID: 5210428771683112954}
   - component: {fileID: 5210428771683112957}
-  - component: {fileID: -4950463875469254613}
+  - component: {fileID: 9156421753640566204}
   m_Layer: 0
   m_Name: SocketCell
   m_TagString: Untagged
@@ -97,7 +97,7 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &-4950463875469254613
+--- !u!114 &9156421753640566204
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -106,7 +106,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 5210428771683112959}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0457dc6b647eb354a8b0b4fab288e03a, type: 3}
+  m_Script: {fileID: 11500000, guid: 69e840b58d32f724b89e5f769c1d2237, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tr: {fileID: 5210428771683112956}
   type: 11
+  hovering: 0
+  originalScale: {x: 0.08, y: 0.3, z: 0.08}
+  isSocketed: 0
+  socketedCell: {fileID: 0}
+  XY: {x: 0, y: 0}

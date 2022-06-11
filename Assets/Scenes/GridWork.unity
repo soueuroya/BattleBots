@@ -190,6 +190,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3899440572048735244, guid: e12f17de2d793fd4bb580d0901edad36, type: 3}
+      propertyPath: orthographic
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3899440572048735244, guid: e12f17de2d793fd4bb580d0901edad36, type: 3}
+      propertyPath: orthographic size
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 3899440572048735246, guid: e12f17de2d793fd4bb580d0901edad36, type: 3}
       propertyPath: m_Name
       value: Main Camera
@@ -310,7 +318,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1844861227
 Transform:
   m_ObjectHideFlags: 0
