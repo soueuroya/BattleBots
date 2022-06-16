@@ -4759,10 +4759,6 @@ PrefabInstance:
       value: AcidRiver
       objectReference: {fileID: 0}
     - target: {fileID: 8107277111984673611, guid: f4e30235d6a654a448e834b1dff0d624, type: 3}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8107277111984673611, guid: f4e30235d6a654a448e834b1dff0d624, type: 3}
       propertyPath: m_LocalPosition.x
       value: 5
       objectReference: {fileID: 0}

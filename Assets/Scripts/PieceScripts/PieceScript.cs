@@ -122,6 +122,19 @@ public class PieceScript : MonoBehaviour
                 }
                 TakeDamage(1);
                 break;
+            case "Spike":
+                TakeDamage(999);
+                break;
+        }
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        switch (other.gameObject.tag)
+        {
+            case "Saw":
+                TakeDamage(10);
+                break;
         }
     }
 
@@ -152,9 +165,6 @@ public class PieceScript : MonoBehaviour
                 TakeDamage(1);
                 break;
             case "Oil":
-                TakeDamage(1);
-                break;
-            case "Saw":
                 TakeDamage(1);
                 break;
             case "Bomb":

@@ -8722,7 +8722,7 @@ ParticleSystem:
     radiusScale: 0.0001
     collidesWith:
       serializedVersion: 2
-      m_Bits: 457
+      m_Bits: 969
     maxCollisionShapes: 256
     quality: 0
     voxelSize: 0.5
@@ -9720,10 +9720,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: BombPiece Variant
       objectReference: {fileID: 0}
-    - target: {fileID: 3969349905372855613, guid: 2f4da06719305fb4c8aa72e45d8b15b1, type: 3}
-      propertyPath: m_TagString
-      value: Untagged
-      objectReference: {fileID: 0}
     - target: {fileID: 3969349905372855614, guid: 2f4da06719305fb4c8aa72e45d8b15b1, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -9857,6 +9853,7 @@ MonoBehaviour:
   mr: {fileID: 3114094972050252059}
   originalColor: {r: 0.9772253, g: 1, b: 0, a: 1}
   robot: {fileID: 0}
+  collidedWith: []
   leftTire: {fileID: 0}
   rightTire: {fileID: 0}
   leftAxis: {fileID: 7527269835034878651}

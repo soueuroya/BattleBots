@@ -7,6 +7,7 @@ public class SawPieceScript : CombatPieceScript
     private const float healthToUse = SAW_PIECE_HEALTH;
     private const float massToUse = SAW_PIECE_WEIGHT;
     [SerializeField] private HingeJoint joint;
+    [SerializeField] private MeshCollider collider;
 
     protected void InitializeShock()
     {
@@ -26,6 +27,10 @@ public class SawPieceScript : CombatPieceScript
             motor.freeSpin = false;
             joint.motor = motor;
             joint.useMotor = true;
+            if (collider != null)
+            {
+                collider.enabled = true;
+            }
         }
     }
 
@@ -39,6 +44,10 @@ public class SawPieceScript : CombatPieceScript
             motor.freeSpin = false;
             joint.motor = motor;
             //joint.useMotor = false;
+            if (collider != null)
+            {
+                collider.enabled = false;
+            }
         }
     }
 

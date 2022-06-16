@@ -33,7 +33,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 357b72ad0eef11443b1c64e95721d715, type: 2}
     - target: {fileID: 3969349905372855557, guid: 2f4da06719305fb4c8aa72e45d8b15b1, type: 3}
       propertyPath: m_SelectedEditorRenderState
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3969349905372855558, guid: 2f4da06719305fb4c8aa72e45d8b15b1, type: 3}
       propertyPath: m_Mesh
@@ -35873,6 +35873,7 @@ MonoBehaviour:
   mr: {fileID: 7197306081117928122}
   originalColor: {r: 0.4245283, g: 0.4245283, b: 0.4245283, a: 1}
   robot: {fileID: 0}
+  collidedWith: []
   leftTire: {fileID: 0}
   rightTire: {fileID: 0}
   leftAxis: {fileID: 0}
@@ -35883,6 +35884,7 @@ MonoBehaviour:
   charge: 0
   maxCharge: 0
   joint: {fileID: 4117727954997997340}
+  collider: {fileID: 5813632512549259008}
 --- !u!1001 &6723291577764164485
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -35893,6 +35895,10 @@ PrefabInstance:
     - target: {fileID: 1000861135369090181, guid: aff3a687a32e8344a98033665466995f, type: 3}
       propertyPath: m_Mesh
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000861135369090181, guid: aff3a687a32e8344a98033665466995f, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1229106470688269462, guid: aff3a687a32e8344a98033665466995f, type: 3}
       propertyPath: m_Mesh
@@ -36580,6 +36586,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aff3a687a32e8344a98033665466995f, type: 3}
+--- !u!64 &5813632512549259008 stripped
+MeshCollider:
+  m_CorrespondingSourceObject: {fileID: 1000861135369090181, guid: aff3a687a32e8344a98033665466995f, type: 3}
+  m_PrefabInstance: {fileID: 6723291577764164485}
+  m_PrefabAsset: {fileID: 0}
 --- !u!59 &4117727954997997340 stripped
 HingeJoint:
   m_CorrespondingSourceObject: {fileID: 7235303090664758425, guid: aff3a687a32e8344a98033665466995f, type: 3}

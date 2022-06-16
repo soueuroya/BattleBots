@@ -13,16 +13,19 @@ public class GridScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        for (int i = 0; i < GRIDSIZE; i++)
+        if (cellPrefab != null)
         {
-            for (int j = 0; j < GRIDSIZE; j++)
+            for (int i = 0; i < GRIDSIZE; i++)
             {
-                grid[i, j] = Instantiate(cellPrefab, transform);
-                grid[i, j].transform.position = startingPos.position + transform.right * i * 0.065f + transform.forward * j * -0.065f;
+                for (int j = 0; j < GRIDSIZE; j++)
+                {
+                    grid[i, j] = Instantiate(cellPrefab, transform);
+                    grid[i, j].transform.position = startingPos.position + transform.right * i * 0.065f + transform.forward * j * -0.065f;
 
-                grid[i, j].transform.Translate(transform.up * 0.001f);
-                //grid[i, j].transform.Translate(transform.forward * j * 0.07f);
+                    grid[i, j].transform.Translate(transform.up * 0.001f);
+                    //grid[i, j].transform.Translate(transform.forward * j * 0.07f);
 
+                }
             }
         }
     }

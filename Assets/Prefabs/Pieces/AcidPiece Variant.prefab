@@ -8722,7 +8722,7 @@ ParticleSystem:
     radiusScale: 0.0001
     collidesWith:
       serializedVersion: 2
-      m_Bits: 457
+      m_Bits: 969
     maxCollisionShapes: 256
     quality: 0
     voxelSize: 0.5
@@ -9720,10 +9720,6 @@ PrefabInstance:
     - target: {fileID: 3969349905372855613, guid: 2f4da06719305fb4c8aa72e45d8b15b1, type: 3}
       propertyPath: m_Name
       value: AcidPiece Variant
-      objectReference: {fileID: 0}
-    - target: {fileID: 3969349905372855613, guid: 2f4da06719305fb4c8aa72e45d8b15b1, type: 3}
-      propertyPath: m_TagString
-      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 3969349905372855614, guid: 2f4da06719305fb4c8aa72e45d8b15b1, type: 3}
       propertyPath: m_RootOrder
