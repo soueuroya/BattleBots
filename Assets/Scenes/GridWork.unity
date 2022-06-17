@@ -143,9 +143,21 @@ PrefabInstance:
       value: 3.87
       objectReference: {fileID: 0}
     - target: {fileID: 3899440571747257196, guid: e12f17de2d793fd4bb580d0901edad36, type: 3}
+      propertyPath: cellPrefab
+      value: 
+      objectReference: {fileID: 9156421753640566204, guid: 558044d977ea603439f84195780e64f2, type: 3}
+    - target: {fileID: 3899440571747257196, guid: e12f17de2d793fd4bb580d0901edad36, type: 3}
+      propertyPath: currentCell
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3899440571747257196, guid: e12f17de2d793fd4bb580d0901edad36, type: 3}
       propertyPath: startingPos
       value: 
       objectReference: {fileID: 1224418352}
+    - target: {fileID: 3899440571747257197, guid: e12f17de2d793fd4bb580d0901edad36, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.34603
+      objectReference: {fileID: 0}
     - target: {fileID: 3899440572048735243, guid: e12f17de2d793fd4bb580d0901edad36, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -302,6 +314,33 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1 &1829786166 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 46255906195282782, guid: e12f17de2d793fd4bb580d0901edad36, type: 3}
+  m_PrefabInstance: {fileID: 1224418351}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1829786167 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1544357623234148511, guid: e12f17de2d793fd4bb580d0901edad36, type: 3}
+  m_PrefabInstance: {fileID: 1224418351}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1829786168
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1829786166}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0ff8579066f67f4f95e5a66d05d7f25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tr: {fileID: 1829786167}
+  type: 6
+  hovering: 0
+  originalScale: {x: 0.10535694, y: 0.38241857, z: 0.08406181}
+  isSelected: 0
 --- !u!1 &1844861226
 GameObject:
   m_ObjectHideFlags: 0

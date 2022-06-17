@@ -6,12 +6,26 @@ using static StaticHelper;
 public class GridScript : MonoBehaviour
 {
     public CellScript cellPrefab;
-    public CellScript currentCell;
+    public CellSelectScript currentCell;
     public CellScript[,] grid = new CellScript[GRIDSIZE, GRIDSIZE]; // 9x9 = 81
     public Transform startingPos;
+    public static GridScript Instance;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
+        DontDestroyOnLoad(this.gameObject);
+    }
+
+        // Start is called before the first frame update
+        void Start()
     {
         if (cellPrefab != null)
         {

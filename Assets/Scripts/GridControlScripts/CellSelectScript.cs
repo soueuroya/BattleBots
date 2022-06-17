@@ -2,12 +2,41 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CellDragScript : CellScript
+public class CellSelectScript : CellScript
 {
-    public float offsetX;
-    public float offsetY;
-    public Vector3 origin;
 
+    private void OnMouseDown()
+    {
+        if (!isSelected)
+        {
+            SelectCell();
+        }
+        else
+        {
+            UnselectCell();
+        }
+    }
+
+    public void SelectCell()
+    {
+        isSelected = true;
+        tr.localScale *= 1.4f;
+        if (GridScript.Instance.currentCell != null)
+        {
+            GridScript.Instance.currentCell.UnselectCell();
+        }
+        GridScript.Instance.currentCell = this;
+    }
+
+    public void UnselectCell()
+    {
+        isSelected = false;
+        tr.localScale = originalScale;
+        GridScript.Instance.currentCell = null;
+    }
+
+
+    /*
     private void OnMouseDown()
     {
         origin = transform.localPosition;
@@ -27,4 +56,5 @@ public class CellDragScript : CellScript
     {
         tr.localPosition = origin;
     }
+    */
 }

@@ -7,6 +7,7 @@ public class CellScript : MonoBehaviour
     public PieceType type;
     public bool hovering = false;
     public Vector3 originalScale;
+    public bool isSelected;
 
     void OnValidate()
     {
@@ -25,7 +26,7 @@ public class CellScript : MonoBehaviour
 
     private void OnMouseExit()
     {
-        if (hovering)
+        if (hovering && !isSelected)
         {
             hovering = false;
             tr.localScale = originalScale;
