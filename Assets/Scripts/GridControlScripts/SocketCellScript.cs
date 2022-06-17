@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 using static StaticHelper;
 
 public class SocketCellScript : CellScript
@@ -8,9 +9,13 @@ public class SocketCellScript : CellScript
     public Vector2 XY;
     public MeshRenderer meshRenderer;
     public Material originalMaterial;
+    public Image image;
 
     public void Start()
     {
+        Color newColor = image.color;
+        newColor.a = 0.1f;
+
         meshRenderer = GetComponent<MeshRenderer>();
         originalMaterial = meshRenderer.material;
     }
