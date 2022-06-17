@@ -20,7 +20,7 @@ public class CellSelectScript : CellScript
     public void SelectCell()
     {
         isSelected = true;
-        tr.localScale *= 1.4f;
+        tr.localScale = originalScale * 1.4f;
         if (GridScript.Instance.currentCell != null)
         {
             GridScript.Instance.currentCell.UnselectCell();
@@ -31,10 +31,10 @@ public class CellSelectScript : CellScript
     public void UnselectCell()
     {
         isSelected = false;
+        hovering = false;
         tr.localScale = originalScale;
         GridScript.Instance.currentCell = null;
     }
-
 
     /*
     private void OnMouseDown()

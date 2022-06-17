@@ -20,16 +20,16 @@ public class CellScript : MonoBehaviour
         if (!hovering)
         {
             hovering = true;
-            tr.localScale *= 1.2f;
+            tr.localScale = originalScale * 1.2f;
         }
     }
 
     private void OnMouseExit()
     {
-        if (hovering && !isSelected)
+        if (!isSelected)
         {
-            hovering = false;
             tr.localScale = originalScale;
+            hovering = false;
         }
     }
 }
