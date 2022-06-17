@@ -9,7 +9,6 @@ public class SocketCellScript : CellScript
     public Vector2 XY;
     public MeshRenderer meshRenderer;
     public Material originalMaterial;
-    public Image image;
 
     public void Start()
     {
