@@ -13,9 +13,6 @@ public class SocketCellScript : CellScript
 
     public void Start()
     {
-        Color newColor = image.color;
-        newColor.a = 0.1f;
-
         meshRenderer = GetComponent<MeshRenderer>();
         originalMaterial = meshRenderer.material;
     }
