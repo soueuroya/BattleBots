@@ -10,13 +10,13 @@ public class CameraFollow : MonoBehaviour
     void Start()
     {
         tr = transform;
-        //offset = tr.position - target.position;
+        offset = tr.position - target.position;
     }
     void Update()
     {
-        //if (RobotControlScript.Instance.robots != null && RobotControlScript.Instance.robots[RobotControlScript.Instance.currentRobot].transform.GetChild(0) != null)
+        if (RobotControlScript.Instance.robots != null && RobotControlScript.Instance.robots[RobotControlScript.Instance.currentRobot].transform.GetChild(0) != null)
         {
-            //tr.position = offset + RobotControlScript.Instance.robots[RobotControlScript.Instance.currentRobot].transform.GetChild(0).transform.position;
+            tr.position = offset + RobotControlScript.Instance.robots[RobotControlScript.Instance.currentRobot].transform.GetChild(0).transform.position;
         }
     }
 }
