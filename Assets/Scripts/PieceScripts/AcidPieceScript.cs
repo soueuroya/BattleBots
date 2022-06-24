@@ -65,9 +65,4 @@ public class AcidPieceScript : CombatPieceScript
     {
         InitializeAcid();
     }
-
-    private void OnDrawGizmosSelected()
-    {
-        InitializeAcid();
-    }
 }

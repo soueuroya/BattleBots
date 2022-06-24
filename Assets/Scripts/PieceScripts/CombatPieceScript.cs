@@ -45,9 +45,4 @@ public class CombatPieceScript : FramePieceScript
     {
         InitializeCombatPiece();
     }
-
-    private void OnDrawGizmosSelected()
-    {
-        InitializeCombatPiece();
-    }
 }

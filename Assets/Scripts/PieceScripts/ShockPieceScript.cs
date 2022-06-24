@@ -24,9 +24,4 @@ public class ShockPieceScript : CombatPieceScript
     {
         InitializeShock();
     }
-
-    private void OnDrawGizmosSelected()
-    {
-        InitializeShock();
-    }
 }

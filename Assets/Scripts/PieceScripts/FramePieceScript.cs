@@ -156,9 +156,4 @@ public class FramePieceScript : PieceScript
     {
         InitializeFrame();
     }
-
-    private void OnDrawGizmosSelected()
-    {
-        InitializeFrame();
-    }
 }

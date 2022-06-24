@@ -23,9 +23,4 @@ public class FirePieceScript : CombatPieceScript
     {
         InitializeFire();
     }
-
-    private void OnDrawGizmosSelected()
-    {
-        InitializeFire();
-    }
 }

@@ -73537,7 +73537,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 725195493987258327, guid: 171530159f79afc45b9efbffa24391a5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -1.75
       objectReference: {fileID: 0}
     - target: {fileID: 725195493987258327, guid: 171530159f79afc45b9efbffa24391a5, type: 3}
       propertyPath: m_LocalPosition.y
@@ -73545,27 +73545,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 725195493987258327, guid: 171530159f79afc45b9efbffa24391a5, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 725195493987258327, guid: 171530159f79afc45b9efbffa24391a5, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 725195493987258327, guid: 171530159f79afc45b9efbffa24391a5, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 725195493987258327, guid: 171530159f79afc45b9efbffa24391a5, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: 725195493987258327, guid: 171530159f79afc45b9efbffa24391a5, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 725195493987258327, guid: 171530159f79afc45b9efbffa24391a5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 725195493987258327, guid: 171530159f79afc45b9efbffa24391a5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
@@ -73573,19 +73573,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 725195493987258327, guid: 171530159f79afc45b9efbffa24391a5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 8625244269344663469, guid: 171530159f79afc45b9efbffa24391a5, type: 3}
       propertyPath: m_ConnectedAnchor.x
-      value: 0
+      value: -1.9444475
       objectReference: {fileID: 0}
     - target: {fileID: 8625244269344663469, guid: 171530159f79afc45b9efbffa24391a5, type: 3}
       propertyPath: m_ConnectedAnchor.y
-      value: 0.19444753
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8625244269344663469, guid: 171530159f79afc45b9efbffa24391a5, type: 3}
       propertyPath: m_ConnectedAnchor.z
-      value: 0
+      value: -2
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 725195493987258325, guid: 171530159f79afc45b9efbffa24391a5, type: 3}
@@ -73599,6 +73599,11 @@ GameObject:
 --- !u!4 &2155936339642362039 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 725195493987258327, guid: 171530159f79afc45b9efbffa24391a5, type: 3}
+  m_PrefabInstance: {fileID: 1727981307321788256}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &2155936339642362025 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 725195493987258313, guid: 171530159f79afc45b9efbffa24391a5, type: 3}
   m_PrefabInstance: {fileID: 1727981307321788256}
   m_PrefabAsset: {fileID: 0}
 --- !u!54 &2155936339642362036 stripped
@@ -73643,16 +73648,16 @@ MonoBehaviour:
   rb: {fileID: 2155936339642362036}
   health: 80
   maxHealth: 80
-  alive: 0
+  alive: 1
   healthbarCanvas: {fileID: 1382816651976623031}
   healthbar: {fileID: 303281338640538818}
   tr: {fileID: 2155936339642362039}
-  mr: {fileID: 0}
-  originalColor: {r: 0, g: 0, b: 0, a: 0}
+  mr: {fileID: 2155936339642362025}
+  originalColor: {r: 0, g: 0, b: 0, a: 1}
   robot: {fileID: 0}
   collidedWith: []
   tireHSide: 0
-  tireVSide: 0
+  tireVSide: 1
   tireOrientation: 0
   hJoint: {fileID: 6937795427394453709}
   axisJoint: {fileID: 0}

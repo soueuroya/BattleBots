@@ -26,9 +26,4 @@ public class MTirePieceScript : TirePieceScript
     {
         InitializeMTire();
     }
-
-    private void OnDrawGizmosSelected()
-    {
-        InitializeMTire();
-    }
 }

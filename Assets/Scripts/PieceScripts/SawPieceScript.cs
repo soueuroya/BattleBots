@@ -60,9 +60,4 @@ public class SawPieceScript : CombatPieceScript
     {
         InitializeShock();
     }
-
-    private void OnDrawGizmosSelected()
-    {
-        InitializeShock();
-    }
 }

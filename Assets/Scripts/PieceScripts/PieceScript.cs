@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using static StaticHelper;
 using static UnityEngine.ParticleSystem;
@@ -22,6 +23,7 @@ public class PieceScript : MonoBehaviour
     [SerializeField] private List<GameObject> collidedWith;
     private bool cleanCollisions;
 
+    [SerializeField] private bool UPDATE;
     protected void InitializePiece()
     {
         alive = true;
@@ -42,32 +44,35 @@ public class PieceScript : MonoBehaviour
         }
         mc.convex = true;
 
-        //SET MESHRENDERER
-        mr = GetComponent<MeshRenderer>();
-        if (mr != null)
+        if (EditorApplication.isPlaying)
         {
-            if (IsFirstMaterial())
+            //SET MESHRENDERER
+            mr = GetComponent<MeshRenderer>();
+            if (mr != null)
             {
-                try
+                if (IsFirstMaterial())
                 {
-                    originalColor = mr.materials[0].color;
-                }
-                catch (System.Exception)
-                {
+                    try
+                    {
+                        originalColor = mr.materials[0].color;
+                    }
+                    catch (System.Exception)
+                    {
 
-                    throw;
+                        throw;
+                    }
                 }
-            }
-            else
-            {
-                try
+                else
                 {
-                    originalColor = mr.materials[1].color;
-                }
-                catch (System.Exception)
-                {
+                    try
+                    {
+                        originalColor = mr.materials[1].color;
+                    }
+                    catch (System.Exception)
+                    {
 
-                    throw;
+                        throw;
+                    }
                 }
             }
         }
@@ -75,6 +80,15 @@ public class PieceScript : MonoBehaviour
         //SET HEALTHBAR
         healthbarCanvas = GetComponentInChildren<Canvas>(true);
         healthbar = healthbarCanvas.GetComponentInChildren<HealthbarScript>(true);
+    }
+
+    private void OnValidate()
+    {
+        if (UPDATE)
+        {
+            InitializePiece();
+            UPDATE = false;
+        }
     }
 
     private void OnMouseDown()
@@ -247,11 +261,6 @@ public class PieceScript : MonoBehaviour
     }
 
     private void Reset()
-    {
-        InitializePiece();
-    }
-
-    private void OnDrawGizmosSelected()
     {
         InitializePiece();
     }

@@ -24,9 +24,4 @@ public class SpikePieceScript : CombatPieceScript
     {
         InitializeSpike();
     }
-
-    private void OnDrawGizmosSelected()
-    {
-        InitializeSpike();
-    }
 }

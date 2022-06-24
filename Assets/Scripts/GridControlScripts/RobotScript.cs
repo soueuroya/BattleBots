@@ -149,11 +149,6 @@ public class RobotScript : MonoBehaviour
         Initialize();
     }
 
-    private void OnDrawGizmosSelected()
-    {
-        Initialize();
-    }
-
     #region POWERS ACTIVATION AND PIECE DESTRUCTION
     public void StartPower(PowerType power)
     {

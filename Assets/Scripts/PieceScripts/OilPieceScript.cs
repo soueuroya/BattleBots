@@ -24,9 +24,4 @@ public class OilPieceScript : CombatPieceScript
     {
         InitializeOil();
     }
-
-    private void OnDrawGizmosSelected()
-    {
-        InitializeOil();
-    }
 }

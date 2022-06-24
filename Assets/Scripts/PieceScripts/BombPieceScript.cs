@@ -24,9 +24,4 @@ public class BombPieceScript : CombatPieceScript
     {
         InitializeBomb();
     }
-
-    private void OnDrawGizmosSelected()
-    {
-        InitializeBomb();
-    }
 }

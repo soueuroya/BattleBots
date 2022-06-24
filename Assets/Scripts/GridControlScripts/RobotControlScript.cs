@@ -34,11 +34,6 @@ public class RobotControlScript : MonoBehaviour
             }
         }
     }
-    private void OnDrawGizmosSelected()
-    {
-        robots.Clear();
-        robots = new List<RobotScript>(FindObjectsOfType<RobotScript>());
-    }
 
     public void Move(MovementDirection dir)
     {

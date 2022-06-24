@@ -23,9 +23,4 @@ public class CorePieceScript : FramePieceScript
     {
         InitializeCore();
     }
-
-    private void OnDrawGizmosSelected()
-    {
-        InitializeCore();
-    }
 }

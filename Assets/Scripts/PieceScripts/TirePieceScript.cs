@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using static StaticHelper;
 
@@ -33,34 +34,45 @@ public class TirePieceScript : PieceScript
 
         //TODO SET JOINTS
         hJoint = GetComponent<HingeJoint>();
-        axisJoint = hJoint.connectedBody.GetComponent<HingeJoint>();
-        JointLimits otherJointLimits = new JointLimits();
-        otherJointLimits.min = -TIRE_PIVOT_ANGLE;
-        otherJointLimits.max = TIRE_PIVOT_ANGLE;
-        axisJoint.limits = otherJointLimits;
-        axisJoint.useLimits = true;
-        //axisJoint.transform.parent.GetComponent<FramePieceScript>()
-        FramePieceScript frameConnectedTo = axisJoint.transform.parent.GetComponent<FramePieceScript>();
-        if (frameConnectedTo != null)
+        if (hJoint.connectedBody != null)
         {
-            if (frameConnectedTo.rightAxis == axisJoint)
+            axisJoint = hJoint.connectedBody.GetComponent<HingeJoint>();
+            JointLimits otherJointLimits = new JointLimits();
+            otherJointLimits.min = -TIRE_PIVOT_ANGLE;
+            otherJointLimits.max = TIRE_PIVOT_ANGLE;
+            axisJoint.limits = otherJointLimits;
+            axisJoint.useLimits = true;
+
+            //axisJoint.transform.parent.GetComponent<FramePieceScript>()
+            FramePieceScript frameConnectedTo = axisJoint.transform.parent.GetComponent<FramePieceScript>();
+            if (frameConnectedTo != null)
             {
-                frameConnectedTo.rightTire = this;
-            }
-            else if (frameConnectedTo.leftAxis == axisJoint)
-            {
-                frameConnectedTo.leftTire = this; // change to list and then just add?
+                if (frameConnectedTo.rightAxis == axisJoint)
+                {
+                    frameConnectedTo.rightTire = this;
+                }
+                else if (frameConnectedTo.leftAxis == axisJoint)
+                {
+                    frameConnectedTo.leftTire = this; // change to list and then just add?
+                }
+                else
+                {
+                    Debug.LogError("FOUND NO AXIS");
+                }
             }
             else
             {
-                Debug.LogError("FOUND NO AXIS");
+                Debug.LogError("FOUND NO FRAME");
             }
+            initialRot = hJoint.connectedBody.transform.localRotation.eulerAngles;
         }
         else
         {
-            Debug.LogError("FOUND NO FRAME");
+            if (EditorApplication.isPlaying)
+            {
+                Debug.LogError("Tire: " + gameObject.name + " has nothing connected to hinge joint"); // TODO : Add ignore on build or only available on development mode
+            }
         }
-        initialRot = hJoint.connectedBody.transform.localRotation.eulerAngles;
     }
 
     public void RotateForward(float speed, bool pivot = false) // TODO - CREATE CO ROUTINE TO LERP ROTATION INSTEAD OF SNAPPING
@@ -146,11 +158,6 @@ public class TirePieceScript : PieceScript
     }
 
     private void Reset()
-    {
-        InitializeTire();
-    }
-
-    private void OnDrawGizmosSelected()
     {
         InitializeTire();
     }
