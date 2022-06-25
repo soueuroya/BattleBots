@@ -110,12 +110,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tr: {fileID: 5210428771683112956}
-  type: 11
+  type: 12
   hovering: 0
   originalScale: {x: 0.08, y: 0.3, z: 0.08}
   isSelected: 0
   isSocketed: 0
-  socketedCell: 0
+  socketedCell: 12
   XY: {x: 0, y: 0}
   meshRenderer: {fileID: 0}
   originalMaterial: {fileID: 0}

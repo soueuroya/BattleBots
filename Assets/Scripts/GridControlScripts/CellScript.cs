@@ -8,6 +8,7 @@ public class CellScript : MonoBehaviour
     public bool hovering = false;
     public Vector3 originalScale;
     public bool isSelected;
+    public bool isLocked;
 
     void OnValidate()
     {

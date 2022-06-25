@@ -10,7 +10,7 @@ public class SocketCellScript : CellScript
     public MeshRenderer meshRenderer;
     public Material originalMaterial;
 
-    public void Start()
+    public void Awake()
     {
         meshRenderer = GetComponent<MeshRenderer>();
         originalMaterial = meshRenderer.material;
@@ -33,7 +33,7 @@ public class SocketCellScript : CellScript
 
     public void SelectCell()
     {
-        if (GridScript.Instance.currentCell != null)
+        if (GridScript.Instance.currentCell != null && !isLocked)
         {
             socketedCell = GridScript.Instance.currentCell.type;
             meshRenderer.material = GridScript.Instance.currentCell.GetComponent<MeshRenderer>().material;
@@ -42,7 +42,10 @@ public class SocketCellScript : CellScript
 
     public void ClearCell()
     {
-        meshRenderer.material = originalMaterial;
-        socketedCell = PieceType.NONE;
+        if (!isLocked)
+        {
+            meshRenderer.material = originalMaterial;
+            socketedCell = PieceType.NONE;
+        }
     }
 }

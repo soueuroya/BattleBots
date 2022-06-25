@@ -1431,6 +1431,7 @@ MonoBehaviour:
   hovering: 0
   originalScale: {x: 0.12, y: 0.2, z: 0.12}
   isSelected: 0
+  isLocked: 0
 --- !u!1 &2414327716641817037
 GameObject:
   m_ObjectHideFlags: 0
@@ -1546,6 +1547,7 @@ MonoBehaviour:
   hovering: 0
   originalScale: {x: 0.12, y: 0.2, z: 0.12}
   isSelected: 0
+  isLocked: 0
 --- !u!1 &3248162469993388976
 GameObject:
   m_ObjectHideFlags: 0
@@ -1795,6 +1797,7 @@ MonoBehaviour:
   hovering: 0
   originalScale: {x: 0.12, y: 0.2, z: 0.12}
   isSelected: 0
+  isLocked: 0
 --- !u!1 &3899440570928497042
 GameObject:
   m_ObjectHideFlags: 0
@@ -3807,6 +3810,12 @@ MonoBehaviour:
   cellPrefab: {fileID: 9156421753640566204, guid: 558044d977ea603439f84195780e64f2, type: 3}
   currentCell: {fileID: 0}
   startingPos: {fileID: 703421323647471740}
+  coreMaterial: {fileID: 2100000, guid: 28de4e1b6f70a194da368a71fdfa1c12, type: 2}
+  acidPrefab: {fileID: 8968101975021125284, guid: 7656dbe7804c72b4988bcd3524020dd3, type: 3}
+  firePrefab: {fileID: 3298913972602771259, guid: 291cd2be4bba5624c8c0ebe804741fd7, type: 3}
+  tirePrefab: {fileID: 725195493987258314, guid: 171530159f79afc45b9efbffa24391a5, type: 3}
+  spawnPosition: {fileID: 0}
+  spawnedPieces: []
 --- !u!1 &3899440571824960990
 GameObject:
   m_ObjectHideFlags: 0
@@ -6072,6 +6081,7 @@ MonoBehaviour:
   hovering: 0
   originalScale: {x: 0.12, y: 0.2, z: 0.12}
   isSelected: 0
+  isLocked: 0
 --- !u!1 &4411794941292854410
 GameObject:
   m_ObjectHideFlags: 0
@@ -6187,6 +6197,7 @@ MonoBehaviour:
   hovering: 0
   originalScale: {x: 0.12, y: 0.2, z: 0.12}
   isSelected: 0
+  isLocked: 0
 --- !u!1 &4496111220910775523
 GameObject:
   m_ObjectHideFlags: 0
@@ -6302,6 +6313,7 @@ MonoBehaviour:
   hovering: 0
   originalScale: {x: 0.12, y: 0.2, z: 0.12}
   isSelected: 0
+  isLocked: 0
 --- !u!1 &5605112933088780745
 GameObject:
   m_ObjectHideFlags: 0
@@ -6417,6 +6429,7 @@ MonoBehaviour:
   hovering: 0
   originalScale: {x: 0.12, y: 0.2, z: 0.12}
   isSelected: 0
+  isLocked: 0
 --- !u!1 &6437174561220818468
 GameObject:
   m_ObjectHideFlags: 0
@@ -6532,6 +6545,7 @@ MonoBehaviour:
   hovering: 0
   originalScale: {x: 0.12, y: 0.2, z: 0.12}
   isSelected: 0
+  isLocked: 0
 --- !u!1 &6671956605691682199
 GameObject:
   m_ObjectHideFlags: 0
@@ -6647,6 +6661,7 @@ MonoBehaviour:
   hovering: 0
   originalScale: {x: 0.12, y: 0.2, z: 0.12}
   isSelected: 0
+  isLocked: 0
 --- !u!1 &8368100202163502512
 GameObject:
   m_ObjectHideFlags: 0
@@ -6762,6 +6777,7 @@ MonoBehaviour:
   hovering: 0
   originalScale: {x: 0.12, y: 0.2, z: 0.12}
   isSelected: 0
+  isLocked: 0
 --- !u!1 &8811248369440313379
 GameObject:
   m_ObjectHideFlags: 0
