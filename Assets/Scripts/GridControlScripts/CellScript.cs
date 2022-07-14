@@ -18,7 +18,7 @@ public class CellScript : MonoBehaviour
 
     private void OnMouseEnter()
     {
-        if (!hovering)
+        if (!hovering && !isLocked)
         {
             hovering = true;
             tr.localScale = originalScale * 1.2f;

@@ -5,8 +5,9 @@ using static StaticHelper;
 public class SocketCellScript : CellScript
 {
     public bool isSocketed = false;
-    public PieceType socketedCell;
-    public Vector2 XY;
+    public PieceType pieceType;
+    public int x, y;
+    public int nextCellsCount = 0;
     public MeshRenderer meshRenderer;
     public Material originalMaterial;
 
@@ -18,14 +19,15 @@ public class SocketCellScript : CellScript
 
     private void OnMouseOver()
     {
-        if (Input.GetMouseButtonDown(1)){
+        if (Input.GetMouseButtonDown(1) && !isLocked)
+        {
             ClearCell();
         }
     }
 
     private void OnMouseDown()
     {
-        if (!isSelected)
+        if (!isSelected && !isLocked)
         {
             SelectCell();
         }
@@ -33,19 +35,21 @@ public class SocketCellScript : CellScript
 
     public void SelectCell()
     {
-        if (GridScript.Instance.currentCell != null && !isLocked)
+        if (GridScript.Instance.currentCell != null)
         {
-            socketedCell = GridScript.Instance.currentCell.type;
+            pieceType = GridScript.Instance.currentCell.type;
             meshRenderer.material = GridScript.Instance.currentCell.GetComponent<MeshRenderer>().material;
+            GridScript.Instance.UnlockNextCells(x, y);
         }
     }
 
     public void ClearCell()
     {
-        if (!isLocked)
+        if (!pieceType.Equals(PieceType.NONE) && nextCellsCount < 2)
         {
             meshRenderer.material = originalMaterial;
-            socketedCell = PieceType.NONE;
+            pieceType = PieceType.NONE;
+            GridScript.Instance.LockNextCells(x, y);
         }
     }
 }
