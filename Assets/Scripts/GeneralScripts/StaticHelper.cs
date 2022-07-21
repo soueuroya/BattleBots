@@ -1,6 +1,6 @@
 public class StaticHelper
 {
-    public enum PieceType { ACID, FIRE, SHOCK, OIL, BOMB, SPIKE, TIRE, MTIRE, FRAME, CORE, SAW, HAMMER, NONE }; // Type of piece
+    public enum PieceType { ACID, FIRE, SHOCK, OIL, BOMB, SPIKE, TIRE, MTIRE, FRAME, CORE, SAW, MACE, NONE }; // Type of piece
     public enum OutDirection { LEFT, RIGHT, UP, DOWN, NONE }; // Output direction of power piece
     public enum TireHSide { LEFT, RIGHT, CENTER }; // If this tire is on the left, right or center of robot. Used for turning
     public enum TireVSide { UP, DOWN, CENTER }; // If this tire is on the left, right or center of robot. Used for turning
