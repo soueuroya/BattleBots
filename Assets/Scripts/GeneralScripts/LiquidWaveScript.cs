@@ -4,23 +4,24 @@ using UnityEngine;
 
 public class LiquidWaveScript : MonoBehaviour
 {
-    public float power = 0.3f;
-    public Vector2 scale = Vector2.right * 0.2f + Vector2.up * 0.2f;
-    public Vector2 timeScale = Vector2.right * 0.5f + Vector2.up * 0.5f;
-    private float xOffset;
-    private float yOffset;
-    public Vector2 size = Vector2.right * 10f + Vector2.up * 10f;
     public int gridSizeX = 128;
     public int gridSizeY = 64;
-    private MeshFilter filter;
-    private List<Rigidbody> floatingBodies;
-    private List<Rigidbody> unfloatingBodies;
+    public float power = 0.3f;
     public float maxDrag = 6;
     public float dragOnExit = 4;
     public float dragOnEnter = 1;
     public float dragOnStay = 0;
     public float forceUp = 8;
     public bool UPDATE;
+    public Vector2 scale = Vector2.right * 0.2f + Vector2.up * 0.2f;
+    public Vector2 timeScale = Vector2.right * 0.5f + Vector2.up * 0.5f;
+    public Vector2 size = Vector2.right * 10f + Vector2.up * 10f;
+
+    private float yOffset;
+    private float xOffset;
+    private MeshFilter filter;
+    private List<Rigidbody> floatingBodies;
+    private List<Rigidbody> unfloatingBodies;
 
     private void Start()
     {

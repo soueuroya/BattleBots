@@ -3,7 +3,7 @@ using UnityEngine;
 using static StaticHelper;
 using static UnityEngine.ParticleSystem;
 
-public class RobotScript : MonoBehaviour
+public class RobotScript : Controllable
 {
     [SerializeField] protected float speed;
     [SerializeField] protected float health;
@@ -18,6 +18,7 @@ public class RobotScript : MonoBehaviour
     [SerializeField] protected List<SawPieceScript> saws = new List<SawPieceScript>();
     [SerializeField] protected List<FramePieceScript> frames = new List<FramePieceScript>();
     [SerializeField] protected List<CorePieceScript> cores = new List<CorePieceScript>();
+    [SerializeField] protected MovementDirection currentDirection;
 
     protected void Initialize()
     {
@@ -139,18 +140,12 @@ public class RobotScript : MonoBehaviour
         health = maxHealth;
     }
 
-    private void Start()
-    {
-        Initialize();
-    }
+    private void Start() { Initialize(); }
 
-    private void Reset()
-    {
-        Initialize();
-    }
+    private void Reset() { Initialize(); }
 
     #region POWERS ACTIVATION AND PIECE DESTRUCTION
-    public void StartPower(PowerType power)
+    public override void StartPower(PowerType power)
     {
         switch (power)
         {
@@ -179,7 +174,6 @@ public class RobotScript : MonoBehaviour
                 break;
         }
     }
-
     public void LosePiece(PieceScript _piece) // When robot looses the piece, remove it from list and stop the piece
     {
         _piece.gameObject.layer = LayerMask.NameToLayer("Default"); // Make this piece collide with the original robot now
@@ -264,7 +258,6 @@ public class RobotScript : MonoBehaviour
                 break;
         }
     }
-
     public void StartAcids()
     {
         foreach (AcidPieceScript acid in acids)
@@ -363,8 +356,7 @@ public class RobotScript : MonoBehaviour
             saw.Deactivate();
         }
     }
-
-    public void StopPower(PowerType power)
+    public override void StopPower(PowerType power)
     {
         switch (power)
         {
@@ -396,8 +388,10 @@ public class RobotScript : MonoBehaviour
     #endregion
 
     #region MOVEMENT
-    public void Move(MovementDirection dir)
+    public override void Move(MovementDirection dir)
     {
+        currentDirection = dir;
+        base.Move(dir);
         switch (dir)
         {
             case MovementDirection.LEFT:
@@ -429,24 +423,29 @@ public class RobotScript : MonoBehaviour
         }
     }
 
-    public void Stop()
+    public override void Stop(MovementDirection dir)
     {
-        //Stop all tires
-        int? tireIndex = null;
-        for (int i = 0; i < tires.Count; i++)
+        Debug.Log("Robot trying to stop");
+        if (currentDirection == dir)
         {
-            if (tires[i].HJoint != null)
+            Debug.Log("Robot stop");
+            //Stop all tires
+            int? tireIndex = null;
+            for (int i = 0; i < tires.Count; i++)
             {
-                tires[i].RotateForward(0);
+                if (tires[i].HJoint != null)
+                {
+                    tires[i].RotateForward(0);
+                }
+                else
+                {
+                    tireIndex = i;
+                }
             }
-            else
+            if (tireIndex.HasValue)
             {
-                tireIndex = i;
+                tires.RemoveAt(tireIndex.Value);
             }
-        }
-        if (tireIndex.HasValue)
-        {
-            tires.RemoveAt(tireIndex.Value);
         }
     }
 
@@ -568,11 +567,22 @@ public class RobotScript : MonoBehaviour
                 {
                     if (tires[i].TireOrientation == TireOrientation.LEFT) // inverted to the left
                     {
-                        tires[i].RotateForward(-speed, true);
+                        tires[i].RotateForward(-speed * 1.5f, true);
                     }
                     else // default
                     {
-                        tires[i].RotateForward(speed, true);
+                        tires[i].RotateForward(speed * 1.5f, true);
+                    }
+                }
+                else if (tires[i].TireHSide == TireHSide.LEFT) // LEFT of the car
+                {
+                    if (tires[i].TireOrientation == TireOrientation.LEFT) // rotate with half speed
+                    {
+                        tires[i].RotateForward(-speed / 2, true);
+                    }
+                    else // inverted to the right
+                    {
+                        tires[i].RotateForward(speed / 2, true);
                     }
                 }
             }
@@ -599,11 +609,22 @@ public class RobotScript : MonoBehaviour
                 {
                     if (tires[i].TireOrientation == TireOrientation.LEFT) // inverted to the left
                     {
-                        tires[i].RotateForward(speed, true);
+                        tires[i].RotateForward(speed * 1.5f, true);
                     }
                     else // default
                     {
-                        tires[i].RotateForward(-speed, true);
+                        tires[i].RotateForward(-speed * 1.5f, true);
+                    }
+                }
+                else if (tires[i].TireHSide == TireHSide.LEFT) // LEFT of the car
+                {
+                    if (tires[i].TireOrientation == TireOrientation.LEFT) // rotate with half the speed
+                    {
+                        tires[i].RotateForward(speed/ 2, true);
+                    }
+                    else // inverted to the right
+                    {
+                        tires[i].RotateForward(-speed / 2, true);
                     }
                 }
             }
@@ -672,23 +693,23 @@ public class RobotScript : MonoBehaviour
                 {
                     if (tires[i].TireOrientation == TireOrientation.LEFT) // default
                     {
-                        tires[i].RotateForward(-speed, true);
+                        tires[i].RotateForward(-speed * 1.5f, true);
                     }
                     else // inverted to the right
                     {
-                        tires[i].RotateForward(speed, true);
+                        tires[i].RotateForward(speed * 1.5f, true);
                     }
                 }
                 else if (tires[i].TireHSide == TireHSide.RIGHT) // RIGHT of the car
                 {
-                    /*if (tires[i].TireOrientation == TireOrientation.LEFT) // inverted to the left
+                    if (tires[i].TireOrientation == TireOrientation.LEFT) // rotat with half the speed
                     {
-                        tires[i].RotateForward(speed, true);
+                        tires[i].RotateForward(-speed/2, true);
                     }
                     else // default
                     {
-                        tires[i].RotateForward(-speed, true);
-                    }*/
+                        tires[i].RotateForward(speed/2, true);
+                    }
                 }
             }
             else
@@ -714,23 +735,23 @@ public class RobotScript : MonoBehaviour
                 {
                     if (tires[i].TireOrientation == TireOrientation.LEFT) // default
                     {
-                        tires[i].RotateForward(speed, true);
+                        tires[i].RotateForward(speed * 1.5f, true);
                     }
                     else // inverted to the right
                     {
-                        tires[i].RotateForward(-speed, true);
+                        tires[i].RotateForward(-speed * 1.5f, true);
                     }
                 }
                 else if (tires[i].TireHSide == TireHSide.RIGHT) // RIGHT of the car
                 {
-                    /*if (tires[i].TireOrientation == TireOrientation.LEFT) // inverted to the left
+                    if (tires[i].TireOrientation == TireOrientation.LEFT) // inverted to the left
                     {
-                        tires[i].RotateForward(speed, true);
+                        tires[i].RotateForward(speed/2, true);
                     }
                     else // default
                     {
-                        tires[i].RotateForward(-speed, true);
-                    }*/
+                        tires[i].RotateForward(-speed/2, true);
+                    }
                 }
             }
             else

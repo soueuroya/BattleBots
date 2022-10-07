@@ -4,11 +4,11 @@ using static StaticHelper;
 public class CellScript : MonoBehaviour
 {
     public Transform tr;
-    public PieceType type;
     public bool hovering = false;
-    public Vector3 originalScale;
     public bool isSelected;
     public bool isLocked;
+    public PieceType type;
+    public Vector3 originalScale;
 
     void OnValidate()
     {

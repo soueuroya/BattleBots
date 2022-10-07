@@ -18,7 +18,7 @@ PrefabInstance:
     - target: {fileID: 725195493987258313, guid: 171530159f79afc45b9efbffa24391a5, type: 3}
       propertyPath: m_Materials.Array.data[2]
       value: 
-      objectReference: {fileID: 2100000, guid: 357b72ad0eef11443b1c64e95721d715, type: 2}
+      objectReference: {fileID: 2100000, guid: f0758e0050fe9684bad4b15ef42fbaa8, type: 2}
     - target: {fileID: 725195493987258314, guid: 171530159f79afc45b9efbffa24391a5, type: 3}
       propertyPath: m_Name
       value: MTirePiece Variant
@@ -73656,6 +73656,7 @@ MonoBehaviour:
   originalColor: {r: 0, g: 0, b: 0, a: 1}
   robot: {fileID: 0}
   collidedWith: []
+  UPDATE: 0
   tireHSide: 0
   tireVSide: 1
   tireOrientation: 0

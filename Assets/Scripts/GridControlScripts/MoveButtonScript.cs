@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using static StaticHelper;
 
@@ -5,21 +6,54 @@ public class MoveButtonScript : MonoBehaviour
 {
     public MovementDirection dir;
     public bool isHeld;
-    public KeyCode key;
+    public List<KeyCode> keys;
+    public List<KeyCode> constraints;
+    private bool isGoing;
     private void Update()
     {
-        if (Input.GetKeyDown(key))
+        isGoing = true;
+        foreach (KeyCode keyCode in keys)
         {
-            StartMove();
+            if (!Input.GetKey(keyCode))
+            {
+                if (dir == MovementDirection.FORWARD)
+                {
+                    Debug.Log("Not going forward because not pressing: " + keyCode);
+                }
+                isGoing = false;
+                break;
+            }
+            /*else if (Input.GetKeyUp(key))
+            {
+                StopMove();
+            }*/
         }
-        else if (Input.GetKeyUp(key))
+        foreach (KeyCode constraint in constraints)
+        {
+            if (Input.GetKey(constraint))
+            {
+                if (dir == MovementDirection.FORWARD)
+                {
+                    Debug.Log("Not going forward because constraint: " + constraint);
+                }
+                isGoing = false;
+                break;
+            }
+        }
+
+        if (!isGoing)
         {
             StopMove();
+        }
+        else
+        {
+            Debug.Log("going forward");
+            StartMove();
         }
 
         if (isHeld)
         {
-            RobotControlScript.Instance.Move(dir);
+            ControlScript.Instance.Move(dir);
         }
     }
     private void OnMouseDown()
@@ -36,7 +70,10 @@ public class MoveButtonScript : MonoBehaviour
     }
     private void StopMove()
     {
-        isHeld = false;
-        RobotControlScript.Instance.Stop();
+        if (isHeld)
+        {
+            isHeld = false;
+            ControlScript.Instance.Stop(dir);
+        }
     }
 }

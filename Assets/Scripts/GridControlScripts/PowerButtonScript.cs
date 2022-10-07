@@ -9,12 +9,12 @@ public class PowerButtonScript : MonoBehaviour
     private void OnMouseDown()
     {
         isHeld = true;
-        RobotControlScript.Instance.robots[RobotControlScript.Instance.currentRobot].StartPower(powerType);
+        ControlScript.Instance.controllables[ControlScript.Instance.currentControllable].StartPower(powerType);
     }
     private void OnMouseUp()
     {
         isHeld = false;
-        RobotControlScript.Instance.robots[RobotControlScript.Instance.currentRobot].StopPower(powerType);
+        ControlScript.Instance.controllables[ControlScript.Instance.currentControllable].StopPower(powerType);
     }
     private void Update()
     {

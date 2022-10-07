@@ -15,7 +15,7 @@ public class FloatingCanvasScript : MonoBehaviour
             offset = tr.position - tr.parent.position; 
         }
         target = tr.parent.transform;
-        tr.parent = null;
+        tr.SetParent(null);
     }
 
     private void Update()

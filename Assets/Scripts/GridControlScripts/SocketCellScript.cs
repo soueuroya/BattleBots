@@ -6,10 +6,10 @@ public class SocketCellScript : CellScript
 {
     public bool isSocketed = false;
     public int isTargetted = 0;
-    public PieceType pieceType;
-    public OutDirection direction;
     public int x, y;
     public int nextCellsCount = 0;
+    public PieceType pieceType;
+    public OutDirection direction;
     public MeshRenderer meshRenderer;
     public Material originalMaterial;
     public GameObject background;
